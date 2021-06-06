@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "465709302285",
+    "project_id": "evcs-system-fcm",
+    "storage_bucket": "evcs-system-fcm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:465709302285:android:3b0f066efcdabb33760b44",
+        "android_client_info": {
+          "package_name": "com.amanuel.evscsystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "465709302285-pe16da7gicd96mvndjpcvgij5a45vogj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmGB0yndHT985_I9nXvwVLwLkD3lO9j2Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "465709302285-pe16da7gicd96mvndjpcvgij5a45vogj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
