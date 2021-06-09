@@ -9,7 +9,7 @@ import retrofit2.HttpException
 abstract class BaseRepository {
 
     suspend fun <T> safeApiCall(
-            apiCall: suspend () -> T
+        apiCall: suspend () -> T
     ): Resource<T> {
         return withContext(Dispatchers.IO) {
             try {
@@ -31,4 +31,6 @@ abstract class BaseRepository {
     suspend fun logout(api: UserApi) = safeApiCall {
         api.logout()
     }
+
+    // since sending the fcm token can be done any where
 }

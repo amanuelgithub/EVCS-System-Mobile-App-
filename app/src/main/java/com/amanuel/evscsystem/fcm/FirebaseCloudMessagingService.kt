@@ -12,10 +12,20 @@ import androidx.core.app.NotificationCompat
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import com.amanuel.evscsystem.R
+import com.amanuel.evscsystem.data.UserPreferences
+import com.amanuel.evscsystem.fcm.djangopushnotification.FCMUtil
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
-class MyFirebaseMessagingService : FirebaseMessagingService() {
+class FirebaseCloudMessagingService : FirebaseMessagingService() {
+    // APP_SERVER_URL to send fcm_token
+
+
     /**
      * Called when message is received.
      *
@@ -104,6 +114,15 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     private fun sendRegistrationToServer(token: String?) {
         // TODO: Implement this method to send token to your app server.
         Log.d(TAG, "sendRegistrationTokenToServer($token)")
+        //@todo: is new token saved to preference conflict with the previous fcm_token may happen
+
+        // update the userPreferences
+//        val userPreferences = UserPreferences(applicationContext)
+//        userPreferences.saveFCMToken(token)
+
+        // using FCMUtil class to send the fcm_token to server
+        FCMUtil.sendRegistrationTokenToServer(token)
+
     }
 
     /**

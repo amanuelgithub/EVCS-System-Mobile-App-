@@ -29,6 +29,13 @@ class UserPreferences(private val context: Context) {
         }
     }
 
+    // saves the fcm_token key
+    suspend fun saveFCMToken(fcmToken: String?){
+        context.dataStore.edit { preferences ->
+            preferences[FCM_TOKEN] = fcmToken!!
+        }
+    }
+
 
     suspend fun clear() {
         context.dataStore.edit { preferences ->
@@ -38,6 +45,7 @@ class UserPreferences(private val context: Context) {
 
     companion object {
         private val KEY_AUTH = stringPreferencesKey("key_auth")
+        private val FCM_TOKEN = stringPreferencesKey("fcm_token")
     }
 
 }

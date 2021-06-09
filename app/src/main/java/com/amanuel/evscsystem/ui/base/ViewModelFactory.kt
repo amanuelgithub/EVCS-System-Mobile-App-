@@ -10,7 +10,7 @@ import com.amanuel.evscsystem.ui.home.HomeViewModel
 import java.lang.IllegalArgumentException
 
 class ViewModelFactory(
-        private val repository: BaseRepository
+    private val repository: BaseRepository
 ) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {

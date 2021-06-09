@@ -45,8 +45,8 @@ fun View.snackbar(message: String, action: (() -> Unit)? = null) {
 
 // a function that utilize the custom snackbar to handel the api error
 fun Fragment.handleApiError(
-        failure: Resource.Failure,
-        retry: (() -> Unit)? = null
+    failure: Resource.Failure,
+    retry: (() -> Unit)? = null
 ) {
     when {
         failure.isNetworkError -> requireView().snackbar("Please check your internet connection!", retry)

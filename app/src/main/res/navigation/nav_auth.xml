@@ -9,7 +9,15 @@
         android:id="@+id/loginFragment"
         android:name="com.amanuel.evscsystem.ui.auth.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_forgetPasswordFragment"
+            app:destination="@id/forgetPasswordFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_out_right"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
 
     <fragment
         android:id="@+id/forgetPasswordFragment"

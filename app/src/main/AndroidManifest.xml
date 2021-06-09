@@ -31,18 +31,20 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" /> <!-- [END fcm_default_icon] -->
         <activity android:name=".fcm.NotificationActivity">
+
+        </activity>
+        <activity android:name=".ui.home.HomeActivity" />
+        <activity android:name=".ui.auth.AuthActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.home.HomeActivity" />
-        <activity android:name=".ui.auth.AuthActivity" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
 
         <service
-            android:name=".fcm.MyFirebaseMessagingService"
+            android:name=".fcm.FirebaseCloudMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

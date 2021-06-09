@@ -31,9 +31,9 @@ abstract class BaseFragment<VM : BaseViewModel, B : ViewBinding, R : BaseReposit
     protected val remoteDataSource = RemoteDataSource()
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         userPreferences = UserPreferences(requireContext())
         binding = getFragmentBinding(inflater, container)

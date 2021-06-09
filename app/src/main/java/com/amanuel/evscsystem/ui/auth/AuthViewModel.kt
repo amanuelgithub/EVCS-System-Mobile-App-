@@ -10,7 +10,7 @@ import com.amanuel.evscsystem.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
 
 class AuthViewModel(
-        private val repository: AuthRepository
+    private val repository: AuthRepository
 ) : BaseViewModel(repository) {
 
     private val _loginResponse: MutableLiveData<Resource<LoginResponse>> = MutableLiveData()
@@ -18,9 +18,10 @@ class AuthViewModel(
     val loginResponse: LiveData<Resource<LoginResponse>>
         get() = _loginResponse
 
+    // network call
     fun login(
-            email: String,
-            password: String
+        email: String,
+        password: String
     ) = viewModelScope.launch {
         _loginResponse.value = Resource.Loading
         _loginResponse.value = repository.login(email, password)

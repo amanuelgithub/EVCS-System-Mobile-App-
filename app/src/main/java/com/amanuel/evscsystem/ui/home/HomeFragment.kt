@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import com.amanuel.evscsystem.databinding.FragmentHomeBinding
 import com.amanuel.evscsystem.data.network.Resource
 import com.amanuel.evscsystem.data.network.UserApi
 import com.amanuel.evscsystem.data.repository.UserRepository
 import com.amanuel.evscsystem.data.responses.User
+import com.amanuel.evscsystem.databinding.FragmentHomeBinding
 import com.amanuel.evscsystem.ui.base.BaseFragment
 import com.amanuel.evscsystem.ui.visible
 import kotlinx.coroutines.flow.first
@@ -46,8 +46,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, UserReposi
 
     private fun updateUI(user: User) {
         with(binding) {
-            textViewId.text = user.id.toString()
-            textViewName.text = user.name
+            textViewId.text = user.pk.toString()
+            textViewName.text = user.username
             textViewEmail.text = user.email
         }
     }
@@ -56,8 +56,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, UserReposi
     override fun getViewModel() = HomeViewModel::class.java
 
     override fun getFragmentBinding(
-            inflater: LayoutInflater,
-            container: ViewGroup?
+        inflater: LayoutInflater,
+        container: ViewGroup?
     ) = FragmentHomeBinding.inflate(inflater, container, false)
 
     override fun getFragmentRepository(): UserRepository {

@@ -10,7 +10,7 @@ import com.amanuel.evscsystem.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
-        private val repository: UserRepository
+    private val repository: UserRepository
 ) : BaseViewModel(repository) {
 
     private val _user: MutableLiveData<Resource<LoginResponse>> = MutableLiveData()
