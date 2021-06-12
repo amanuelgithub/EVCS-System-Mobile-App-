@@ -10,8 +10,6 @@
     <string name="invalid_password" translatable="false">Password must be >5 characters</string>
     <string name="login_failed" translatable="false">"Login failed"</string>
     <string name="title_activity_login" translatable="false">LoginActivity</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 
 
     <string name="quickstart_message" translatable="false">Click the SUBSCRIBE TO WEATHER button below to subscribe to the
@@ -36,4 +34,24 @@
     <string name="FCM_TOKEN" translatable="false">fcm_token</string>
     <string name="FCM_PREF" translatable="false">fcm_pref</string>
     <string name="forget_password" translatable="false">forget password?</string>
+    <string name="title_activity_bottom_navigation">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_bottom_nav">MainActivity</string>
+    
+    
+    <!-- Menu -->
+    <string name="menu__home">Home</string>
+    <string name="menu__user_information">User Information</string>
+    <string name="menu__settings">Settings</string>
+    <string name="menu__user_profile">User Profile</string>
+    <string name="menu__location_settings">Work Location</string>
+    <string name="menu__terms_conditions">terms and conditions</string>
+    <string name="menu__notifications">Notifications</string>
+    <string name="menu__reports">Reports</string>
+    <string name="menu__language">Language</string>
+
+    
+    
 </resources>

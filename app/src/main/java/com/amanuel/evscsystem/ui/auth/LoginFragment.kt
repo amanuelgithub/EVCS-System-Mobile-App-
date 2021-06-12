@@ -1,5 +1,6 @@
 package com.amanuel.evscsystem.ui.auth
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -66,7 +67,8 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
 
         // handles what things to do when clicking the login button
         binding.buttonLogin.setOnClickListener {
-            login()
+//            login()
+            startActivity(Intent(context, HomeActivity::class.java))
         }
 
     }

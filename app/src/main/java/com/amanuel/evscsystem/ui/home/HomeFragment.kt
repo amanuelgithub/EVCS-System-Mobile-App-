@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.amanuel.evscsystem.data.network.Resource
 import com.amanuel.evscsystem.data.network.UserApi
 import com.amanuel.evscsystem.data.repository.UserRepository
@@ -21,26 +24,27 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, UserReposi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.progressbarHome.visible(false)
 
-        viewModel.getUser()
-
-        viewModel.user.observe(viewLifecycleOwner, Observer {
-            when (it) {
-                is Resource.Success -> {
-                    binding.progressbarHome.visible(false)
-                    updateUI(it.value.user)
-                }
-                is Resource.Loading -> {
-                    binding.progressbarHome.visible(true)
-                }
-            }
-        })
-
-
-        binding.buttonLogout.setOnClickListener {
-            logout()
-        }
+//        binding.progressbarHome.visible(false)
+//
+//        viewModel.getUser()
+//
+//        viewModel.user.observe(viewLifecycleOwner, Observer {
+//            when (it) {
+//                is Resource.Success -> {
+//                    binding.progressbarHome.visible(false)
+//                    updateUI(it.value.user)
+//                }
+//                is Resource.Loading -> {
+//                    binding.progressbarHome.visible(true)
+//                }
+//            }
+//        })
+//
+//
+//        binding.buttonLogout.setOnClickListener {
+//            logout()
+//        }
 
     }
 
