@@ -12,7 +12,6 @@ import com.amanuel.evscsystem.data.UserPreferences
 import com.amanuel.evscsystem.data.network.RemoteDataSource
 import com.amanuel.evscsystem.data.network.UserApi
 import com.amanuel.evscsystem.data.repository.BaseRepository
-import com.amanuel.evscsystem.ui.auth.AuthActivity
 import com.amanuel.evscsystem.ui.startNewActivity
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -54,7 +53,8 @@ abstract class BaseFragment<VM : BaseViewModel, B : ViewBinding, R : BaseReposit
         viewModel.logout(api)
         // clear the local storage
         userPreferences.clear()
-        requireActivity().startNewActivity(AuthActivity::class.java)
+         // @todo: [replace with LoginFragment] -> clear the BackStack to move to the specified fragment
+//        requireActivity().startNewActivity(AuthActivity::class.java)
     }
 
     abstract fun getViewModel(): Class<VM>

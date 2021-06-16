@@ -1,14 +1,18 @@
 package com.amanuel.evscsystem.ui.auth
 
-import android.content.Intent
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import com.amanuel.evscsystem.MainActivity
 import com.amanuel.evscsystem.R
 import com.amanuel.evscsystem.data.network.AuthApi
 import com.amanuel.evscsystem.data.network.Resource
@@ -17,7 +21,6 @@ import com.amanuel.evscsystem.databinding.FragmentLoginBinding
 import com.amanuel.evscsystem.ui.base.BaseFragment
 import com.amanuel.evscsystem.ui.enable
 import com.amanuel.evscsystem.ui.handleApiError
-import com.amanuel.evscsystem.ui.home.HomeActivity
 import com.amanuel.evscsystem.ui.startNewActivity
 import com.amanuel.evscsystem.ui.visible
 import kotlinx.coroutines.launch
@@ -58,17 +61,27 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
 //
 //                        }
                         //@todo 2: check the traffic police selected a location: and based on that move either to fragment_home.xml or to fragment_location_config.xml
-                        requireActivity().startNewActivity(HomeActivity::class.java)
+                        //@todo 3: also replace the below code with one that will work with fragment
+//                        requireActivity().startNewActivity(HomeActivity::class.java)
                     }
                 }
                 is Resource.Failure -> handleApiError(it) { login() }
             }
         })
 
+
         // handles what things to do when clicking the login button
         binding.buttonLogin.setOnClickListener {
 //            login()
-            startActivity(Intent(context, HomeActivity::class.java))
+
+            // @todo: experimental code needs to be updated[or might be cause of error in future]
+//            val navController = findNavController()
+//            if (navController.graph.startDestination == R.id.loginFragment){
+//                navController.graph.startDestination = R.id.homeFragment
+//            }
+
+            findNavController().navigate(R.id.action_loginFragment_to_nav_home)
+
         }
 
     }
@@ -94,5 +107,6 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
     override fun getFragmentRepository() =
         AuthRepository(remoteDataSource.buildApi(AuthApi::class.java), userPreferences)
 
-
 }
+
+

@@ -11,6 +11,10 @@
     <string name="login_failed" translatable="false">"Login failed"</string>
     <string name="title_activity_login" translatable="false">LoginActivity</string>
 
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
 
     <string name="quickstart_message" translatable="false">Click the SUBSCRIBE TO WEATHER button below to subscribe to the
         weather topic. Messages sent to the weather topic will be received. The LOG TOKEN button logs the
@@ -39,8 +43,8 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_bottom_nav">MainActivity</string>
-    
-    
+
+
     <!-- Menu -->
     <string name="menu__home">Home</string>
     <string name="menu__user_information">User Information</string>
@@ -51,7 +55,10 @@
     <string name="menu__notifications">Notifications</string>
     <string name="menu__reports">Reports</string>
     <string name="menu__language">Language</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="defaultChannel">DefaultChannel</string>
+    <string name="notificationDescription">This is a channel for FCM notification messages</string>
 
-    
-    
+
 </resources>

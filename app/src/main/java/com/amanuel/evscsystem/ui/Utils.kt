@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import com.amanuel.evscsystem.R
 import com.amanuel.evscsystem.data.network.Resource
 import com.amanuel.evscsystem.ui.auth.LoginFragment
 import com.amanuel.evscsystem.ui.base.BaseFragment
@@ -16,6 +18,21 @@ fun <A : Activity> Activity.startNewActivity(activity: Class<A>) {
         // this flags restrict the user from accessing the login page after successful authentication
         it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(it)
+    }
+}
+
+/**
+ * Extension function to navigate to a
+ */
+fun Fragment.navigate(fragmentManager: FragmentManager): Int? {
+    return fragmentManager.run {
+        beginTransaction()
+            .replace(
+                R.id.nav_host_fragment_content_main,
+                this@navigate,
+                this@navigate::class.simpleName
+            )
+            .commit()
     }
 }
 
