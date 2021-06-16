@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/group_before_login"
+        android:checkableBehavior="single">
+
+        <!-- @todo(replace item's id): Id should be replaced with fragment_id to where we need to navigate to -->
+        <item android:title="@string/menu__home">
+            <menu>
+                <group android:checkableBehavior="single">
+
+                    <item
+                        android:id="@+id/nav_home"
+                        android:title="@string/menu__home" />
+                    <item
+                        android:id="@+id/nav_notifications"
+                        android:title="@string/menu__notifications" />
+                    <item
+                        android:id="@+id/nav_reports"
+                        android:title="@string/menu__reports" />
+
+                </group>
+            </menu>
+
+        </item>
+
+
+        <item android:title="@string/menu__user_information">
+            <menu>
+                <group android:checkableBehavior="single">
+
+                    <item
+                        android:id="@+id/profileFragment"
+                        android:title="@string/menu__user_profile" />
+
+                </group>
+            </menu>
+
+        </item>
+
+        <item android:title="@string/menu__settings">
+            <menu>
+                <group android:checkableBehavior="single">
+
+                    <item
+                        android:id="@+id/nav_language"
+                        android:title="@string/menu__language" />
+
+                    <item
+                        android:id="@+id/nav_location_settings"
+                        android:title="@string/menu__location_settings" />
+
+                    <item
+                        android:id="@+id/nav_privacy_policy"
+                        android:title="@string/menu__terms_conditions" />
+
+                </group>
+            </menu>
+
+        </item>
+
+    </group>
+
+</menu>

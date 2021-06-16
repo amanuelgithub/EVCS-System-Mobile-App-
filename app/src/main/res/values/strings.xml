@@ -1,15 +1,64 @@
 <resources>
     <string name="app_name">EVSC System</string>
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email" translatable="false">Email</string>
+    <string name="prompt_password" translatable="false">Password</string>
+    <string name="action_sign_in" translatable="false">Sign in or register</string>
+    <string name="action_sign_in_short" translatable="false">Sign in</string>
+    <string name="welcome" translatable="false">"Welcome !"</string>
+    <string name="invalid_username" translatable="false">Not a valid username</string>
+    <string name="invalid_password" translatable="false">Password must be >5 characters</string>
+    <string name="login_failed" translatable="false">"Login failed"</string>
+    <string name="title_activity_login" translatable="false">LoginActivity</string>
+
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+
+    <string name="quickstart_message" translatable="false">Click the SUBSCRIBE TO WEATHER button below to subscribe to the
+        weather topic. Messages sent to the weather topic will be received. The LOG TOKEN button logs the
+        FCM registration token to logcat.</string>
+    <string name="subscribe_to_weather" translatable="false">Subscribe To Weather</string>
+    <string name="log_token" translatable="false">Log Token</string>
+
+    <string name="msg_subscribed" translatable="false">Subscribed to weather topic</string>
+    <string name="msg_token_fmt" translatable="false">FCM registration Token: %s</string>
+
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <!--
+        This is the name that users will see when interacting with this channel.
+        It should describe the category of notifications that will be sent through this channel
+     -->
+    <!-- [START fcm_default_icon_string] -->
+    <string name="default_notification_channel_name" translatable="false">Weather</string>
+    <!-- [END fcm_default_icon_string] -->
+    <string name="msg_subscribe_failed" translatable="false">Failed to subscribe to weather topic</string>
+    <string name="fcm_message" translatable="false">FCM Message</string>
+    <string name="FCM_TOKEN" translatable="false">fcm_token</string>
+    <string name="FCM_PREF" translatable="false">fcm_pref</string>
+    <string name="forget_password" translatable="false">forget password?</string>
+    <string name="title_activity_bottom_navigation">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_bottom_nav">MainActivity</string>
+
+
+    <!-- Menu -->
+    <string name="menu__home">Home</string>
+    <string name="menu__user_information">User Information</string>
+    <string name="menu__settings">Settings</string>
+    <string name="menu__user_profile">User Profile</string>
+    <string name="menu__location_settings">Work Location</string>
+    <string name="menu__terms_conditions">terms and conditions</string>
+    <string name="menu__notifications">Notifications</string>
+    <string name="menu__reports">Reports</string>
+    <string name="menu__language">Language</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="defaultChannel">DefaultChannel</string>
+    <string name="notificationDescription">This is a channel for FCM notification messages</string>
+
+
 </resources>

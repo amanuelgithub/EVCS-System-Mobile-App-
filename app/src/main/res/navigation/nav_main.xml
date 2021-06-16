@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_auth"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.amanuel.evscsystem.ui.auth.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_forgetPasswordFragment"
+            app:destination="@id/forgetPasswordFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_loginFragment_to_navigation"
+            app:destination="@id/nav_home" />
+        <action
+            android:id="@+id/action_loginFragment_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/forgetPasswordFragment"
+        android:name="com.amanuel.evscsystem.ui.auth.ForgetPasswordFragment"
+        android:label="Reset Password"
+        tools:layout="@layout/fragment_forget_password" >
+        <action
+            android:id="@+id/action_forgetPasswordFragment_to_emailVerifyFragment"
+            app:destination="@id/emailVerifyFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/aboutFragment2"
+        android:name="com.amanuel.evscsystem.ui.about.AboutFragment"
+        android:label="About"
+        tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/emailVerifyFragment"
+        android:name="com.amanuel.evscsystem.ui.email.EmailVerifyFragment"
+        android:label="fragment_verify_email"
+        tools:layout="@layout/fragment_verify_email" />
+
+
+    <navigation android:id="@+id/nav_home"
+        app:startDestination="@id/homeFragment2">
+        <fragment
+            android:id="@+id/homeFragment2"
+            android:name="com.amanuel.evscsystem.ui.home.HomeFragment"
+            android:label="fragment_home"
+            tools:layout="@layout/fragment_home" />
+        <fragment
+            android:id="@+id/notificationsFragment2"
+            android:name="com.amanuel.evscsystem.ui.notification.NotificationsFragment"
+            android:label="fragment_notifications"
+            tools:layout="@layout/fragment_notifications" />
+    </navigation>
+    <navigation android:id="@+id/nav_notificaiton"
+        app:startDestination="@id/notificationsDetailFragmentOnNavNotify">
+        <fragment
+            android:id="@+id/notificationsDetailFragmentOnNavNotify"
+            android:name="com.amanuel.evscsystem.ui.notification.NotificationsDetailFragment"
+            android:label="fragment_notifications_detail"
+            tools:layout="@layout/fragment_notifications_detail" />
+        <fragment
+            android:id="@+id/notificationsFragmentOnNavNotify"
+            android:name="com.amanuel.evscsystem.ui.notification.NotificationsFragment"
+            android:label="fragment_notifications"
+            tools:layout="@layout/fragment_notifications" />
+    </navigation>
+    <action android:id="@+id/action_global_nav_notificaiton" app:destination="@id/nav_notificaiton" />
+
+
+</navigation>
