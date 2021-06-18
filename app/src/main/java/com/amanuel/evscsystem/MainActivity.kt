@@ -1,29 +1,27 @@
 package com.amanuel.evscsystem
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
-import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.get
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.amanuel.evscsystem.databinding.ActivityMainBinding
 import com.amanuel.evscsystem.notification.NotificationHelper
-import com.google.android.material.navigation.NavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Created by Amanuel Girma.
  * Contact Email : amanuelgirma070@gmail.com
  */
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -37,32 +35,25 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.appBarMain.toolbar)
+        appBarConfiguration = AppBarConfiguration(setOf())
 
-//        val drawerLayout: DrawerLayout = binding.drawerLayout
-        val navView: NavigationView = binding.navView
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
         navController = navHostFragment.findNavController()
-//        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-//        appBarConfiguration = AppBarConfiguration(
-//            setOf(
-//                // top level destinations (we don't show the navigateUp button)
-//                R.id.homeFragment, R.id.searchFragment, R.id.notificationsFragment,
-//                // also the login pages are excluded
-//                R.id.loginFragment, R.id.forgetPasswordFragment, R.id.emailVerifyFragment
-//            )
-//        )
-//        setupActionBarWithNavController(navController, appBarConfiguration)
-//        navView.setupWithNavController(navController)
 
         // initialize the notification channel
         NotificationHelper.init(this)
 
+        initView()
+
         // controller navigation drawer opening and closing in different fragments
-        navigatedListener()
+        updateUIBasedOnDestination()
+    }
+
+    private fun initView() {
+        setupActionBar(appBarConfiguration) // setup action bar with default appBarConfiguration
+        setupNavView()
+        setupBottomNav()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -77,58 +68,95 @@ class MainActivity : AppCompatActivity() {
     }
 
     // controller navigation drawer opening and closing in different fragments
-    private fun navigatedListener() {
+    private fun updateUIBasedOnDestination() {
         navController.addOnDestinationChangedListener { navController, navDestination, arguments ->
             when (navDestination.id) {
                 navController.graph.startDestination,
                 R.id.emailVerifyFragment,
                 R.id.forgetPasswordFragment
                 -> {
-                    binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-                    val drawerLayout: DrawerLayout = binding.drawerLayout
-                    appBarConfiguration = AppBarConfiguration(
-                        setOf(
-                            // top level destinations (we don't show the navigateUp button)
-//                            R.id.homeFragment,
-//                            R.id.searchFragment,
-//                            R.id.notificationsFragment,
-                            // also the login pages are excluded
-                            R.id.loginFragment,
-                            R.id.forgetPasswordFragment,
-                            R.id.emailVerifyFragment
-                        )
-                    )
-
-                    binding.appBarMain.toolbar.visibility = View.GONE
-
-                    setupActionBarWithNavController(navController, appBarConfiguration)
-                    binding.navView.setupWithNavController(navController)
+                    closeDrawer()
+                    hideBottomNav()
+                    hideActionBar()
                 }
                 else -> {
-                    binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-                    val drawerLayout: DrawerLayout = binding.drawerLayout
-                    appBarConfiguration = AppBarConfiguration(
-                        setOf(
-                            // top level destinations (we don't show the navigateUp button)
-                            R.id.homeFragment,
-                            R.id.searchFragment,
-                            R.id.notificationsFragment,
-                            // also the login pages are excluded
-//                            R.id.loginFragment,
-//                            R.id.forgetPasswordFragment,
-//                            R.id.emailVerifyFragment
-                        ), drawerLayout
-                    )
+                    appBarConfiguration = appBarConfigForNavMain()
+                    setupActionBar(appBarConfiguration) // setup action bar with default appBarConfiguration
+                    setupNavView()
+                    setupBottomNav()
 
-                    binding.appBarMain.toolbar.visibility = View.VISIBLE
-
-                    setupActionBarWithNavController(navController, appBarConfiguration)
-                    binding.navView.setupWithNavController(navController)
+                    openDrawer()
+                    showActionBar()
+                    showBottomNav()
                 }
             }
         }
     }
 
+    private fun appBarConfigForNavMain(): AppBarConfiguration = AppBarConfiguration(
+        topLevelDestinationIds = setOf(
+            // top level destinations (we don't show the navigateUp button)
+            R.id.homeFragment,
+            R.id.searchFragment,
+            R.id.notificationsFragment,
+        ),
+        binding.drawerLayout,
+        fallbackOnNavigateUpListener = { onSupportNavigateUp() }
+    )
+
+
+    /**
+     * This method is not used because in those destinations the ActionBar is hidden
+     */
+    private fun appBarConfigForNavAuth(): AppBarConfiguration = AppBarConfiguration(
+        topLevelDestinationIds = setOf(
+            // also the login pages are excluded
+            R.id.loginFragment,
+            R.id.forgetPasswordFragment,
+            R.id.emailVerifyFragment
+        ),
+        fallbackOnNavigateUpListener = { onSupportNavigateUp() }
+    )
+
+    private fun setupBottomNav() {
+        binding.appBarMain.contentMain.bottomNav.setupWithNavController(navController)
+    }
+
+    private fun setupNavView() {
+        binding.navView.setupWithNavController(navController)
+    }
+
+    private fun openDrawer() {
+        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+    }
+
+    private fun closeDrawer() {
+        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+    }
+
+    private fun hideBottomNav() {
+        binding.appBarMain.contentMain.bottomNav.visibility = View.GONE
+    }
+
+    private fun showBottomNav() {
+        binding.appBarMain.contentMain.bottomNav.visibility = View.VISIBLE
+    }
+
+    private fun hideActionBar() {
+        binding.appBarMain.toolbar.visibility = View.GONE
+    }
+
+    private fun showActionBar() {
+        binding.appBarMain.toolbar.visibility = View.VISIBLE
+    }
+
+    /**
+     * action bar is similar with toolbar
+     */
+    private fun setupActionBar(appBarConfig: AppBarConfiguration) {
+        setSupportActionBar(binding.appBarMain.toolbar)
+        setupActionBarWithNavController(navController, appBarConfig)
+    }
 
 }
 
