@@ -28,7 +28,10 @@ class NotificationAdapter :
         fun bind(notification: Notification) {
             binding.apply {
                 // @todo: bind the view with the notifications data
-                speedTextView.setText(notification.speed)
+                plateNoTextView.setText(notification.plateNumber.toString())
+                // include vehicle code
+                vehicleSpeedTextView.setText(notification.speed.toString())
+                locationTextView.setText(notification.location.toString())
             }
         }
     }
