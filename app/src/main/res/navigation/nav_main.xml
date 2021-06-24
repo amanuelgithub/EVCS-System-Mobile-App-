@@ -47,9 +47,15 @@
 
     <fragment
         android:id="@+id/notificationsDetailFragment"
-        android:name="com.amanuel.evscsystem.ui.notification.NotificationsDetailFragment"
+        android:name="com.amanuel.evscsystem.ui.notification.NotificationDetailFragment"
         android:label="fragment_notifications_detail"
-        tools:layout="@layout/fragment_notifications_detail" />
+        tools:layout="@layout/fragment_notifications_detail" >
+        <argument
+            android:name="notificationId"
+            app:argType="integer" />
+        <argument android:name="notificationPlateNumber"
+            app:argType="integer" />
+    </fragment>
     <action
         android:id="@+id/action_global_notificationsDetailFragment"
         app:destination="@id/notificationsDetailFragment"

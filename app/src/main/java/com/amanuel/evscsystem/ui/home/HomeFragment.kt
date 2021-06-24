@@ -1,13 +1,20 @@
 package com.amanuel.evscsystem.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewConfiguration
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
+import com.amanuel.evscsystem.MainActivity
+import com.amanuel.evscsystem.R
 import com.amanuel.evscsystem.data.network.Resource
 import com.amanuel.evscsystem.data.network.UserApi
 import com.amanuel.evscsystem.data.repository.UserRepository
@@ -21,8 +28,26 @@ import kotlinx.coroutines.runBlocking
 
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, UserRepository>() {
 
+    private lateinit var appConfiguration: AppBarConfiguration
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        /** start codes related to creating a custom toolbar */
+
+//        val toolbar = binding.toolbarHome
+//        toolbar.inflateMenu(R.menu.custom_home_fragment_menu)
+//
+//        toolbar.setNavigationIcon(R.drawable.ic_baseline_menu_24)
+//        toolbar.setNavigationOnClickListener { view ->
+//            // reference to drawer
+//        }
+
+//        handleOnClickOnCustomOptions()
+
+        // add the navigation icon
+
+        /** end codes related to creating a custom toolbar */
 
 
 //        binding.progressbarHome.visible(false)
@@ -48,12 +73,14 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, UserReposi
 
     }
 
+
+
     private fun updateUI(user: User) {
-        with(binding) {
-            textViewId.text = user.pk.toString()
-            textViewName.text = user.username
-            textViewEmail.text = user.email
-        }
+//        with(binding) {
+//            textViewId.text = user.pk.toString()
+//            textViewName.text = user.username
+//            textViewEmail.text = user.email
+//        }
     }
 
 
