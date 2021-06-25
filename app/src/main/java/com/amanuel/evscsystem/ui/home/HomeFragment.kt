@@ -1,76 +1,54 @@
 package com.amanuel.evscsystem.ui.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.NavController
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import com.amanuel.evscsystem.R
+import com.amanuel.evscsystem.data.UserPreferences
+import com.amanuel.evscsystem.data.network.RemoteServiceBuilderHelper
 import com.amanuel.evscsystem.data.network.Resource
-import com.amanuel.evscsystem.data.network.UserApi
-import com.amanuel.evscsystem.data.repository.UserRepository
-import com.amanuel.evscsystem.data.responses.User
 import com.amanuel.evscsystem.databinding.FragmentHomeBinding
-import com.amanuel.evscsystem.ui.base.BaseFragment
-import com.amanuel.evscsystem.ui.visible
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
-class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, UserRepository>() {
+    private val viewModel: HomeViewModel by viewModels()
+
+    private lateinit var binding: FragmentHomeBinding
+
+    private lateinit var appConfiguration: AppBarConfiguration
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding = FragmentHomeBinding.bind(view)
 
-//        binding.progressbarHome.visible(false)
-//
-//        viewModel.getUser()
-//
-//        viewModel.user.observe(viewLifecycleOwner, Observer {
-//            when (it) {
-//                is Resource.Success -> {
-//                    binding.progressbarHome.visible(false)
-//                    updateUI(it.value.user)
-//                }
-//                is Resource.Loading -> {
-//                    binding.progressbarHome.visible(true)
-//                }
-//            }
-//        })
-//
-//
-//        binding.buttonLogout.setOnClickListener {
-//            logout()
-//        }
 
-    }
+        viewModel.getUser()
 
-    private fun updateUI(user: User) {
-        with(binding) {
-            textViewId.text = user.pk.toString()
-            textViewName.text = user.username
-            textViewEmail.text = user.email
+        viewModel.user.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is Resource.Success -> {
+                    Toast.makeText(requireActivity(), "${it.value.user}", Toast.LENGTH_SHORT).show()
+                }
+                is Resource.Loading -> {
+                    // show progress bar or something
+                }
+            }
+        })
+
+
+        binding.buttonLogout.setOnClickListener {
+            // todo: logout imp
         }
+
     }
 
 
-    override fun getViewModel() = HomeViewModel::class.java
-
-    override fun getFragmentBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ) = FragmentHomeBinding.inflate(inflater, container, false)
-
-    override fun getFragmentRepository(): UserRepository {
-        // runBlocking function stops other tasks.so is good if not used.
-        // to quickly find the token request the token at the start of the fragment(called on the BaseFragment)
-        val token = runBlocking { userPreferences.authToken.first() }
-        val api = remoteDataSource.buildApi(UserApi::class.java, token)
-
-        return UserRepository(api)
-    }
 
 }

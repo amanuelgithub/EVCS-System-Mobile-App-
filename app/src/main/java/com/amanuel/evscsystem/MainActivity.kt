@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -24,10 +25,21 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var mToolbar: Toolbar
+
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
     private lateinit var navController: NavController
+
+
+    // list of all kinds of toolbar to be displayed in the different pages
+    // of the application
+    companion object {
+        private const val NO_APPBAR_LAYOUT = 1 // no app bar layout
+    }
+
+    private lateinit var toolbar: Toolbar // setup toolbar based on destination
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        appBarConfiguration = AppBarConfiguration(setOf())
+//        appBarConfiguration = AppBarConfiguration(setOf())
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
@@ -44,21 +56,43 @@ class MainActivity : AppCompatActivity() {
         // initialize the notification channel
         NotificationHelper.init(this)
 
+        hideAllAppBarLayout()
+
         initView()
 
         // controller navigation drawer opening and closing in different fragments
         updateUIBasedOnDestination()
     }
 
+    // hide all appbar layouts
+    private fun hideAllAppBarLayout() {
+        binding.apply {
+            appBarMain.apply {
+                homeFragAppBarLayout.visibility = View.GONE
+                searchFragAppBarLayout.visibility = View.GONE
+            }
+        }
+    }
+
+
     private fun initView() {
-        setupActionBar(appBarConfiguration) // setup action bar with default appBarConfiguration
+//        setupActionBar(appBarConfiguration) // setup action bar with default appBarConfiguration
         setupNavView()
         setupBottomNav()
     }
 
+    /** need a modification */
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
+        navController.addOnDestinationChangedListener { navController, navDestination, arguments ->
+            // inflate different types of menus based on destination
+            when (navDestination.id) {
+                R.id.searchFragment -> {
+                    menuInflater.inflate(R.menu.menu_search_fragment, menu)
+                }
+                else -> super.onCreateOptionsMenu(menu)
+            }
+        }
         return true
     }
 
@@ -75,22 +109,77 @@ class MainActivity : AppCompatActivity() {
                 R.id.emailVerifyFragment,
                 R.id.forgetPasswordFragment
                 -> {
-                    closeDrawer()
+                    lockDrawer()
                     hideBottomNav()
-                    hideActionBar()
+
+                    hideActionBarForHomeFragment()
+                    hideActionBarForSearchFragment()
                 }
-                else -> {
-                    appBarConfiguration = appBarConfigForNavMain()
-                    setupActionBar(appBarConfiguration) // setup action bar with default appBarConfiguration
+
+//                R.id.searchFragment -> {
+//
+//                    // hide the search appbar layout
+//                    hideActionBarForHomeFragment()
+//                    setupActionBarForSearchFragment()
+//
+//                    setupNavView()
+//                    setupBottomNav()
+//
+//                    unlockDrawer()
+//                    showBottomNav()
+//                }
+
+
+                R.id.homeFragment -> {
+                    hideActionBarForSearchFragment()
+                    setupActionBarForHomeFragment()
+
                     setupNavView()
                     setupBottomNav()
 
-                    openDrawer()
-                    showActionBar()
+                    unlockDrawer()
+                    showBottomNav()
+                }
+                else -> {
+                    // hides all actionbars
+                    hideActionBarForSearchFragment()
+                    hideActionBarForHomeFragment()
+
+                    appBarConfiguration = appBarConfigForNavMain()
+//                    setupActionBar(appBarConfiguration) // setup action bar with default appBarConfiguration
+                    setupNavView()
+                    setupBottomNav()
+
+                    unlockDrawer()
+//                    showActionBar() // modified
                     showBottomNav()
                 }
             }
         }
+    }
+
+
+    private fun hideActionBarForSearchFragment() {
+        binding.appBarMain.searchFragAppBarLayout.visibility = View.GONE
+    }
+
+    private fun setupActionBarForSearchFragment() {
+        binding.appBarMain.searchFragAppBarLayout.visibility = View.VISIBLE
+        setSupportActionBar(binding.appBarMain.toolbarSearchFrag)
+        appBarConfiguration = appBarConfigForNavMain()
+        setupActionBarWithNavController(navController, appBarConfiguration)
+    }
+
+
+    private fun hideActionBarForHomeFragment() {
+        binding.appBarMain.homeFragAppBarLayout.visibility = View.GONE
+    }
+
+    private fun setupActionBarForHomeFragment() {
+        binding.appBarMain.homeFragAppBarLayout.visibility = View.VISIBLE
+        setSupportActionBar(binding.appBarMain.toolbarHomeFrag)
+        appBarConfiguration = appBarConfigForNavMain()
+        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
     private fun appBarConfigForNavMain(): AppBarConfiguration = AppBarConfiguration(
@@ -119,44 +208,29 @@ class MainActivity : AppCompatActivity() {
     )
 
     private fun setupBottomNav() {
-        binding.appBarMain.contentMain.bottomNav.setupWithNavController(navController)
+        binding.appBarMain.bottomNav.setupWithNavController(navController)
     }
 
     private fun setupNavView() {
         binding.navView.setupWithNavController(navController)
     }
 
-    private fun openDrawer() {
+    private fun unlockDrawer() {
         binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
     }
 
-    private fun closeDrawer() {
+    private fun lockDrawer() {
         binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
     }
 
     private fun hideBottomNav() {
-        binding.appBarMain.contentMain.bottomNav.visibility = View.GONE
+        binding.appBarMain.bottomNav.visibility = View.GONE
     }
 
     private fun showBottomNav() {
-        binding.appBarMain.contentMain.bottomNav.visibility = View.VISIBLE
+        binding.appBarMain.bottomNav.visibility = View.VISIBLE
     }
 
-    private fun hideActionBar() {
-        binding.appBarMain.toolbar.visibility = View.GONE
-    }
-
-    private fun showActionBar() {
-        binding.appBarMain.toolbar.visibility = View.VISIBLE
-    }
-
-    /**
-     * action bar is similar with toolbar
-     */
-    private fun setupActionBar(appBarConfig: AppBarConfiguration) {
-        setSupportActionBar(binding.appBarMain.toolbar)
-        setupActionBarWithNavController(navController, appBarConfig)
-    }
 
 }
 

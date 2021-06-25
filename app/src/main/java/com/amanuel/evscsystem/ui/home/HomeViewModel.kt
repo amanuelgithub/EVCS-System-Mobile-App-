@@ -7,9 +7,13 @@ import com.amanuel.evscsystem.data.network.Resource
 import com.amanuel.evscsystem.data.repository.UserRepository
 import com.amanuel.evscsystem.data.responses.LoginResponse
 import com.amanuel.evscsystem.ui.base.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel(
+
+@HiltViewModel
+class HomeViewModel @Inject constructor(
     private val repository: UserRepository
 ) : BaseViewModel(repository) {
 

@@ -17,6 +17,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 
     <fragment
@@ -47,9 +50,15 @@
 
     <fragment
         android:id="@+id/notificationsDetailFragment"
-        android:name="com.amanuel.evscsystem.ui.notification.NotificationsDetailFragment"
+        android:name="com.amanuel.evscsystem.ui.notification.NotificationDetailFragment"
         android:label="fragment_notifications_detail"
-        tools:layout="@layout/fragment_notifications_detail" />
+        tools:layout="@layout/fragment_notifications_detail" >
+        <argument
+            android:name="notificationId"
+            app:argType="integer" />
+        <argument android:name="notificationPlateNumber"
+            app:argType="integer" />
+    </fragment>
     <action
         android:id="@+id/action_global_notificationsDetailFragment"
         app:destination="@id/notificationsDetailFragment"

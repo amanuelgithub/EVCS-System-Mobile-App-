@@ -59,6 +59,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="defaultChannel">DefaultChannel</string>
     <string name="notificationDescription">This is a channel for FCM notification messages</string>
+    <string name="search_title">Search</string>
 
 
 </resources>

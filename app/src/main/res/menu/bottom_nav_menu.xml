@@ -9,13 +9,18 @@
 
     <item
         android:id="@+id/homeFragment"
-        android:icon="@drawable/ic_home"
-        android:title="Home" />
+        android:icon="@drawable/ic_baseline_dashboard_24"
+        android:title="Dashboard" />
 
     <item
         android:id="@+id/notificationsFragment"
         android:icon="@drawable/ic_notifications"
         android:title="Notifications" />
+
+    <item
+        android:id="@+id/settings_fragment"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title="Settings" />
 
 
 </menu>

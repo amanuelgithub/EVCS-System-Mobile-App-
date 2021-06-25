@@ -2,10 +2,10 @@ package com.amanuel.evscsystem.data.repository
 
 import com.amanuel.evscsystem.data.UserPreferences
 import com.amanuel.evscsystem.data.network.AuthApi
-import com.amanuel.evscsystem.fcm.FirebaseCloudMessagingService
+import javax.inject.Inject
 
-class AuthRepository(
-    private val api: AuthApi,
+class AuthRepository @Inject constructor(
+    private val api: AuthApi, // this dependency is provided by the NetworkModule
     private val userPreferences: UserPreferences,
 ) : BaseRepository() {
 
