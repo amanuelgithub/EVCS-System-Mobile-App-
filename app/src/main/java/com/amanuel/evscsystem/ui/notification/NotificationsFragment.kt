@@ -3,15 +3,12 @@ package com.amanuel.evscsystem.ui.notification
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amanuel.evscsystem.R
-import com.amanuel.evscsystem.data.models.Notification
 import com.amanuel.evscsystem.databinding.FragmentNotificationsBinding
-import com.amanuel.evscsystem.databinding.NotificationBottomSheetDialogBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 //class NotificationsFragment : Fragment(R.layout.fragment_notifications) {

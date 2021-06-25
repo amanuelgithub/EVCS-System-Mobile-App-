@@ -1,12 +1,9 @@
 package com.amanuel.evscsystem.fcm
 
-import android.app.PendingIntent
-import android.content.Intent
 import android.util.Log
 import androidx.navigation.NavDeepLinkBuilder
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
-import com.amanuel.evscsystem.MainActivity
 import com.amanuel.evscsystem.R
 import com.amanuel.evscsystem.fcm.djangopushnotification.FCMUtil
 import com.amanuel.evscsystem.notification.NotificationHelper
@@ -59,7 +56,7 @@ class FirebaseCloudMessagingService : FirebaseMessagingService() {
             // create the deep link using the pending intent
             // optionally we can pass in an argument using setArgument method
             val pendingIntent = NavDeepLinkBuilder(this)
-                .setGraph(R.navigation.nav_main)
+                .setGraph(R.navigation.nav_graph_main)
                 .setDestination(R.id.notificationsDetailFragment)
                 .createPendingIntent()
 

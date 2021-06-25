@@ -9,10 +9,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import com.amanuel.evscsystem.data.UserPreferences
-import com.amanuel.evscsystem.data.network.RemoteDataSource
+import com.amanuel.evscsystem.data.network.RemoteServiceBuilderHelper
 import com.amanuel.evscsystem.data.network.UserApi
 import com.amanuel.evscsystem.data.repository.BaseRepository
-import com.amanuel.evscsystem.ui.startNewActivity
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
@@ -27,7 +26,7 @@ abstract class BaseFragment<VM : BaseViewModel, B : ViewBinding, R : BaseReposit
     protected lateinit var binding: B
     protected lateinit var viewModel: VM
 
-    protected val remoteDataSource = RemoteDataSource()
+    protected val remoteDataSource = RemoteServiceBuilderHelper()
 
     override fun onCreateView(
         inflater: LayoutInflater,
