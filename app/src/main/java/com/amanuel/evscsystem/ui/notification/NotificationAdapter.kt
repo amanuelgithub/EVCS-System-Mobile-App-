@@ -10,7 +10,7 @@ import com.amanuel.evscsystem.data.models.Notification
 import com.amanuel.evscsystem.databinding.ItemNotificationBinding
 
 class NotificationAdapter(
-    private val listener: onLocationImageViewClickListener
+    private val notificationWidgetsClickListenerInterface: NotificationWidgetsClickListenerInterface
 ) :
     ListAdapter<Notification, NotificationAdapter.NotificationsViewHolder>(NotificationDiffCallBack()) {
 
@@ -24,42 +24,44 @@ class NotificationAdapter(
     override fun onBindViewHolder(holder: NotificationsViewHolder, position: Int) {
         val currentNotificationItem = getItem(position)
         holder.bind(currentNotificationItem)
-        holder.apply {
-
-        }
     }
 
-        inner class NotificationsViewHolder(private val binding: ItemNotificationBinding) :
+    inner class NotificationsViewHolder(private val binding: ItemNotificationBinding) :
         RecyclerView.ViewHolder(binding.root), View.OnClickListener {
         fun bind(notification: Notification) {
             binding.apply {
                 // @todo: bind the view with the notifications data
-                plateNoTextView.setText(notification.plateNumber.toString())
+                plateNoTextView.text = notification.plateNumber.toString()
                 // include vehicle code
-                vehicleSpeedTextView.setText(notification.speed.toString())
-                locationTextView.setText(notification.location.toString())
+                vehicleSpeedTextView.text = notification.speed.toString()
+                locationTextView.text = notification.Location
             }
         }
 
+        // setting up the clickListener for the NotificationListItem views or widgets
         init {
             binding.locationImageView.setOnClickListener(this)
             binding.moreImageView.setOnClickListener(this)
         }
 
+        // This onclick listener listen for the multiple click events for that
+        // for the different views or widgets in the recyclerView.
         override fun onClick(v: View?) {
             val position = adapterPosition
-            if (position != RecyclerView.NO_POSITION){
+            if (position != RecyclerView.NO_POSITION) {
 
-                when(v){
-                    binding.locationImageView ->{
-                        val notificationId  = getItem(position).id
-                        val notificationPlateNumber = getItem(position).plateNumber
-
-                        listener.onLocationImageViewClick(notificationId, notificationPlateNumber)
+                when (v) {
+                    // when the LocationImageView ,which is contained in the cardView, is
+                    // clicked it will send the the notification id to the method that
+                    // handles the locationImageViewClicking
+                    binding.locationImageView -> {
+                        val notification: Notification = getItem(position) as Notification
+                        notificationWidgetsClickListenerInterface
+                            .onLocationImageViewClicked(notification)
                     }
-                    binding.moreImageView ->{
-                        // to handle the more options(this is done by showing a bottom sheet in the NotificationsFragment)
-                        listener.onMoreOptionClick(position)
+                    // moreOptionsImageView will be handled
+                    binding.moreImageView -> {
+                        notificationWidgetsClickListenerInterface.onMoreOptionClicked(position)
                     }
                 }
             }
@@ -75,10 +77,10 @@ class NotificationAdapter(
 
     }
 
-    interface onLocationImageViewClickListener{
-        fun onLocationImageViewClick(notificationId: Int, notificationPlateNumber: Int)
+    interface NotificationWidgetsClickListenerInterface {
+        fun onLocationImageViewClicked(notification: Notification)
 
-        fun onMoreOptionClick(position: Int)
+        fun onMoreOptionClicked(position: Int)
     }
 
 }

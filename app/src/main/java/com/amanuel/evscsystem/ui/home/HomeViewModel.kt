@@ -23,7 +23,7 @@ class HomeViewModel @Inject constructor(
 
 
     fun getUser() = viewModelScope.launch {
-        _user.value = Resource.Loading
+//        _user.value = Resource.Loading
         _user.value = repository.getUser()
     }
 

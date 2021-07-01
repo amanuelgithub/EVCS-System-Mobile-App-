@@ -15,14 +15,7 @@ abstract class BaseRepository {
             try {
                 Resource.Success(apiCall.invoke())
             } catch (throwable: Throwable) {
-                when (throwable) {
-                    is HttpException -> {
-                        Resource.Failure(false, throwable.code(), throwable.response()?.errorBody())
-                    }
-                    else -> {
-                        Resource.Failure(true, null, null)
-                    }
-                }
+                Resource.Failure(throwable, apiCall.invoke())
             }
         }
     }

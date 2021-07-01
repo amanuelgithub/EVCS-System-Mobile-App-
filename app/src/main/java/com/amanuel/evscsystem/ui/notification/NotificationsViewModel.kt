@@ -1,16 +1,19 @@
 package com.amanuel.evscsystem.ui.notification
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
+import androidx.lifecycle.*
+import com.amanuel.evscsystem.data.models.Notification
 import com.amanuel.evscsystem.data.models.NotificationDao
+import com.amanuel.evscsystem.data.network.NotificationApi
+import com.amanuel.evscsystem.data.repository.NotificationRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class NotificationsViewModel @Inject internal constructor(
-    // pass the notifications repository but for simplicity we take rooms NotificationDao
-    private val notificationsDao: NotificationDao
+    repository: NotificationRepository
 ) : ViewModel() {
+    // Note: this .asLiveData() does multiple things including launching a coroutine.
+    val notifications = repository.getNotifications().asLiveData()
 
-    val notifications = notificationsDao.getNotifications().asLiveData()
 }

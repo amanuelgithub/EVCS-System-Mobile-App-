@@ -9,7 +9,7 @@ class UserRepository @Inject constructor(
 
 
     suspend fun getUser() = safeApiCall {
-        api.getUser()
+        api.getUsers()
     }
 
 }

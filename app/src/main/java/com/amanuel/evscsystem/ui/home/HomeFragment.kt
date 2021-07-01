@@ -29,18 +29,26 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding = FragmentHomeBinding.bind(view)
 
 
-        viewModel.getUser()
+//        viewModel.getUser()
 
-        viewModel.user.observe(viewLifecycleOwner, Observer {
-            when (it) {
-                is Resource.Success -> {
-                    Toast.makeText(requireActivity(), "${it.value.user}", Toast.LENGTH_SHORT).show()
-                }
-                is Resource.Loading -> {
-                    // show progress bar or something
-                }
-            }
-        })
+//        viewModel.user.observe(viewLifecycleOwner, Observer { resources ->
+//            when (resources) {
+//                is Resource.Success -> {
+//                    Toast.makeText(requireActivity(), "${resources.data?.user}", Toast.LENGTH_SHORT)
+//                        .show()
+//                }
+//                is Resource.Loading -> {
+//                    // show progress bar or something
+//                }
+//                is Resource.Failure -> {
+//                    Toast.makeText(
+//                        requireActivity(),
+//                        resources.error.toString(),
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//                }
+//            }
+//        })
 
 
         binding.buttonLogout.setOnClickListener {
@@ -48,7 +56,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
 
     }
-
 
 
 }

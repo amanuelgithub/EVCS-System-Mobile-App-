@@ -56,7 +56,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                     lifecycleScope.launch {
 //                        viewModel.saveAuthToken(it.value.user.access_token!!) // !! make cause a null pointer exception
 
-                        viewModel.saveAuthToken(it.value.key!!) // !! make cause a null pointer exception
+                        viewModel.saveAuthToken(it.data?.key!!) // !! make cause a null pointer exception
                         //@todo 1: saveFCMTokenTo remote server
 //                        if (it.value.user.fcm_token.isNullOrEmpty()){
 //
