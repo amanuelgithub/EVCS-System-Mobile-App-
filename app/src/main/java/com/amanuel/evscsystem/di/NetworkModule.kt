@@ -2,6 +2,7 @@ package com.amanuel.evscsystem.di
 
 import com.amanuel.evscsystem.data.UserPreferences
 import com.amanuel.evscsystem.data.network.AuthApi
+import com.amanuel.evscsystem.data.network.NotificationApi
 import com.amanuel.evscsystem.data.network.RemoteServiceBuilderHelper
 import com.amanuel.evscsystem.data.network.UserApi
 import dagger.Module
@@ -37,4 +38,25 @@ object NetworkModule {
         return remoteServiceBuilderHelper.buildApi(UserApi::class.java, userPreferences?.authToken.toString())
     }
 
+
+    @Singleton
+    @Provides
+    fun provideNotificationService(
+        remoteServiceBuilderHelper: RemoteServiceBuilderHelper,
+    ) : NotificationApi{
+        return remoteServiceBuilderHelper.buildApi(NotificationApi::class.java)
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+

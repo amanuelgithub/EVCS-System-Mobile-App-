@@ -4,16 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
-import androidx.work.workDataOf
 import com.amanuel.evscsystem.data.models.Notification
 import com.amanuel.evscsystem.data.models.NotificationDao
-import com.amanuel.evscsystem.utilities.DATABASE_NAME
-import com.amanuel.evscsystem.utilities.NOTIFICATION_DATA_FILENAME
-import com.amanuel.evscsystem.workers.SeedDatabaseWorker
-import com.amanuel.evscsystem.workers.SeedDatabaseWorker.Companion.KEY_FILENAME
+import com.amanuel.evscsystem.utilities.constants.Constants
 
 @Database(entities = [Notification::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
@@ -21,7 +14,6 @@ abstract class AppDatabase : RoomDatabase() {
 
     companion object {
 
-        // For Singleton instantiation
         @Volatile
         private var instance: AppDatabase? = null
 
@@ -34,20 +26,27 @@ abstract class AppDatabase : RoomDatabase() {
 
         // Create and pre-populate the database
         private fun buildDatabase(context: Context): AppDatabase {
-            return Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
-//                .fallbackToDestructiveMigration()
-                .addCallback(
-                    object : RoomDatabase.Callback() {
-                        override fun onCreate(db: SupportSQLiteDatabase) {
-                            super.onCreate(db)
-                            val request = OneTimeWorkRequestBuilder<SeedDatabaseWorker>()
-                                .setInputData(workDataOf(KEY_FILENAME to NOTIFICATION_DATA_FILENAME))
-                                .build()
-                            WorkManager.getInstance(context).enqueue(request)
-                        }
-                    }
-                )
+                return Room.databaseBuilder(context, AppDatabase::class.java, Constants.DATABASE_NAME)
                 .build()
         }
+
+
+//        // Create and pre-populate the database
+//        private fun buildDatabase(context: Context): AppDatabase {
+//            return Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
+////                .fallbackToDestructiveMigration()
+//                .addCallback(
+//                    object : RoomDatabase.Callback() {
+//                        override fun onCreate(db: SupportSQLiteDatabase) {
+//                            super.onCreate(db)
+//                            val request = OneTimeWorkRequestBuilder<SeedDatabaseWorker>()
+//                                .setInputData(workDataOf(KEY_FILENAME to NOTIFICATION_DATA_FILENAME))
+//                                .build()
+//                            WorkManager.getInstance(context).enqueue(request)
+//                        }
+//                    }
+//                )
+//                .build()
+//        }
     }
 }
