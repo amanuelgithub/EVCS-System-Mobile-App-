@@ -41,7 +41,6 @@
                 android:id="@+id/toolbar_home_frag"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorAccent"
                 app:layout_scrollFlags="scroll|enterAlways"/>
 
         </com.google.android.material.appbar.AppBarLayout>

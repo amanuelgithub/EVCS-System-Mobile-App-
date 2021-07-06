@@ -21,7 +21,7 @@
            <androidx.constraintlayout.widget.ConstraintLayout
                android:layout_width="match_parent"
                android:layout_height="170dp"
-               android:background="@color/purple_500"
+               android:background="@color/primaryDarkColor"
                app:layout_constraintEnd_toEndOf="parent"
                app:layout_constraintStart_toStartOf="parent"
                app:layout_constraintTop_toTopOf="parent">
@@ -37,7 +37,7 @@
                    android:paddingEnd="16dp"
                    android:text="You've just received an email containing verification code on"
                    android:textAlignment="center"
-                   android:textColor="#fff"
+                   android:textColor="@color/primaryTextColor"
                    app:layout_constraintEnd_toEndOf="parent"
                    app:layout_constraintHorizontal_bias="0.0"
                    app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +48,7 @@
                    android:layout_height="wrap_content"
                    android:layout_marginTop="8dp"
                    android:text="example@gmail.com"
-                   android:textColor="#fff"
+                   android:textColor="@color/primaryTextColor"
                    app:layout_constraintEnd_toEndOf="parent"
                    app:layout_constraintHorizontal_bias="0.498"
                    app:layout_constraintStart_toStartOf="parent"
@@ -61,29 +61,35 @@
                android:layout_width="100dp"
                android:layout_height="100dp"
                android:layout_marginTop="120dp"
-               android:background="#fff"
+               android:background="@color/colorBackground"
                android:src="@drawable/ic_baseline_mark_email"
                app:layout_constraintEnd_toEndOf="parent"
                app:layout_constraintHorizontal_bias="0.498"
                app:layout_constraintStart_toStartOf="parent"
                app:layout_constraintTop_toTopOf="parent" />
 
-           <TextView
-               android:id="@+id/textView3"
-               android:layout_width="wrap_content"
+           <com.google.android.material.textfield.TextInputLayout
+               android:id="@+id/emailVerifyTextInputLayout"
+               style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+               android:layout_width="match_parent"
                android:layout_height="wrap_content"
+               android:layout_marginStart="32dp"
                android:layout_marginTop="16dp"
-               android:drawableStart="@drawable/ic_baseline_confirmation_number"
+               android:layout_marginEnd="32dp"
                android:hint="Enter Verification Code"
-               android:inputType="number"
-               android:paddingStart="16dp"
-               android:paddingEnd="32dp"
-               android:textAlignment="center"
-               android:textSize="24sp"
+               app:endIconMode="clear_text"
                app:layout_constraintEnd_toEndOf="parent"
                app:layout_constraintHorizontal_bias="0.498"
                app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+               app:layout_constraintTop_toBottomOf="@+id/imageView3"
+               app:startIconDrawable="@drawable/ic_baseline_confirmation_number">
+
+               <com.google.android.material.textfield.TextInputEditText
+                   android:id="@+id/editTextTextPassword"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content" />
+           </com.google.android.material.textfield.TextInputLayout>
+
 
            <Button
                android:id="@+id/button"
@@ -91,10 +97,10 @@
                android:layout_height="wrap_content"
                android:layout_marginTop="16dp"
                android:text="Submit"
-               app:layout_constraintEnd_toEndOf="@+id/textView3"
+               app:layout_constraintEnd_toEndOf="@+id/emailVerifyTextInputLayout"
                app:layout_constraintHorizontal_bias="0.0"
-               app:layout_constraintStart_toStartOf="@+id/textView3"
-               app:layout_constraintTop_toBottomOf="@+id/textView3" />
+               app:layout_constraintStart_toStartOf="@+id/emailVerifyTextInputLayout"
+               app:layout_constraintTop_toBottomOf="@+id/emailVerifyTextInputLayout" />
 
            <View
                android:id="@+id/view"

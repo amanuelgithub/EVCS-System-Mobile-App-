@@ -52,7 +52,7 @@
         android:id="@+id/notificationsDetailFragment"
         android:name="com.amanuel.evscsystem.ui.notification.NotificationDetailFragment"
         android:label="fragment_notifications_detail"
-        tools:layout="@layout/fragment_notifications_detail" >
+        tools:layout="@layout/fragment_notifications_detail">
         <argument
             android:name="notification"
             app:argType="com.amanuel.evscsystem.data.models.Notification" />
@@ -69,10 +69,14 @@
         android:id="@+id/notificationsFragment"
         android:name="com.amanuel.evscsystem.ui.notification.NotificationsFragment"
         android:label="fragment_notifications"
-        tools:layout="@layout/fragment_notifications" >
+        tools:layout="@layout/fragment_notifications">
         <action
             android:id="@+id/action_notificationsFragment_to_notificationsDetailFragment"
-            app:destination="@id/notificationsDetailFragment" />
+            app:destination="@id/notificationsDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
 
