@@ -1,15 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!--?xml version="1.0" encoding="UTF-8"?-->
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="primaryColor">#bf360c</color>
+    <color name="primaryLightColor">#f9683a</color>
+    <color name="primaryDarkColor">#870000</color>
+    <color name="secondaryColor">#0d47a1</color>
+    <color name="secondaryLightColor">#5472d3</color>
+    <color name="secondaryDarkColor">#002171</color>
+    <color name="primaryTextColor">#ffffff</color>
+    <color name="secondaryTextColor">#ffffff</color>
 
-    <color name="colorAccent">#9C27B0</color>
+    <color name="colorBackground">#FAFAFA</color>
+    <color name="colorOnBackground">#212121</color>
 
 
+
+    <!--start another color combination -->
+<!--    <color name="primaryColor">#880e4f</color>-->
+<!--    <color name="primaryLightColor">#bc477b</color>-->
+<!--    <color name="primaryDarkColor">#560027</color>-->
+<!--    <color name="secondaryColor">#ff6f00</color>-->
+<!--    <color name="secondaryLightColor">#ffa040</color>-->
+<!--    <color name="secondaryDarkColor">#c43e00</color>-->
+<!--    <color name="primaryTextColor">#ffffff</color>-->
+<!--    <color name="secondaryTextColor">#000000</color>-->
+    <!--end another color combination -->
 
 </resources>
