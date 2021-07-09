@@ -56,6 +56,15 @@
         <argument
             android:name="notification"
             app:argType="com.amanuel.evscsystem.data.models.Notification" />
+        <action
+            android:id="@+id/action_notificationsDetailFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+        <action
+            android:id="@+id/action_notificationsDetailFragment_to_reportFragment"
+            app:destination="@id/reportFragment" />
+        <action
+            android:id="@+id/action_notificationsDetailFragment_to_vehicleOwnerFragment"
+            app:destination="@id/vehicleOwnerFragment" />
     </fragment>
     <action
         android:id="@+id/action_global_notificationsDetailFragment"
@@ -84,6 +93,26 @@
         android:id="@+id/searchFragment"
         android:name="com.amanuel.evscsystem.ui.search.SearchFragment"
         android:label="SearchFragment" />
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.amanuel.evscsystem.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" />
+    <fragment
+        android:id="@+id/reportFragment"
+        android:name="com.amanuel.evscsystem.ui.report.ReportFragment"
+        android:label="fragment_report"
+        tools:layout="@layout/fragment_report" />
+    <fragment
+        android:id="@+id/vehicleOwnerFragment"
+        android:name="com.amanuel.evscsystem.ui.vehicle.owner.VehicleOwnerFragment"
+        android:label="fragment_vehicle_owner"
+        tools:layout="@layout/fragment_vehicle_owner" />
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.amanuel.evscsystem.ui.profile.UserProfileFragment"
+        android:label="UserProfileFragment"
+        tools:layout="@layout/fragment_user_profile"/>
 
 
 </navigation>

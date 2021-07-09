@@ -35,6 +35,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
                         android:scaleType="centerCrop"
+                        android:tooltipText="@string/vehicle_image_tooltip"
                         tools:src="@tools:sample/backgrounds/scenic" />
 
                     <TextView
@@ -43,7 +44,7 @@
                         android:layout_marginTop="16dp"
                         android:text="Notification Detail"
                         android:textAlignment="center"
-                        android:textColor="#000"
+                        android:textColor="@color/colorOnSurface"
                         android:textSize="18dp"
                         android:textStyle="bold" />
 
@@ -179,13 +180,13 @@
                         android:layout_marginBottom="8dp"
                         android:background="#B8B8B8" />
 
-                    <!-- make this view gone -->
+                    <!-- start of collapsable view -> gone -->
                     <LinearLayout
                         android:id="@+id/expandableAvailActions"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:visibility="gone">
+                        android:visibility="visible">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -205,12 +206,14 @@
                             android:orientation="horizontal">
 
                             <LinearLayout
+                                android:id="@+id/location_on_map_layout"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:orientation="vertical">
 
                                 <ImageButton
+                                    android:id="@+id/location_on_map_img_btn"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -226,12 +229,14 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/write_report_layout"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:orientation="vertical">
 
                                 <ImageButton
+                                    android:id="@+id/write_report_img_btn"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -247,12 +252,14 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/owner_layout"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:orientation="vertical">
 
                                 <ImageButton
+                                    android:id="@+id/owner_img_btn"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -268,16 +275,18 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/more_on_vehicle_layout"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:orientation="vertical">
 
                                 <ImageButton
+                                    android:id="@+id/more_on_vehicle_img_btn"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:src="@drawable/ic_baseline_location_on_24" />
+                                    android:src="@drawable/ic_baseline_read_more_24" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -285,11 +294,13 @@
                                     android:layout_gravity="center"
                                     android:layout_marginTop="4dp"
                                     android:layout_marginBottom="4dp"
-                                    android:text="View On Map" />
+                                    android:text="More" />
                             </LinearLayout>
 
                         </LinearLayout>
                     </LinearLayout>
+                    <!-- end of collapsable view -> gone -->
+
 
                     <View
                         android:layout_width="match_parent"
@@ -318,6 +329,7 @@
 
         <!-- the bottom sheet that will show something here -->
         <FrameLayout
+            android:visibility="gone"
             android:id="@+id/bottomSheetNotifyDetail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -25,8 +25,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var mToolbar: Toolbar
-
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
@@ -38,8 +36,6 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private const val NO_APPBAR_LAYOUT = 1 // no app bar layout
     }
-
-    private lateinit var toolbar: Toolbar // setup toolbar based on destination
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
