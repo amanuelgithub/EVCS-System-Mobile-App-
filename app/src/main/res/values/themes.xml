@@ -14,38 +14,43 @@
         <item name="android:colorBackground">@color/colorBackground</item>
         <item name="colorOnBackground">@color/colorOnBackground</item>
 
+        <item name="colorError">@color/colorError</item>
+        <item name="colorOnError">@color/colorOnError</item>
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
+
     </style>
 
-<!--    <style name="Theme.EVSCSystem.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />-->
-<!---->
-<!--    <style name="Theme.EVSCSystem.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />-->
+    <!--    <style name="Theme.EVSCSystem.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />-->
+    <!---->
+    <!--    <style name="Theme.EVSCSystem.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />-->
 
 
     <!-- This is where you set all of your common styling.
      TextApperances, default widget styles, etc. -->
-<!--    <style name="Base.Theme.EVSCSystem"-->
-<!--        parent="Theme.MaterialComponents.DayNight.NoActionBar">-->
-<!--        &lt;!&ndash; Your app theme, minus color palette &ndash;&gt;-->
-<!--    </style>-->
+    <!--    <style name="Base.Theme.EVSCSystem"-->
+    <!--        parent="Theme.MaterialComponents.DayNight.NoActionBar">-->
+    <!--        &lt;!&ndash; Your app theme, minus color palette &ndash;&gt;-->
+    <!--    </style>-->
 
     <!-- Our light theme, which only sets our light theme color
          palette. It extends from our base theme, which contains
          all of our common styling. -->
-<!--    <style name="Theme.EVSCSystem" parent="Base.Theme.EVSCSystem">-->
-<!--        <item name="colorPrimary">#212121</item>-->
-<!--        <item name="colorPrimaryVariant">#000000</item>-->
-<!--        <item name="colorOnPrimary">#FFFFFF</item>-->
-<!--        <item name="colorSecondary">#2962FF</item>-->
-<!--        <item name="colorSecondaryVariant">#0039CB</item>-->
-<!--        <item name="colorOnSecondary">#FFFFFF</item>-->
-<!--        <item name="colorError">#F44336</item>-->
-<!--        <item name="colorOnError">#FFFFFF</item>-->
-<!--        <item name="colorSurface">#FFFFFF</item>-->
-<!--        <item name="colorOnSurface">#212121</item>-->
-<!--        <item name="android:colorBackground">@color/background</item>-->
-<!--        <item name="colorOnBackground">#212121</item>-->
-<!--    </style>-->
+    <!--    <style name="Theme.EVSCSystem" parent="Base.Theme.EVSCSystem">-->
+    <!--        <item name="colorPrimary">#212121</item>-->
+    <!--        <item name="colorPrimaryVariant">#000000</item>-->
+    <!--        <item name="colorOnPrimary">#FFFFFF</item>-->
+    <!--        <item name="colorSecondary">#2962FF</item>-->
+    <!--        <item name="colorSecondaryVariant">#0039CB</item>-->
+    <!--        <item name="colorOnSecondary">#FFFFFF</item>-->
+    <!--        <item name="colorError">#F44336</item>-->
+    <!--        <item name="colorOnError">#FFFFFF</item>-->
+    <!--        <item name="colorSurface">#FFFFFF</item>-->
+    <!--        <item name="colorOnSurface">#212121</item>-->
+    <!--        <item name="android:colorBackground">@color/background</item>-->
+    <!--        <item name="colorOnBackground">#212121</item>-->
+    <!--    </style>-->
 
-<!--    <color name="background">#FAFAFA</color>-->
+    <!--    <color name="background">#FAFAFA</color>-->
 
 </resources>

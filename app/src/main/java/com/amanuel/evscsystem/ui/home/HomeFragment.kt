@@ -51,9 +51,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 //        })
 
 
-        binding.buttonLogout.setOnClickListener {
-            // todo: logout imp
-        }
+//        binding.buttonLogout.setOnClickListener {
+//            // todo: logout imp
+//        }
 
     }
 

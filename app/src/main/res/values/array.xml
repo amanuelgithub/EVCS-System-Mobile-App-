@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="other_violations_array">
+        <item>Was not cooperative</item>
+        <item>Have not had their driving Licence</item>
+        <item>Tried to Run Away</item>
+        <item>Exceeded the limited passenger number</item>
+        <item>Vehicle Should be Out of Service</item>
+    </string-array>
+</resources>

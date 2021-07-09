@@ -60,6 +60,11 @@
     <string name="defaultChannel">DefaultChannel</string>
     <string name="notificationDescription">This is a channel for FCM notification messages</string>
     <string name="search_title">Search</string>
+    <string name="vehicle_image_tooltip">Vehicle Image</string>
+    <string name="ok_label">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="dismiss_label">Dismiss</string>
+    <string name="clear_all_label">Clear</string>
 
 
 </resources>

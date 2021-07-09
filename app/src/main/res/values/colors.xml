@@ -13,6 +13,11 @@
     <color name="colorOnBackground">#212121</color>
 
 
+    <color name="colorError">#F44336</color>
+    <color name="colorOnError">#FFFFFF</color>
+    <color name="colorSurface">#FFFFFF</color>
+    <color name="colorOnSurface">#212121</color>
+
 
     <!--start another color combination -->
 <!--    <color name="primaryColor">#880e4f</color>-->
