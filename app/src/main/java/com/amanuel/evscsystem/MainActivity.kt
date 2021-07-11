@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -52,22 +51,10 @@ class MainActivity : AppCompatActivity() {
         // initialize the notification channel
         NotificationHelper.init(this)
 
-        hideAllAppBarLayout()
-
         initView()
 
         // controller navigation drawer opening and closing in different fragments
         updateUIBasedOnDestination()
-    }
-
-    // hide all appbar layouts
-    private fun hideAllAppBarLayout() {
-        binding.apply {
-            appBarMain.apply {
-                homeFragAppBarLayout.visibility = View.GONE
-                searchFragAppBarLayout.visibility = View.GONE
-            }
-        }
     }
 
 
@@ -77,7 +64,9 @@ class MainActivity : AppCompatActivity() {
         setupBottomNav()
     }
 
-    /** need a modification */
+    /**
+     * Change the options menu based on destination (or the type of the fragment)
+     */
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         navController.addOnDestinationChangedListener { navController, navDestination, arguments ->
@@ -97,83 +86,37 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    // controller navigation drawer opening and closing in different fragments
+    /**
+     * This function is for reminding that i can do things based on the different destination.
+     * It has no other purpose other than this.
+     */
     private fun updateUIBasedOnDestination() {
         navController.addOnDestinationChangedListener { navController, navDestination, arguments ->
             when (navDestination.id) {
                 navController.graph.startDestination,
                 R.id.emailVerifyFragment,
-                R.id.forgetPasswordFragment
-                -> {
-                    lockDrawer()
+                R.id.forgetPasswordFragment -> {
                     hideBottomNav()
-
-                    hideActionBarForHomeFragment()
-                    hideActionBarForSearchFragment()
+                    hideAppBarLayout()
                 }
 
-//                R.id.searchFragment -> {
-//
-//                    // hide the search appbar layout
-//                    hideActionBarForHomeFragment()
-//                    setupActionBarForSearchFragment()
-//
-//                    setupNavView()
-//                    setupBottomNav()
-//
-//                    unlockDrawer()
-//                    showBottomNav()
-//                }
 
-
-                R.id.homeFragment -> {
-                    hideActionBarForSearchFragment()
-                    setupActionBarForHomeFragment()
-
-                    setupNavView()
-                    setupBottomNav()
-
-                    unlockDrawer()
-                    showBottomNav()
-                }
                 else -> {
-                    // hides all actionbars
-                    hideActionBarForSearchFragment()
-                    hideActionBarForHomeFragment()
-
-                    appBarConfiguration = appBarConfigForNavMain()
-//                    setupActionBar(appBarConfiguration) // setup action bar with default appBarConfiguration
-                    setupNavView()
-                    setupBottomNav()
-
-                    unlockDrawer()
-//                    showActionBar() // modified
                     showBottomNav()
+                    setAppAppBarLayout()
                 }
             }
         }
     }
 
 
-    private fun hideActionBarForSearchFragment() {
-        binding.appBarMain.searchFragAppBarLayout.visibility = View.GONE
+    private fun hideAppBarLayout() {
+        binding.appBarMain.appBarLayout.visibility = View.GONE
     }
 
-    private fun setupActionBarForSearchFragment() {
-        binding.appBarMain.searchFragAppBarLayout.visibility = View.VISIBLE
-        setSupportActionBar(binding.appBarMain.toolbarSearchFrag)
-        appBarConfiguration = appBarConfigForNavMain()
-        setupActionBarWithNavController(navController, appBarConfiguration)
-    }
-
-
-    private fun hideActionBarForHomeFragment() {
-        binding.appBarMain.homeFragAppBarLayout.visibility = View.GONE
-    }
-
-    private fun setupActionBarForHomeFragment() {
-        binding.appBarMain.homeFragAppBarLayout.visibility = View.VISIBLE
-        setSupportActionBar(binding.appBarMain.toolbarHomeFrag)
+    private fun setAppAppBarLayout() {
+        binding.appBarMain.appBarLayout.visibility = View.VISIBLE
+        setSupportActionBar(binding.appBarMain.toolbar)
         appBarConfiguration = appBarConfigForNavMain()
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
@@ -183,7 +126,7 @@ class MainActivity : AppCompatActivity() {
             // top level destinations (we don't show the navigateUp button)
             R.id.homeFragment,
             R.id.searchFragment,
-            R.id.notificationsFragment,
+            R.id.notificationsFragment
         ),
         binding.drawerLayout,
         fallbackOnNavigateUpListener = { onSupportNavigateUp() }
