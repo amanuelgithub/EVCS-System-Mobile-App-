@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="?attr/actionBarSize"
     android:orientation="vertical"
     tools:context=".ui.home.HomeFragment">
 
@@ -12,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="64dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +22,11 @@
             android:id="@+id/cardView2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:elevation="10dp"
+            app:cardElevation="40dp"
+            app:cardCornerRadius="20dp"
             android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
             android:layout_marginTop="24dp"
             app:cardBackgroundColor="#7229AA"
             app:layout_constraintStart_toStartOf="parent"
@@ -63,6 +67,9 @@
             android:id="@+id/cardView3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:elevation="10dp"
+            app:cardElevation="40dp"
+            app:cardCornerRadius="20dp"
             android:layout_marginEnd="16dp"
             app:cardBackgroundColor="#ed920c"
             app:layout_constraintBottom_toBottomOf="@+id/cardView2"
@@ -104,9 +111,14 @@
             android:id="@+id/cardView4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:elevation="10dp"
+            app:cardElevation="40dp"
+            app:cardCornerRadius="20dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
             app:cardBackgroundColor="#de1963"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView2">
 
@@ -145,6 +157,9 @@
             android:id="@+id/cardView5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:elevation="10dp"
+            app:cardElevation="40dp"
+            app:cardCornerRadius="20dp"
             android:layout_marginEnd="16dp"
             app:cardBackgroundColor="#00d1b9"
             app:layout_constraintBottom_toBottomOf="@+id/cardView4"
@@ -199,68 +214,55 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_margin="4dp">
 
-                <Button
+            <com.google.android.material.chip.ChipGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:singleLine="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip4"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ToDay"
-                    android:textAllCaps="false" />
-            </androidx.cardview.widget.CardView>
+                    android:layout_marginLeft="8dp"
+                    android:text="To Day" />
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_margin="4dp">
-
-                <Button
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip5"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Yesterday"
-                    android:textAllCaps="false" />
-            </androidx.cardview.widget.CardView>
+                    android:layout_marginLeft="8dp"
+                    android:text="Yesterday" />
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_margin="4dp">
-
-                <Button
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip6"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Last 7 Days"
-                    android:textAllCaps="false" />
-            </androidx.cardview.widget.CardView>
+                    android:layout_marginLeft="8dp"
+                    android:text="Last 7 Days" />
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_margin="4dp">
-
-                <Button
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip7"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Last 30 Days"
-                    android:textAllCaps="false" />
-            </androidx.cardview.widget.CardView>
+                    android:layout_marginLeft="8dp"
+                    android:text="Last 30 Days" />
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_margin="4dp">
-
-                <Button
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip9"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="All Times"
-                    android:textAllCaps="false" />
-            </androidx.cardview.widget.CardView>
+                    android:layout_marginLeft="8dp"
+                    android:text="All Times" />
+            </com.google.android.material.chip.ChipGroup>
 
         </LinearLayout>
-
 
     </HorizontalScrollView>
 
