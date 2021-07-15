@@ -114,6 +114,11 @@
         android:name="com.amanuel.evscsystem.ui.profile.UserProfileFragment"
         android:label="UserProfileFragment"
         tools:layout="@layout/fragment_user_profile"/>
+    <fragment
+        android:id="@+id/filterSortFragment"
+        android:name="com.amanuel.evscsystem.filter.FilterSortDialogFragment"
+        android:label="fragment_filter_sort"
+        tools:layout="@layout/fragment_dialog_filter_sort" />
 
 
 </navigation>

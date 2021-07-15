@@ -51,13 +51,13 @@ class FirebaseCloudMessagingService : FirebaseMessagingService() {
 
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated. See sendNotification method below.
-
         if (remoteMessage.data.isNotEmpty()) {
             // create the deep link using the pending intent
             // optionally we can pass in an argument using setArgument method
             val pendingIntent = NavDeepLinkBuilder(this)
                 .setGraph(R.navigation.nav_graph_main)
-                .setDestination(R.id.notificationsDetailFragment)
+//                .setDestination(R.id.notificationsDetailFragment)
+                .setDestination(R.id.notificationsFragment)
                 .createPendingIntent()
 
 

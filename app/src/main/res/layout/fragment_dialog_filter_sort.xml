@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
-    android:layout_marginStart="56dp"
     tools:context=".filter.FilterSortDialogFragment">
 
     <!-- start including my custom toolbar -->
@@ -43,11 +42,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Category"
-                android:textSize="16dp"/>
+                android:textSize="16dp" />
 
             <HorizontalScrollView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
                 <com.google.android.material.chip.ChipGroup
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -55,36 +55,50 @@
                     app:singleSelection="true">
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/chip14"
+                        android:id="@+id/notification_catg_chip"
                         style="@style/Widget.MaterialComponents.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:layout_marginLeft="8dp"
+                        android:paddingLeft="2dp"
+                        android:paddingRight="2dp"
                         android:text="Notifications" />
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/chip13"
+                        android:id="@+id/vehicle_catg_chip"
                         style="@style/Widget.MaterialComponents.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:paddingLeft="2dp"
+                        android:paddingRight="2dp"
                         android:text="Vehicles" />
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/chip12"
+                        android:id="@+id/records_catg_chip"
                         style="@style/Widget.MaterialComponents.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Records" />
+                        android:layout_marginLeft="8dp"
+                        android:paddingLeft="2dp"
+                        android:paddingRight="2dp"
+                        android:text="Record" />
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/chip11"
+                        android:id="@+id/accident_catg_chip"
                         style="@style/Widget.MaterialComponents.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Accidents" />
+                        android:layout_marginLeft="8dp"
+                        android:paddingLeft="2dp"
+                        android:paddingRight="2dp"
+                        android:text="Accident" />
 
                 </com.google.android.material.chip.ChipGroup>
 
             </HorizontalScrollView>
+
             <View
                 android:id="@+id/divider6"
                 android:layout_width="match_parent"
@@ -96,24 +110,74 @@
             <!-- Sort by options -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sort By"
-                    android:textSize="16sp"/>
+                    android:text="Filters"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <!-- start the filters section (Note: all them are hidden) -->
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:visibility="gone"
+                        android:id="@+id/filter_checkBox1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="true"
+                        android:text="CheckBox" />
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:visibility="gone"
+                        android:id="@+id/filter_checkBox2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="CheckBox" />
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:visibility="gone"
+                        android:id="@+id/filter_checkBox3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="CheckBox" />
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:visibility="gone"
+                        android:id="@+id/filter_checkBox4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="CheckBox" />
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:visibility="gone"
+                        android:id="@+id/filter_checkBox5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="CheckBox" />
+                    <!-- start the filters section (Note: all them are hidden) -->
+                </LinearLayout>
+
+
+
 
                 <!-- sort by for notification
                 date created, location sent from, by status(viewed or not)-->
-
 
 
                 <!-- end sort by for notification -->
 
                 <!-- sort by for vehicles
                 vehicle code number, status(active or not)-->
-
 
 
                 <!-- end sort by for vehicles -->
@@ -140,17 +204,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Order In"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp" />
 
                 <!-- ascending,descending,-->
                 <RadioGroup
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_height="match_parent">
 
                     <RadioButton
                         android:id="@+id/radioButtonAscending"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:checked="true"
                         android:text="ascending" />
 
                     <RadioButton
@@ -159,8 +224,6 @@
                         android:layout_height="wrap_content"
                         android:text="descending" />
                 </RadioGroup>
-
-
 
 
             </LinearLayout>
@@ -186,21 +249,23 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/clear_filter_button"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:text="Clear Filters"/>
+            android:layout_weight="1"
+            android:text="Clear Filters" />
 
         <Button
+            android:id="@+id/apply_filter_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
-            android:text="Apply Filters"/>
+            android:layout_weight="1"
+            android:text="Apply Filters" />
 
     </LinearLayout>
 

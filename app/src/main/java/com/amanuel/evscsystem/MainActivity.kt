@@ -2,6 +2,7 @@ package com.amanuel.evscsystem
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -14,6 +15,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.amanuel.evscsystem.databinding.ActivityMainBinding
+import com.amanuel.evscsystem.filter.FilterSortDialogFragment
 import com.amanuel.evscsystem.notification.NotificationHelper
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,7 +31,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
 
-
     // list of all kinds of toolbar to be displayed in the different pages
     // of the application
     companion object {
@@ -38,7 +39,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun initView() {
-//        setupActionBar(appBarConfiguration) // setup action bar with default appBarConfiguration
+        setAppAppBarLayout() // setup action bar with default appBarConfiguration
         setupNavView()
         setupBottomNav()
     }
@@ -68,6 +68,7 @@ class MainActivity : AppCompatActivity() {
      * Change the options menu based on destination (or the type of the fragment)
      */
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        super.onCreateOptionsMenu(menu)
         // Inflate the menu; this adds items to the action bar if it is present.
         navController.addOnDestinationChangedListener { navController, navDestination, arguments ->
             // inflate different types of menus based on destination
@@ -79,6 +80,41 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        navController.addOnDestinationChangedListener { navController, navDestination, arguments ->
+            // handle the on items click listeners
+            when (navDestination.id) {
+                /**
+                 * Handles the OptionsMenu Click Listeners for the SearchFragment
+                 */
+                R.id.searchFragment -> {
+                    when (item.itemId) {
+                        R.id.filter_menu_option -> {
+                            FilterSortDialogFragment().show(
+                                supportFragmentManager,
+                                FilterSortDialogFragment.TAG
+                            )
+
+                        }
+                        else -> {
+                            super.onOptionsItemSelected(item)
+                        }
+                    }
+                }
+                /**
+                 * Handles the OptionsMenu Click Listeners for the HomeFragment
+                 */
+                R.id.homeFragment -> {
+
+                }
+                else -> {
+                    super.onOptionsItemSelected(item)
+                }
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -99,8 +135,6 @@ class MainActivity : AppCompatActivity() {
                     hideBottomNav()
                     hideAppBarLayout()
                 }
-
-
                 else -> {
                     showBottomNav()
                     setAppAppBarLayout()
