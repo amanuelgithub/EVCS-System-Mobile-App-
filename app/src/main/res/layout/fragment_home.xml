@@ -20,15 +20,15 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"
-            android:layout_width="0dp"
+            android:layout_width="162dp"
             android:layout_height="wrap_content"
-            android:elevation="10dp"
-            app:cardElevation="40dp"
-            app:cardCornerRadius="20dp"
             android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
             android:layout_marginTop="24dp"
+            android:elevation="10dp"
             app:cardBackgroundColor="#7229AA"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="40dp"
+            app:layout_constraintEnd_toStartOf="@+id/cardView3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -40,10 +40,11 @@
                 <TextView
                     android:id="@+id/textView19"
                     style="@style/TextAppearance.Subtitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:text="All Time Notifications"
+                    android:textAlignment="center"
                     android:textColor="#FFFFFF"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.333"
@@ -65,15 +66,17 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView3"
-            android:layout_width="0dp"
+            android:layout_width="162dp"
             android:layout_height="wrap_content"
-            android:elevation="10dp"
-            app:cardElevation="40dp"
-            app:cardCornerRadius="20dp"
+            android:layout_marginStart="20dp"
             android:layout_marginEnd="16dp"
+            android:elevation="10dp"
             app:cardBackgroundColor="#ed920c"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="40dp"
             app:layout_constraintBottom_toBottomOf="@+id/cardView2"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cardView2"
             app:layout_constraintTop_toTopOf="@+id/cardView2">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -84,10 +87,11 @@
                 <TextView
                     android:id="@+id/textView18"
                     style="@style/TextAppearance.Subtitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:text="All Time Notifications"
+                    android:textAlignment="center"
                     android:textColor="#FFFFFF"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.333"
@@ -109,16 +113,17 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView4"
-            android:layout_width="0dp"
+            android:layout_width="162dp"
             android:layout_height="wrap_content"
-            android:elevation="10dp"
-            app:cardElevation="40dp"
-            app:cardCornerRadius="20dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
+            android:elevation="10dp"
             app:cardBackgroundColor="#de1963"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cardView5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView2">
 
@@ -130,10 +135,11 @@
                 <TextView
                     android:id="@+id/textView16"
                     style="@style/TextAppearance.Subtitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:text="All Time Notifications"
+                    android:textAlignment="center"
                     android:textColor="#FFFFFF"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.333"
@@ -155,15 +161,17 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView5"
-            android:layout_width="0dp"
+            android:layout_width="162dp"
             android:layout_height="wrap_content"
-            android:elevation="10dp"
-            app:cardElevation="40dp"
-            app:cardCornerRadius="20dp"
+            android:layout_marginStart="20dp"
             android:layout_marginEnd="16dp"
+            android:elevation="10dp"
             app:cardBackgroundColor="#00d1b9"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="40dp"
             app:layout_constraintBottom_toBottomOf="@+id/cardView4"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cardView4"
             app:layout_constraintTop_toTopOf="@+id/cardView4">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -174,10 +182,11 @@
                 <TextView
                     android:id="@+id/textView17"
                     style="@style/TextAppearance.Subtitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:text="All Time Notifications"
+                    android:textAlignment="center"
                     android:textColor="#FFFFFF"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.333"

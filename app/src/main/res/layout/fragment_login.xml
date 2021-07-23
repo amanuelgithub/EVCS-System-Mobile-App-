@@ -78,8 +78,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:hint="username"
-                    app:startIconDrawable="@drawable/ic_baseline_account_circle_24"
+                    android:hint="email"
+                    app:startIconDrawable="@drawable/ic_baseline_email"
                     app:endIconMode="clear_text"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -88,6 +88,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editTextTextEmailAddress"
                         android:layout_width="match_parent"
+                        android:inputType="textEmailAddress"
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -108,7 +109,8 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editTextTextPassword"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
 

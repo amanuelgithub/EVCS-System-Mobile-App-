@@ -12,4 +12,8 @@ class UserRepository @Inject constructor(
         api.getUsers()
     }
 
+    suspend fun logout() = safeApiCall {
+        api.logout()
+    }
+
 }

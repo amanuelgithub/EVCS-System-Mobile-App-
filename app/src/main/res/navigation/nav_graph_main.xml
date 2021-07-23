@@ -118,7 +118,12 @@
         android:id="@+id/filterSortFragment"
         android:name="com.amanuel.evscsystem.filter.FilterSortDialogFragment"
         android:label="fragment_filter_sort"
-        tools:layout="@layout/fragment_dialog_filter_sort" />
+        tools:layout="@layout/fragment_dialog_filter_sort" /><action android:id="@+id/action_global_userProfileFragment" app:destination="@id/userProfileFragment"/>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.amanuel.evscsystem.ui.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" /><action android:id="@+id/action_global_loginFragment" app:destination="@id/loginFragment"/>
 
 
 </navigation>

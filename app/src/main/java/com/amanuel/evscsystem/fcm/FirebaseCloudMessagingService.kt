@@ -5,19 +5,20 @@ import androidx.navigation.NavDeepLinkBuilder
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import com.amanuel.evscsystem.R
+import com.amanuel.evscsystem.data.UserPreferences
 import com.amanuel.evscsystem.fcm.djangopushnotification.FCMUtil
 import com.amanuel.evscsystem.notification.NotificationHelper
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 class FirebaseCloudMessagingService : FirebaseMessagingService() {
 
-
     companion object {
         private const val TAG = "MyFirebaseMsgService" // used for logging data
-
         private const val TAG_FCM_MESSAGE = "MessageFromFCM"
-
         var notificaitonId: Int = 0
     }
 
@@ -75,9 +76,9 @@ class FirebaseCloudMessagingService : FirebaseMessagingService() {
     // [START on_new_token]
     override fun onNewToken(token: String) {
         Log.d(TAG, "Refreshed token: $token")
-        sendRegistrationToServer(token)
     }
     // [END on_new_token]
+
 
     /**
      * Schedule async work using WorkManager.
@@ -95,24 +96,6 @@ class FirebaseCloudMessagingService : FirebaseMessagingService() {
     private fun handleNow() {
         Log.d(TAG, "Short lived task is done.")
     }
-
-    /**
-     * Persist token to third-party servers.
-     *
-     * Modify this method to associate the user's FCM registration token with any server-side account
-     * maintained by your application.
-     *
-     * @param token The new token.
-     */
-    private fun sendRegistrationToServer(token: String?) {
-        // TODO: Implement this method to send token to your app server.
-        Log.d(TAG, "sendRegistrationTokenToServer($token)")
-        //@todo: is new token saved to preference conflict with the previous fcm_token may happen
-
-        FCMUtil.sendRegistrationTokenToServer(token)
-
-    }
-
 
 }
 

@@ -1,14 +1,15 @@
+
 package com.amanuel.evscsystem.ui
 
 import android.app.Activity
 import android.content.Intent
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.amanuel.evscsystem.R
 import com.amanuel.evscsystem.data.network.Resource
 import com.amanuel.evscsystem.ui.auth.LoginFragment
-import com.amanuel.evscsystem.ui.base.BaseFragment
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.HttpException
 
@@ -63,21 +64,24 @@ fun View.snackbar(message: String, action: (() -> Unit)? = null) {
 
 // a function that utilize the custom snackbar to handel the api error
 fun <T> Fragment.handleApiError(
-    failure: Resource.Failure<T>,
+    failure: Resource<T>,
     retry: (() -> Unit)? = null
 ) {
     when (failure.error) {
         is HttpException -> {
-            if (failure.error.code() == 401) {
-                if (this is LoginFragment) {
-                    requireView().snackbar("You've entered incorrect email or password")
-                } else {
-                    // todo: logout the user
+            when {
+                failure.error.code() == 401 -> {
+                    if (this is LoginFragment) {
+                        requireView().snackbar("You've entered incorrect email or password")
+                    } else {
+                        // todo: logout the user
 //                    (this as BaseFragment).logout()
+                    }
                 }
-            } else { // Network Error
-                val error = failure.error.response()?.errorBody().toString()
-                requireView().snackbar("Error: $error")
+                else -> {
+                    val error = failure.error.response()?.errorBody().toString()
+                    requireView().snackbar("Error: $error")
+                }
             }
         }
         else -> {
@@ -85,4 +89,26 @@ fun <T> Fragment.handleApiError(
         }
     }
 }
+
+// previous way to handle the the different resource errors
+//fun Fragment.handleApiError(
+//    failure: Resource.Failure,
+//    retry: (() -> Unit)? = null
+//) {
+//    when {
+//        failure.isNetworkError ->
+//            requireView().snackbar("Please check your internet connection!", retry)
+//        failure.errorCode == 401 -> {
+//            if (this is LoginFragment) {
+//                requireView().snackbar("You've entered incorrect email or password")
+//            } else {
+////                (this as BaseFragment<*, *, *>).logout()
+//            }
+//        }
+//        else -> {
+//            val error = failure.errorBody?.string().toString()
+//            requireView().snackbar(error)
+//        }
+//    }
+//}
 

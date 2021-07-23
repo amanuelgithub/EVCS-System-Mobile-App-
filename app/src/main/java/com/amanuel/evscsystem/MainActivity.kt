@@ -60,61 +60,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun initView() {
         setAppAppBarLayout() // setup action bar with default appBarConfiguration
-        setupNavView()
+//        setupNavView()
         setupBottomNav()
-    }
-
-    /**
-     * Change the options menu based on destination (or the type of the fragment)
-     */
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        super.onCreateOptionsMenu(menu)
-        // Inflate the menu; this adds items to the action bar if it is present.
-        navController.addOnDestinationChangedListener { navController, navDestination, arguments ->
-            // inflate different types of menus based on destination
-            when (navDestination.id) {
-                R.id.searchFragment -> {
-                    menuInflater.inflate(R.menu.menu_search_fragment, menu)
-                }
-                else -> super.onCreateOptionsMenu(menu)
-            }
-        }
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        navController.addOnDestinationChangedListener { navController, navDestination, arguments ->
-            // handle the on items click listeners
-            when (navDestination.id) {
-                /**
-                 * Handles the OptionsMenu Click Listeners for the SearchFragment
-                 */
-                R.id.searchFragment -> {
-                    when (item.itemId) {
-                        R.id.filter_menu_option -> {
-                            FilterSortDialogFragment().show(
-                                supportFragmentManager,
-                                FilterSortDialogFragment.TAG
-                            )
-
-                        }
-                        else -> {
-                            super.onOptionsItemSelected(item)
-                        }
-                    }
-                }
-                /**
-                 * Handles the OptionsMenu Click Listeners for the HomeFragment
-                 */
-                R.id.homeFragment -> {
-
-                }
-                else -> {
-                    super.onOptionsItemSelected(item)
-                }
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -160,11 +107,22 @@ class MainActivity : AppCompatActivity() {
             // top level destinations (we don't show the navigateUp button)
             R.id.homeFragment,
             R.id.searchFragment,
-            R.id.notificationsFragment
+            R.id.notificationsFragment,
+            R.id.settingsFragment
         ),
-        binding.drawerLayout,
         fallbackOnNavigateUpListener = { onSupportNavigateUp() }
     )
+
+//    private fun appBarConfigForNavMain(): AppBarConfiguration = AppBarConfiguration(
+//        topLevelDestinationIds = setOf(
+//            // top level destinations (we don't show the navigateUp button)
+//            R.id.homeFragment,
+//            R.id.searchFragment,
+//            R.id.notificationsFragment
+//        ),
+//        binding.drawerLayout,
+//        fallbackOnNavigateUpListener = { onSupportNavigateUp() }
+//    )
 
 
     /**
@@ -184,9 +142,9 @@ class MainActivity : AppCompatActivity() {
         binding.appBarMain.bottomNav.setupWithNavController(navController)
     }
 
-    private fun setupNavView() {
-        binding.navView.setupWithNavController(navController)
-    }
+//    private fun setupNavView() {
+//        binding.navView.setupWithNavController(navController)
+//    }
 
     private fun unlockDrawer() {
         binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)

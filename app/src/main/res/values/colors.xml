@@ -18,6 +18,10 @@
     <color name="colorSurface">#FFFFFF</color>
     <color name="colorOnSurface">#212121</color>
 
+    <color name="snackbar_error_color">#ff0000</color>
+    <color name="snackbar_success_color">#42ba96</color>
+    <color name="snackbar_warning_color">#FFCC00</color>
+
 
     <!--start another color combination -->
 <!--    <color name="primaryColor">#880e4f</color>-->
