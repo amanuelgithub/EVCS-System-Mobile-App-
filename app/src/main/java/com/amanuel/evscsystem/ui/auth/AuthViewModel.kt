@@ -3,10 +3,9 @@ package com.amanuel.evscsystem.ui.auth
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.amanuel.evscsystem.data.models.User
 import com.amanuel.evscsystem.data.network.Resource
 import com.amanuel.evscsystem.data.repository.AuthRepository
-import com.amanuel.evscsystem.data.responses.Device
+import com.amanuel.evscsystem.data.repository.UserRepository
 import com.amanuel.evscsystem.data.responses.LoginResponse
 import com.amanuel.evscsystem.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,8 +15,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val repository: AuthRepository
-) : BaseViewModel(repository) {
+    private val userRepository: UserRepository,
+    private val authRepository: AuthRepository
+) : BaseViewModel(authRepository) {
 
     private val _loginResponse: MutableLiveData<Resource<LoginResponse>> = MutableLiveData()
     val loginResponse: LiveData<Resource<LoginResponse>>
@@ -30,18 +30,18 @@ class AuthViewModel @Inject constructor(
 
     fun login(email: String, password: String) = viewModelScope.launch {
 //        _loginResponse.value = Resource.Loading
-        _loginResponse.value = repository.login(email, password)
+        _loginResponse.value = authRepository.login(email, password)
     }
 
     fun updateFCMToken(id: Int, fcmToken: String) = viewModelScope.launch {
-        _updateFCMTokenResponse.value = repository.updateFCMToken(id, fcmToken)
+        _updateFCMTokenResponse.value = userRepository.updateFCMToken(id, fcmToken)
     }
 
     suspend fun saveAuthToken(token: String) {
-        repository.saveAuthToken(token)
+        authRepository.saveAuthToken(token)
     }
 
     suspend fun saveFCMTokenToPreferences(fcmToken: String) {
-        repository.saveFCMTokenToPreferences(fcmToken)
+        authRepository.saveFCMTokenToPreferences(fcmToken)
     }
 }

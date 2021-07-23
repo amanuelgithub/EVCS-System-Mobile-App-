@@ -2,18 +2,18 @@ package com.amanuel.evscsystem.data.network
 
 import com.amanuel.evscsystem.data.responses.LoginResponse
 import okhttp3.ResponseBody
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface UserApi {
 
     @GET("users")
     suspend fun getUsers(): LoginResponse // needs modification
 
-//    @GET("users/{id}")
-//    suspend fun getUser(@Path("id") userId: Int): LoginResponse
 
-    @POST("logout/")
-    suspend fun logout(): ResponseBody
+    // updates the fcm_registration token of the device
+    @PUT("devices/{id}/")
+    suspend fun updateFCMToken(
+        @Path("id") id: Int,
+        @Body fcm_token: String
+    ): Any
 }

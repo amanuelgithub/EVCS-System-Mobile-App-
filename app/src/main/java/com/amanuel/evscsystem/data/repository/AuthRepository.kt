@@ -15,15 +15,15 @@ class AuthRepository @Inject constructor(
         authApi.login(email, password)
     }
 
-    suspend fun updateFCMToken(id: Int, fcmToken: String) = safeApiCall {
-        authApi.updateFCMToken(id, fcmToken)
-    }
-
     suspend fun saveAuthToken(token: String) {
         userPreferences.saveAuthToken(token)
     }
 
     suspend fun saveFCMTokenToPreferences(fcmToken: String) {
         userPreferences.saveFCMToken(fcmToken)
+    }
+
+    suspend fun logout() = safeApiCall {
+        authApi.logout()
     }
 }

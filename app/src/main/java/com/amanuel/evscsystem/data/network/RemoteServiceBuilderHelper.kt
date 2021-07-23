@@ -10,16 +10,17 @@ import javax.inject.Inject
 
 class RemoteServiceBuilderHelper @Inject constructor() {
 
-    fun <Api> buildApi(
+    // api/rest-auth/
+    fun <Api> buildAuthApi(
         api: Class<Api>,
-        token: String? = null
+        authToken: String? = null
     ): Api {
         return Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL)
+            .baseUrl(Constants.BASE_AUTH_URL)
             .client(OkHttpClient.Builder()
                 .addInterceptor { chain ->
                     chain.proceed(chain.request().newBuilder().also {
-                        it.addHeader("Authorization", "Bearer $token")
+                        it.addHeader("Authorization", "Bearer $authToken")
                     }.build())
                 }.also { client ->
                     if (BuildConfig.DEBUG) {
@@ -33,4 +34,31 @@ class RemoteServiceBuilderHelper @Inject constructor() {
             .build()
             .create(api)
     }
+
+    // api/
+    fun <Api> buildApi(
+        api: Class<Api>,
+        token: String? = null
+    ): Api {
+        return Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
+            .client(OkHttpClient.Builder()
+                .addInterceptor { chain ->
+                    chain.proceed(chain.request().newBuilder().also {
+                        it.addHeader("Authorization", "token $token")
+                    }.build())
+                }.also { client ->
+                    if (BuildConfig.DEBUG) {
+                        val logging = HttpLoggingInterceptor()
+                        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+                        client.addInterceptor(logging)
+                    }
+                }.build()
+            )
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(api)
+    }
+
+
 }

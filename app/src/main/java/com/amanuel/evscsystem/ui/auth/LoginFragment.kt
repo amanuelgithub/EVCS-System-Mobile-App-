@@ -43,6 +43,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentLoginBinding.bind(view)
+
         preferences = UserPreferences(requireContext())
 
         binding.textViewTextForgetPassword.setOnClickListener { v: View ->

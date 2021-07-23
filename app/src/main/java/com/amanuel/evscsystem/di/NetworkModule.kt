@@ -9,6 +9,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 import javax.inject.Singleton
 
 /**
@@ -18,24 +20,35 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
+    // api/rest-auth/
     @Singleton
     @Provides
     fun provideAuthService(
         remoteServiceBuilderHelper: RemoteServiceBuilderHelper,
         userPreferences: UserPreferences?,
-    ): AuthApi{
+    ): AuthApi {
         /** Note: actually we don't need an auth token in the AuthApi. but for safety purposes i included it. */
-        return remoteServiceBuilderHelper.buildApi(AuthApi::class.java)
+        val token = runBlocking{userPreferences?.authToken?.first()}
+        return remoteServiceBuilderHelper.buildAuthApi(
+            AuthApi::class.java,
+            token
+        )
     }
 
 
+    // api/
     @Singleton
     @Provides
     fun provideUserService(
         remoteServiceBuilderHelper: RemoteServiceBuilderHelper,
         userPreferences: UserPreferences?
-    ) : UserApi{
-        return remoteServiceBuilderHelper.buildApi(UserApi::class.java, userPreferences?.authToken.toString())
+    ): UserApi {
+        val token = runBlocking{userPreferences?.authToken?.first()}
+
+        return remoteServiceBuilderHelper.buildApi(
+            UserApi::class.java,
+            token
+        )
     }
 
 
@@ -43,8 +56,8 @@ object NetworkModule {
     @Provides
     fun provideNotificationService(
         remoteServiceBuilderHelper: RemoteServiceBuilderHelper,
-    ) : NotificationApi{
-        return remoteServiceBuilderHelper.buildApi(NotificationApi::class.java)
+    ): NotificationApi {
+        return remoteServiceBuilderHelper.buildAuthApi(NotificationApi::class.java)
     }
 
 }
