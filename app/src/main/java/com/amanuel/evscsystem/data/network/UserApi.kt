@@ -14,6 +14,6 @@ interface UserApi {
 //    @GET("users/{id}")
 //    suspend fun getUser(@Path("id") userId: Int): LoginResponse
 
-    @POST("logout")
+    @POST("logout/")
     suspend fun logout(): ResponseBody
 }

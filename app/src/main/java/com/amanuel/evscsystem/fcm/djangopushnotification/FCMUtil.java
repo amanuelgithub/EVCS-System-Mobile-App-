@@ -1,10 +1,6 @@
 package com.amanuel.evscsystem.fcm.djangopushnotification;
 
-import android.content.DialogInterface;
 import android.util.Log;
-import android.widget.Toast;
-
-import androidx.appcompat.app.AlertDialog;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -20,6 +16,8 @@ public class FCMUtil {
     private final static String app_server_url = "http://192.168.137.1:8000/HelloWorldApp/insert/?fcm_token="; //change it to your server address
 
     public static void sendRegistrationTokenToServer(String token){
+        // This method uses a GET request to send the fcm_token
+        // todo: change the GET request to POST
         StringRequest stringRequest = new StringRequest(Request.Method.GET, app_server_url + token,
                 new Response.Listener<String>() {
                     @Override

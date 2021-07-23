@@ -1,11 +1,11 @@
-package com.amanuel.evscsystem.data.responses
+package com.amanuel.evscsystem.data.models
 
 data class User(
-        val pk: Int,
-        val username: String,
-        val email: String,
-        val first_name: String,
-        val last_name: String
+    val pk: Int,
+    val username: String,
+    val email: String,
+    val first_name: String,
+    val last_name: String,
 //        val id: Int,
 //        val name: String,
 //        val email: String,

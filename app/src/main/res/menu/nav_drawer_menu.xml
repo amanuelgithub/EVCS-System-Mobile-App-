@@ -32,7 +32,7 @@
                 <group android:checkableBehavior="single">
 
                     <item
-                        android:id="@+id/userProfileFragment"
+                        android:id="@+id/action_global_userProfileFragment"
                         android:title="@string/menu__user_profile" />
 
                 </group>

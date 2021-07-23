@@ -30,6 +30,8 @@ class NotificationDetailFragment : Fragment(R.layout.fragment_notifications_deta
 
         val args = NotificationDetailFragmentArgs.fromBundle(requireArguments())
         // notification sent form the NotificationsFragment
+
+        // a url for that specific notification is required
         notification = args.notification
 
         Toast.makeText(requireActivity(), "Notification: ${notification.id}", Toast.LENGTH_SHORT)

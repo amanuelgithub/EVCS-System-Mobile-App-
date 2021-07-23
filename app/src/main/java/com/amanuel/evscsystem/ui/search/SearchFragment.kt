@@ -7,7 +7,6 @@ import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.amanuel.evscsystem.R
-import com.amanuel.evscsystem.databinding.FragmentDialogFilterSortBinding
 import com.amanuel.evscsystem.databinding.FragmentSearchBinding
 import com.amanuel.evscsystem.filter.FilterSortDialogFragment
 
@@ -18,6 +17,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
         val binding = FragmentSearchBinding.bind(view)
 
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -25,33 +25,17 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            // search option should not be included in here.
-//            R.id.search_menu_option -> {
-//
-//                true
-//            }
+        when (item.itemId) {
             R.id.filter_menu_option -> {
-                // todo: show the filter page
-                FilterSortDialogFragment().show(
-                    childFragmentManager, FilterSortDialogFragment.TAG
-                )
-
-                true
-            }
-            R.id.action_sort_by_date -> {
-                // todo: handle the sort by date action
-                true
-            }
-            R.id.action_sort_by_name -> {
-                // todo: handle the sort by name
-                true
+                // show filter sort fragment
+                FilterSortDialogFragment().show(childFragmentManager, FilterSortDialogFragment.TAG)
             }
             else -> {
                 return super.onOptionsItemSelected(item)
             }
-
         }
+        return super.onOptionsItemSelected(item)
     }
+
 
 }

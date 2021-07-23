@@ -2,6 +2,7 @@ package com.amanuel.evscsystem
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -14,6 +15,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.amanuel.evscsystem.databinding.ActivityMainBinding
+import com.amanuel.evscsystem.filter.FilterSortDialogFragment
 import com.amanuel.evscsystem.notification.NotificationHelper
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,7 +31,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
 
-
     // list of all kinds of toolbar to be displayed in the different pages
     // of the application
     companion object {
@@ -38,7 +39,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -59,26 +59,9 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun initView() {
-//        setupActionBar(appBarConfiguration) // setup action bar with default appBarConfiguration
-        setupNavView()
+        setAppAppBarLayout() // setup action bar with default appBarConfiguration
+//        setupNavView()
         setupBottomNav()
-    }
-
-    /**
-     * Change the options menu based on destination (or the type of the fragment)
-     */
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        navController.addOnDestinationChangedListener { navController, navDestination, arguments ->
-            // inflate different types of menus based on destination
-            when (navDestination.id) {
-                R.id.searchFragment -> {
-                    menuInflater.inflate(R.menu.menu_search_fragment, menu)
-                }
-                else -> super.onCreateOptionsMenu(menu)
-            }
-        }
-        return true
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -99,8 +82,6 @@ class MainActivity : AppCompatActivity() {
                     hideBottomNav()
                     hideAppBarLayout()
                 }
-
-
                 else -> {
                     showBottomNav()
                     setAppAppBarLayout()
@@ -126,11 +107,22 @@ class MainActivity : AppCompatActivity() {
             // top level destinations (we don't show the navigateUp button)
             R.id.homeFragment,
             R.id.searchFragment,
-            R.id.notificationsFragment
+            R.id.notificationsFragment,
+            R.id.settingsFragment
         ),
-        binding.drawerLayout,
         fallbackOnNavigateUpListener = { onSupportNavigateUp() }
     )
+
+//    private fun appBarConfigForNavMain(): AppBarConfiguration = AppBarConfiguration(
+//        topLevelDestinationIds = setOf(
+//            // top level destinations (we don't show the navigateUp button)
+//            R.id.homeFragment,
+//            R.id.searchFragment,
+//            R.id.notificationsFragment
+//        ),
+//        binding.drawerLayout,
+//        fallbackOnNavigateUpListener = { onSupportNavigateUp() }
+//    )
 
 
     /**
@@ -150,9 +142,9 @@ class MainActivity : AppCompatActivity() {
         binding.appBarMain.bottomNav.setupWithNavController(navController)
     }
 
-    private fun setupNavView() {
-        binding.navView.setupWithNavController(navController)
-    }
+//    private fun setupNavView() {
+//        binding.navView.setupWithNavController(navController)
+//    }
 
     private fun unlockDrawer() {
         binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)

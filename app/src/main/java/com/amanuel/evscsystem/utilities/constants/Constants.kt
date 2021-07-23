@@ -3,7 +3,6 @@ package com.amanuel.evscsystem.utilities.constants
 /**
  * Constants used throughout the App
  */
-
 class Constants {
     companion object {
         const val DATABASE_NAME = "evscdb"
@@ -15,9 +14,10 @@ class Constants {
 
 //        const val BASE_URL = "http://simplifiedcoding.tech/mywebapp/public/api/"
 //        const val BASE_URL = "http://apix.simplifiedcoding.in/api/"
-//        const val BASE_URL = "http://10.240.72.198:8000/api/rest-auth/"
+        const val BASE_URL = "http://10.240.72.29:8000/api/rest-auth/"
+//        const val BASE_URL = "http://10.240.72.198:8000"
+//        const val BASE_URL = "http://192.168.43.212:8000/"
 //        const val BASE_URL = "http://192.168.137.1:3000/"
-        const val BASE_URL = "http://192.168.137.1:3000/"
     }
 }
 

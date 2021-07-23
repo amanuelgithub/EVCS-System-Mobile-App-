@@ -29,7 +29,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding = FragmentHomeBinding.bind(view)
 
 
-//        viewModel.getUser()
 
 //        viewModel.user.observe(viewLifecycleOwner, Observer { resources ->
 //            when (resources) {

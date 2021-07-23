@@ -26,6 +26,12 @@ class UserPreferences @Inject constructor(
             preferences[KEY_AUTH]
         }
 
+    // return the stored fcm_token
+    val fcmToken: Flow<String?>
+        get() = appContext.dataStore.data.map { preferences ->
+            preferences[FCM_TOKEN]
+        }
+
 
     // saves the auth key
     suspend fun saveAuthToken(authToken: String) {
@@ -35,9 +41,9 @@ class UserPreferences @Inject constructor(
     }
 
     // saves the fcm_token key
-    suspend fun saveFCMToken(fcmToken: String?) {
+    suspend fun saveFCMToken(fcmToken: String) {
         appContext.dataStore.edit { preferences ->
-            preferences[FCM_TOKEN] = fcmToken!!
+            preferences[FCM_TOKEN] = fcmToken
         }
     }
 

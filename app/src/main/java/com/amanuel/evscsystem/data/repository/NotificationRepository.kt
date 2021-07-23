@@ -10,7 +10,7 @@ import javax.inject.Inject
 class NotificationRepository @Inject constructor(
     private val notificationApi: NotificationApi,
     private val appDatabase: AppDatabase
-): BaseRepository() {
+) {
 
     private val notificationDao = appDatabase.notificationDao()
 
