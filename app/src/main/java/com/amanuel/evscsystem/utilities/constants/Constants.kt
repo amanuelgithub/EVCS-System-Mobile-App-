@@ -14,7 +14,8 @@ class Constants {
 
 //        const val BASE_URL = "http://simplifiedcoding.tech/mywebapp/public/api/"
 //        const val BASE_URL = "http://apix.simplifiedcoding.in/api/"
-        const val BASE_AUTH_URL = "http://10.240.72.34:8000/api/rest-auth/"
+        const val BASE_AUTH_LOGIN_URL = "http://10.240.72.34:8000/api/rest-auth/"
+        const val BASE_AUTH_LOGOUT_URL = "http://10.240.72.34:8000/api/rest-auth/"
         const val BASE_URL = "http://10.240.72.34:8000/api/"
 //        const val BASE_URL = "http://10.240.72.198:8000"
 //        const val BASE_URL = "http://192.168.43.212:8000/"

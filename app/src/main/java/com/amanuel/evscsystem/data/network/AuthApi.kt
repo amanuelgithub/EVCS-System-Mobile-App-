@@ -14,8 +14,4 @@ interface AuthApi {
     ): LoginResponse
 
 
-    // api/rest-auth/
-    @POST("logout/")
-    suspend fun logout(): ResponseBody
-
 }

@@ -10,13 +10,13 @@ import javax.inject.Inject
 
 class RemoteServiceBuilderHelper @Inject constructor() {
 
-    // api/rest-auth/
+    // api/rest-auth/login/
     fun <Api> buildAuthApi(
         api: Class<Api>,
         authToken: String? = null
     ): Api {
         return Retrofit.Builder()
-            .baseUrl(Constants.BASE_AUTH_URL)
+            .baseUrl(Constants.BASE_AUTH_LOGIN_URL)
             .client(OkHttpClient.Builder()
                 .addInterceptor { chain ->
                     chain.proceed(chain.request().newBuilder().also {
@@ -35,10 +35,38 @@ class RemoteServiceBuilderHelper @Inject constructor() {
             .create(api)
     }
 
-    // api/
+
+
+    // api/rest-auth/logout
+    fun <Api> buildAuthLogoutApi(
+        api: Class<Api>,
+        authToken: String? = null
+    ): Api {
+        return Retrofit.Builder()
+            .baseUrl(Constants.BASE_AUTH_LOGIN_URL)
+            .client(OkHttpClient.Builder()
+                .addInterceptor { chain ->
+                    chain.proceed(chain.request().newBuilder().also {
+                        it.addHeader("Authorization", "Bearer $authToken")
+                    }.build())
+                }.also { client ->
+                    if (BuildConfig.DEBUG) {
+                        val logging = HttpLoggingInterceptor()
+                        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+                        client.addInterceptor(logging)
+                    }
+                }.build()
+            )
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(api)
+    }
+
+
+    // api/...
     fun <Api> buildApi(
         api: Class<Api>,
-        token: String? = null
+        token: String?
     ): Api {
         return Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)

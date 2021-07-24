@@ -12,6 +12,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.amanuel.evscsystem.R
 import com.amanuel.evscsystem.connectivity.Connectivity
+import com.amanuel.evscsystem.data.SessionManager
 import com.amanuel.evscsystem.data.UserPreferences
 import com.amanuel.evscsystem.data.models.User
 import com.amanuel.evscsystem.data.network.Resource
@@ -25,6 +26,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginFragment : Fragment(R.layout.fragment_login) {
@@ -35,7 +37,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private val viewModel: AuthViewModel by viewModels()
 
-    private lateinit var preferences: UserPreferences
+//    private lateinit var preferences: UserPreferences
+    @Inject lateinit var sessionManager: SessionManager
 
     private lateinit var binding: FragmentLoginBinding
 
@@ -44,7 +47,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         binding = FragmentLoginBinding.bind(view)
 
-        preferences = UserPreferences(requireContext())
+//        preferences = UserPreferences(requireContext())
+        sessionManager = SessionManager(requireContext())
 
         binding.textViewTextForgetPassword.setOnClickListener { v: View ->
             navToForgetPasswordFragment(v)
@@ -72,7 +76,11 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                         Toast.makeText(requireContext(), resource.data?.key!!, Toast.LENGTH_SHORT)
                             .show()
 //                        saveFCMToken to server
-                        if (preferences.fcmToken.toString().isNotEmpty()) {
+//                        if (preferences.fcmToken.toString().isNotEmpty()) {
+//                            updateFCMToken(resource.data.user)
+//                        }
+
+                        if (sessionManager.fetchAuthToken()!!.isNotEmpty() && sessionManager.fetchAuthToken() != null) {
                             updateFCMToken(resource.data.user)
                         }
 
@@ -137,7 +145,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             if (fcm_token != null) {
                 lifecycleScope.launch {
                     // save to the preferences
-                    viewModel.saveFCMTokenToPreferences(fcm_token)
+//                    viewModel.saveFCMTokenToPreferences(fcm_token)
                 }
                 // update the fcm_token
                 viewModel.updateFCMToken(user.pk, fcm_token)

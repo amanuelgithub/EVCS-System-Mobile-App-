@@ -11,9 +11,11 @@ interface UserApi {
 
 
     // updates the fcm_registration token of the device
+//    @Headers("Content-Type: application/json")
+    @FormUrlEncoded
     @PUT("devices/{id}/")
     suspend fun updateFCMToken(
         @Path("id") id: Int,
-        @Body fcm_token: String
+        @Field("fcm_token") fcm_token: String
     ): Any
 }

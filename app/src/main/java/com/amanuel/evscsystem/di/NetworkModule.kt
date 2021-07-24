@@ -1,10 +1,8 @@
 package com.amanuel.evscsystem.di
 
+import com.amanuel.evscsystem.data.SessionManager
 import com.amanuel.evscsystem.data.UserPreferences
-import com.amanuel.evscsystem.data.network.AuthApi
-import com.amanuel.evscsystem.data.network.NotificationApi
-import com.amanuel.evscsystem.data.network.RemoteServiceBuilderHelper
-import com.amanuel.evscsystem.data.network.UserApi
+import com.amanuel.evscsystem.data.network.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,14 +22,27 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideAuthService(
-        remoteServiceBuilderHelper: RemoteServiceBuilderHelper,
-        userPreferences: UserPreferences?,
+        remoteServiceBuilderHelper: RemoteServiceBuilderHelper
     ): AuthApi {
         /** Note: actually we don't need an auth token in the AuthApi. but for safety purposes i included it. */
-        val token = runBlocking{userPreferences?.authToken?.first()}
         return remoteServiceBuilderHelper.buildAuthApi(
-            AuthApi::class.java,
-            token
+            AuthApi::class.java
+        )
+    }
+
+    // api/rest-auth/
+    @Singleton
+    @Provides
+    fun provideAuthLogoutService(
+        remoteServiceBuilderHelper: RemoteServiceBuilderHelper,
+//        userPreferences: UserPreferences?
+        sessionManager: SessionManager
+    ): AuthLogoutApi {
+//        var token: String? = runBlocking { userPreferences?.authToken?.first() }
+
+        return remoteServiceBuilderHelper.buildAuthLogoutApi(
+            AuthLogoutApi::class.java,
+            sessionManager.fetchAuthToken()
         )
     }
 
@@ -41,13 +52,14 @@ object NetworkModule {
     @Provides
     fun provideUserService(
         remoteServiceBuilderHelper: RemoteServiceBuilderHelper,
-        userPreferences: UserPreferences?
+//        userPreferences: UserPreferences?
+        sessionManager: SessionManager
     ): UserApi {
-        val token = runBlocking{userPreferences?.authToken?.first()}
+//        var token: String? = runBlocking { userPreferences?.authToken?.first() }
 
         return remoteServiceBuilderHelper.buildApi(
             UserApi::class.java,
-            token
+            sessionManager.fetchAuthToken()
         )
     }
 
