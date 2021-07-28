@@ -26,6 +26,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import java.net.SocketException
+import java.net.SocketTimeoutException
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -37,8 +40,9 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private val viewModel: AuthViewModel by viewModels()
 
-//    private lateinit var preferences: UserPreferences
-    @Inject lateinit var sessionManager: SessionManager
+    //    private lateinit var preferences: UserPreferences
+    @Inject
+    lateinit var sessionManager: SessionManager
 
     private lateinit var binding: FragmentLoginBinding
 
@@ -64,30 +68,103 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             binding.buttonLogin.enable(email.isNotEmpty() && it.toString().isNotEmpty())
         }
 
+        /**
+        viewModel.loginResponse.observe(viewLifecycleOwner) { resource ->
+        //            Snackbar.make(requireView(), "Login response", Snackbar.LENGTH_LONG).show()
+        //            binding.progressbar.visible(resource is Resource.Loading)
+        when {
+        resource is Resource.Success && (resource.data != null) -> {
+        Log.d(TAG, "onViewCreated: ${resource.error.toString()}")
+        lifecycleScope.launch {
+        viewModel.saveAuthToken(resource.data?.key!!)
+
+        val tokenEmpty = sessionManager.fetchAuthToken()?.isNotEmpty() ?: true
+        val tokenNull = sessionManager.fetchAuthToken() == null
+
+        if (!tokenEmpty && !tokenNull) {
+        resource.data?.let { updateFCMToken(it.user) }
+        }
+        }
+
+        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+        }
+        resource is (Resource.Failure) && (resource.data == null) -> {
+        Log.d(TAG, "onViewCreated: ${resource.error.toString()}")
+        when (resource.error) {
+        is HttpException -> when {
+        resource.error.code() == 400 -> {
+        Toast.makeText(
+        requireContext(),
+        "Bad Request",
+        Toast.LENGTH_SHORT
+        ).show()
+        }
+        resource.error.code() == 401 -> {
+        Toast.makeText(
+        requireContext(),
+        "You are not authorized",
+        Toast.LENGTH_SHORT
+        ).show()
+        }
+        else -> {
+        Toast.makeText(
+        requireContext(),
+        "Unknown Http Error Occurred",
+        Toast.LENGTH_SHORT
+        ).show()
+        }
+
+        }
+        is SocketException -> {
+        Toast.makeText(requireContext(), "SocketException", Toast.LENGTH_SHORT)
+        .show()
+        }
+        else -> {
+        Toast.makeText(
+        requireContext(),
+        "Unknown Error Occurred",
+        Toast.LENGTH_SHORT
+        ).show()
+        }
+
+        }
+        Log.d("Failure", "Resource Failure")
+        //                    handleApiError(resource) { login() }
+        }
+        resource is (Resource.Loading) && (resource.data == null) -> {
+        binding.progressbar.visible(true)
+        }
+        else -> {
+        // do something here
+        Toast.makeText(
+        requireContext(),
+        "Resource Data: ${resource.data} and Error: ${resource.error}",
+        Toast.LENGTH_SHORT
+        ).show()
+        }
+        }
+        }
+         */
+
 
         // controls any kind of live update made in the case of logging in
         viewModel.loginResponse.observe(viewLifecycleOwner) { resource ->
-            Snackbar.make(requireView(), "Login response", Snackbar.LENGTH_LONG).show()
+            //            Snackbar.make(requireView(), "Login response", Snackbar.LENGTH_LONG).show()
             binding.progressbar.visible(resource is Resource.Loading)
             when (resource) {
                 is Resource.Success -> {
                     lifecycleScope.launch {
                         viewModel.saveAuthToken(resource.data?.key!!)
-                        Toast.makeText(requireContext(), resource.data?.key!!, Toast.LENGTH_SHORT)
-                            .show()
-//                        saveFCMToken to server
-//                        if (preferences.fcmToken.toString().isNotEmpty()) {
-//                            updateFCMToken(resource.data.user)
-//                        }
 
-                        if (sessionManager.fetchAuthToken()!!.isNotEmpty() && sessionManager.fetchAuthToken() != null) {
-                            updateFCMToken(resource.data.user)
+                        val tokenEmpty = sessionManager.fetchAuthToken()?.isNotEmpty() ?: true
+                        val tokenNull = sessionManager.fetchAuthToken() == null
+
+                        if (!tokenEmpty && !tokenNull) {
+                            resource.data?.let { updateFCMToken(it.user) }
                         }
-
-                        //@todo 2: check the traffic police selected a location: and based on that move either to fragment_home.xml or to fragment_location_config.xml
-                        //@todo 3: also replace the below code with one that will work with fragment
-                        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                     }
+
+                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                 }
                 is Resource.Failure -> {
                     Log.d("Failure", "Resource Failure")
@@ -109,9 +186,9 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             if (Connectivity.isConnectedOrConnecting(requireContext())) {
                 login()
             } else {
-                view.showWarningSnackBar("Check Your Internet Connection.")
+//                view.showWarningSnackBar("Check Your Internet Connection.")
+                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
             }
-//            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
         }
 
     }

@@ -116,7 +116,7 @@
         tools:layout="@layout/fragment_user_profile"/>
     <fragment
         android:id="@+id/filterSortFragment"
-        android:name="com.amanuel.evscsystem.filter.FilterSortDialogFragment"
+        android:name="com.amanuel.evscsystem.ui.dialogs.FilterSortDialogFragment"
         android:label="fragment_filter_sort"
         tools:layout="@layout/fragment_dialog_filter_sort" /><action android:id="@+id/action_global_userProfileFragment" app:destination="@id/userProfileFragment"/>
     <fragment

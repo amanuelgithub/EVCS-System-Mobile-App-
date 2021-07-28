@@ -29,7 +29,7 @@ class AuthViewModel @Inject constructor(
         get() = _updateFCMTokenResponse
 
     fun login(email: String, password: String) = viewModelScope.launch {
-//        _loginResponse.value = Resource.Loading
+        _loginResponse.value = Resource.Loading(null)
         _loginResponse.value = authRepository.login(email, password)
     }
 

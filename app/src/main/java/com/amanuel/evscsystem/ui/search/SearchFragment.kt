@@ -8,7 +8,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.amanuel.evscsystem.R
 import com.amanuel.evscsystem.databinding.FragmentSearchBinding
-import com.amanuel.evscsystem.filter.FilterSortDialogFragment
+import com.amanuel.evscsystem.ui.dialogs.FilterSortDialogFragment
 
 class SearchFragment : Fragment(R.layout.fragment_search) {
 
