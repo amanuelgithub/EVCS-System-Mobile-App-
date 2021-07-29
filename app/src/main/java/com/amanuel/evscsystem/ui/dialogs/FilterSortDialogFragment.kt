@@ -30,11 +30,6 @@ class FilterSortDialogFragment : DialogFragment(R.layout.fragment_dialog_filter_
 
     private var orderBy = mutableMapOf("Ascending" to true, "Descending" to false)
 
-
-    // stores the checkbox and its filtering text
-    private lateinit var checkBoxFiltersHolder: MutableMap<MaterialCheckBox, String>
-
-
     // filters
     // consists of checkboxes that will dynamically be shown
     private lateinit var filterCheckBoxes: MutableList<MaterialCheckBox>
@@ -48,7 +43,7 @@ class FilterSortDialogFragment : DialogFragment(R.layout.fragment_dialog_filter_
     private var vehiclesFilters = mutableListOf("vehicle_id")
 
     // for record = [vehicle_id(or plate_number), created_at, status] (Note: most of this features are not included
-    // in the functional require of our project)
+    // in the functional requirement of our project)
     private var recordFilters = mutableListOf("created_at", "vehicle_id", "status")
 
 
@@ -59,7 +54,7 @@ class FilterSortDialogFragment : DialogFragment(R.layout.fragment_dialog_filter_
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_FullScreenDialog)
+        setStyle(STYLE_NORMAL, R.style.Theme_FullScreenDialog)
     }
 
     override fun onCreateView(
@@ -67,20 +62,6 @@ class FilterSortDialogFragment : DialogFragment(R.layout.fragment_dialog_filter_
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDialogFilterSortBinding.inflate(layoutInflater, container, false)
-
-        // start date picker option
-        binding.datePickerTextView.setOnClickListener {
-            // Builds and shows the material date picker
-            val materialDatePickerBuilder = MaterialDatePicker.Builder.datePicker()
-            materialDatePickerBuilder.setTitleText("Select Date")
-
-            val materialDatePicker = materialDatePickerBuilder.build()
-            materialDatePicker.show(childFragmentManager, "DatePicker")
-        }
-        // end date picker option
-
-        // a map to store the checkbox and filters dynamically
-        checkBoxFiltersHolder = mutableMapOf()
 
         filterCheckBoxes = mutableListOf(
             binding.filterCheckBox1,
@@ -95,13 +76,6 @@ class FilterSortDialogFragment : DialogFragment(R.layout.fragment_dialog_filter_
             binding.recordsCatgChip,
             binding.accidentCatgChip
         )
-
-
-
-        // close imageView on the toolbar
-        binding.toolbarFilterSortInc.closeImageView.setOnClickListener {
-            dismiss()
-        }
 
 
         // Handles the click event for each of categories
@@ -156,6 +130,7 @@ class FilterSortDialogFragment : DialogFragment(R.layout.fragment_dialog_filter_
             }
         }
 
+
         binding.apply {
             notificationCatgChip.setOnClickListener {
                 setCategoryToNotification()
@@ -176,7 +151,22 @@ class FilterSortDialogFragment : DialogFragment(R.layout.fragment_dialog_filter_
         }
 
 
+        // start date picker option
+        binding.datePickerTextView.setOnClickListener {
+            // Builds and shows the material date picker
+            val materialDatePickerBuilder = MaterialDatePicker.Builder.datePicker()
+            materialDatePickerBuilder.setTitleText("Select Date")
 
+            val materialDatePicker = materialDatePickerBuilder.build()
+            materialDatePicker.show(childFragmentManager, "DatePicker")
+        }
+        // end date picker option
+
+
+        // close imageView on the toolbar
+        binding.toolbarFilterSortInc.closeImageView.setOnClickListener {
+            dismiss()
+        }
 
         binding.clearFilterButton.setOnClickListener {
             clearFilters()
@@ -203,60 +193,9 @@ class FilterSortDialogFragment : DialogFragment(R.layout.fragment_dialog_filter_
     }
 
 
-    // The default category is Notification and the default filter for it is created_at(or date)
-    private fun setupDefaultCategoryAndFilters() {
-        uncheckAllCheckedBox()
-        setCategoryToNotification()
-        setupNotificationFilters()
-    }
-
-    private fun setupRecordFilters() {
-        uncheckAllCheckedBox()
-        hideAllMoreFilterViews()
-        setAllCheckBoxInvisible()
-
-        for (index in recordFilters.indices) {
-            filterCheckBoxes[index].apply {
-                visibility = View.VISIBLE
-                text = recordFilters[index]
-            }
-        }
 
 
-        // store the checkbox along with its filtering text if it is checked
-        for (index in filterCheckBoxes.indices) {
-            if (filterCheckBoxes[index].isChecked) {
-                checkBoxFiltersHolder.put(filterCheckBoxes[index], recordFilters[index])
-            }
-        }
 
-//        setupMoreRecordFilters()
-
-    }
-
-    private fun setupVehicleFilters() {
-        uncheckAllCheckedBox()
-        hideAllMoreFilterViews()
-        setAllCheckBoxInvisible()
-        for (index in vehiclesFilters.indices) {
-            filterCheckBoxes[index].apply {
-                visibility = View.VISIBLE
-                text = vehiclesFilters[index]
-            }
-        }
-    }
-
-    private fun setupNotificationFilters() {
-        uncheckAllCheckedBox()
-        hideAllMoreFilterViews()
-        setAllCheckBoxInvisible()
-        for (index in notificationFilters.indices) {
-            filterCheckBoxes[index].apply {
-                visibility = View.VISIBLE
-                text = notificationFilters[index]
-            }
-        }
-    }
 
     // Checkboxes
     override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
@@ -382,6 +321,51 @@ class FilterSortDialogFragment : DialogFragment(R.layout.fragment_dialog_filter_
     }
 
 
+    // The default category is Notification and the default filter for it is created_at(or date)
+    private fun setupDefaultCategoryAndFilters() {
+        uncheckAllCheckedBox()
+        setCategoryToNotification()
+        setupNotificationFilters()
+    }
+
+    private fun setupRecordFilters() {
+        uncheckAllCheckedBox()
+        hideAllMoreFilterViews()
+        setAllCheckBoxInvisible()
+
+        for (index in recordFilters.indices) {
+            filterCheckBoxes[index].apply {
+                visibility = View.VISIBLE
+                text = recordFilters[index]
+            }
+        }
+    }
+
+    private fun setupVehicleFilters() {
+        uncheckAllCheckedBox()
+        hideAllMoreFilterViews()
+        setAllCheckBoxInvisible()
+        for (index in vehiclesFilters.indices) {
+            filterCheckBoxes[index].apply {
+                visibility = View.VISIBLE
+                text = vehiclesFilters[index]
+            }
+        }
+    }
+
+    private fun setupNotificationFilters() {
+        uncheckAllCheckedBox()
+        hideAllMoreFilterViews()
+        setAllCheckBoxInvisible()
+        for (index in notificationFilters.indices) {
+            filterCheckBoxes[index].apply {
+                visibility = View.VISIBLE
+                text = notificationFilters[index]
+            }
+        }
+    }
+
+
     private fun hideMoreFilterViewForRecord() {
         binding.apply {
             for (index in filterCheckBoxes.indices) {
@@ -419,23 +403,13 @@ class FilterSortDialogFragment : DialogFragment(R.layout.fragment_dialog_filter_
                             datePickerTextView.visibility = View.VISIBLE
                         }
                         filterCheckBoxes[index] == filterCheckBox2 -> {
-                            //
                             vehiclePlateNoInputLayout.visibility = View.VISIBLE
                         }
                         filterCheckBoxes[index] == filterCheckBox3 -> {
-                            //
                             statusRadioGroup.visibility = View.VISIBLE
-                        }
-                        filterCheckBoxes[index] == filterCheckBox4 -> {
-
-                        }
-                        filterCheckBoxes[index] == filterCheckBox5 -> {
-
                         }
                     }
                 }
-
-
             }
         }
     }
@@ -454,12 +428,6 @@ class FilterSortDialogFragment : DialogFragment(R.layout.fragment_dialog_filter_
                         }
                         filterCheckBoxes[index] == filterCheckBox3 -> {
                             speedRangeSlider.visibility = View.GONE
-                        }
-                        filterCheckBoxes[index] == filterCheckBox4 -> {
-
-                        }
-                        filterCheckBoxes[index] == filterCheckBox5 -> {
-
                         }
                     }
                 }
@@ -486,16 +454,8 @@ class FilterSortDialogFragment : DialogFragment(R.layout.fragment_dialog_filter_
                             //
                             speedRangeSlider.visibility = View.VISIBLE
                         }
-                        filterCheckBoxes[index] == filterCheckBox4 -> {
-
-                        }
-                        filterCheckBoxes[index] == filterCheckBox5 -> {
-
-                        }
                     }
                 }
-
-
             }
         }
     }
@@ -512,12 +472,6 @@ class FilterSortDialogFragment : DialogFragment(R.layout.fragment_dialog_filter_
 
                         }
                         filterCheckBoxes[index] == filterCheckBox3 -> {
-                        }
-                        filterCheckBoxes[index] == filterCheckBox4 -> {
-
-                        }
-                        filterCheckBoxes[index] == filterCheckBox5 -> {
-
                         }
                     }
                 }
@@ -539,12 +493,6 @@ class FilterSortDialogFragment : DialogFragment(R.layout.fragment_dialog_filter_
                         filterCheckBoxes[index] == filterCheckBox2 -> {
                         }
                         filterCheckBoxes[index] == filterCheckBox3 -> {
-                        }
-                        filterCheckBoxes[index] == filterCheckBox4 -> {
-
-                        }
-                        filterCheckBoxes[index] == filterCheckBox5 -> {
-
                         }
                     }
                 }

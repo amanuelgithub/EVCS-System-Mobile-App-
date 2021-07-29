@@ -77,7 +77,7 @@
     <fragment
         android:id="@+id/notificationsFragment"
         android:name="com.amanuel.evscsystem.ui.notification.NotificationsFragment"
-        android:label="fragment_notifications"
+        android:label="Notifications"
         tools:layout="@layout/fragment_notifications">
         <action
             android:id="@+id/action_notificationsFragment_to_notificationsDetailFragment"
@@ -93,7 +93,11 @@
         android:id="@+id/searchFragment"
         android:name="com.amanuel.evscsystem.ui.search.SearchFragment"
         android:label="Search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_notificationsFragment"
+            app:destination="@id/notificationsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mapsFragment"
         android:name="com.amanuel.evscsystem.MapsFragment"

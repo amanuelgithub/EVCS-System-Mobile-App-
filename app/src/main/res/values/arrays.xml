@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="search_options_array">
+        <item>Notifications</item>
+        <item>Records</item>
+        <item>Vehicles</item>
+        <item>Accidents</item>
+    </string-array>
+</resources>
