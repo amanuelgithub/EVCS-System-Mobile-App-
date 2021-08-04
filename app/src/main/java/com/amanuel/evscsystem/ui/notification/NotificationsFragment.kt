@@ -5,17 +5,17 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amanuel.evscsystem.R
-import com.amanuel.evscsystem.data.models.Notification
+import com.amanuel.evscsystem.data.db.models.Notification
 import com.amanuel.evscsystem.data.network.Resource
 import com.amanuel.evscsystem.databinding.FragmentNotificationsBinding
 import com.amanuel.evscsystem.ui.dialogs.FilterSortDialogFragment
-import com.amanuel.evscsystem.utilities.constants.Constants
 import dagger.hilt.android.AndroidEntryPoint
 
 //class NotificationsFragment : Fragment(R.layout.fragment_notifications) {
@@ -79,6 +79,14 @@ class NotificationsFragment : Fragment(R.layout.fragment_notifications),
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_all_search_fragment, menu)
+
+        // converting the menu search item to a search view
+        val search = menu?.findItem(R.id.search_data_menu_option)
+        val searchView = search?.actionView as? SearchView
+//        searchView?.isSubmitButtonEnabled = true
+        searchView?.queryHint = "Search Notifications..."
+
+//        searchView.setOnQueryTextListener(this)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

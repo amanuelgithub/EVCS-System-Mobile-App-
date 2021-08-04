@@ -1,11 +1,8 @@
 package com.amanuel.evscsystem.data.repository
 
 import com.amanuel.evscsystem.data.SessionManager
-import com.amanuel.evscsystem.data.UserPreferences
-import com.amanuel.evscsystem.data.models.User
 import com.amanuel.evscsystem.data.network.AuthApi
 import com.amanuel.evscsystem.data.network.AuthLogoutApi
-import com.amanuel.evscsystem.data.responses.Device
 import javax.inject.Inject
 
 class AuthRepository @Inject constructor(

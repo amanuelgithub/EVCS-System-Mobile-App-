@@ -38,24 +38,28 @@
     <fragment
         android:id="@+id/emailVerifyFragment"
         android:name="com.amanuel.evscsystem.ui.email.EmailVerifyFragment"
-        android:label="fragment_verify_email"
+        android:label="Verify Email"
         tools:layout="@layout/fragment_verify_email" />
 
 
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.amanuel.evscsystem.ui.home.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        android:label="Dashboard"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/notificationsDetailFragment"
         android:name="com.amanuel.evscsystem.ui.notification.NotificationDetailFragment"
-        android:label="fragment_notifications_detail"
+        android:label="Notification"
         tools:layout="@layout/fragment_notifications_detail">
         <argument
             android:name="notification"
-            app:argType="com.amanuel.evscsystem.data.models.Notification" />
+            app:argType="com.amanuel.evscsystem.data.db.models.Notification" />
         <action
             android:id="@+id/action_notificationsDetailFragment_to_mapsFragment"
             app:destination="@id/mapsFragment" />
@@ -97,16 +101,19 @@
         <action
             android:id="@+id/action_searchFragment_to_notificationsFragment"
             app:destination="@id/notificationsFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_recordsFragment"
+            app:destination="@id/recordsFragment" />
     </fragment>
     <fragment
         android:id="@+id/mapsFragment"
         android:name="com.amanuel.evscsystem.MapsFragment"
-        android:label="fragment_maps"
+        android:label=" "
         tools:layout="@layout/fragment_maps" />
     <fragment
         android:id="@+id/reportFragment"
         android:name="com.amanuel.evscsystem.ui.report.ReportFragment"
-        android:label="fragment_report"
+        android:label=" "
         tools:layout="@layout/fragment_report" />
     <fragment
         android:id="@+id/vehicleOwnerFragment"
@@ -116,18 +123,23 @@
     <fragment
         android:id="@+id/userProfileFragment"
         android:name="com.amanuel.evscsystem.ui.profile.UserProfileFragment"
-        android:label="UserProfileFragment"
-        tools:layout="@layout/fragment_user_profile"/>
+        android:label="User Profile"
+        tools:layout="@layout/fragment_user_profile" />
     <fragment
         android:id="@+id/filterSortFragment"
         android:name="com.amanuel.evscsystem.ui.dialogs.FilterSortDialogFragment"
-        android:label="fragment_filter_sort"
+        android:label="Filter and Sort"
         tools:layout="@layout/fragment_dialog_filter_sort" /><action android:id="@+id/action_global_userProfileFragment" app:destination="@id/userProfileFragment"/>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.amanuel.evscsystem.ui.settings.SettingsFragment"
-        android:label="fragment_settings"
+        android:label="Settings"
         tools:layout="@layout/fragment_settings" /><action android:id="@+id/action_global_loginFragment" app:destination="@id/loginFragment"/>
+    <fragment
+        android:id="@+id/recordsFragment"
+        android:name="com.amanuel.evscsystem.ui.record.RecordsFragment"
+        android:label="Records"
+        tools:layout="@layout/fragment_records" />
 
 
 </navigation>

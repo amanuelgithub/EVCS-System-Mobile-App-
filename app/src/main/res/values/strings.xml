@@ -67,4 +67,12 @@
     <string name="clear_all_label">Clear</string>
 
 
+
+
+
+<!--    Default Values  -->
+    <!-- Language Preference Default Value-->
+    <string name="language_preference_default_value">English</string>
+
+
 </resources>

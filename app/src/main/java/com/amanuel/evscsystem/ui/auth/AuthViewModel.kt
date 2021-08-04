@@ -41,6 +41,10 @@ class AuthViewModel @Inject constructor(
         authRepository.saveAuthToken(token)
     }
 
+    suspend fun saveUserId(userId: Int) {
+        userRepository.saveUserId(userId)
+    }
+
 //    suspend fun saveFCMTokenToPreferences(fcmToken: String) {
 //        authRepository.saveFCMTokenToPreferences(fcmToken)
 //    }

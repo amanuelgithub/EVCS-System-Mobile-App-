@@ -8,13 +8,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
 import com.amanuel.evscsystem.R
-import com.amanuel.evscsystem.data.models.Notification
+import com.amanuel.evscsystem.data.db.models.Notification
 import com.amanuel.evscsystem.databinding.FragmentNotificationsDetailBinding
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 

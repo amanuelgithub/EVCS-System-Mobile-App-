@@ -55,11 +55,12 @@ object NetworkModule {
 //        userPreferences: UserPreferences?
         sessionManager: SessionManager
     ): UserApi {
-//        var token: String? = runBlocking { userPreferences?.authToken?.first() }
+
+        val token = runBlocking { sessionManager.fetchAuthToken() }
 
         return remoteServiceBuilderHelper.buildApi(
             UserApi::class.java,
-            sessionManager.fetchAuthToken()
+            token
         )
     }
 

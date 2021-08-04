@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.amanuel.evscsystem.R
@@ -55,9 +56,10 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                         findNavController().navigate(R.id.action_searchFragment_to_notificationsFragment)
                     }
                     which == 1 -> {
-                        // open the notifications recordsSearchFragment
+                        // open  recordsSearchFragment
                         Toast.makeText(requireContext(), "Records: $which", Toast.LENGTH_SHORT)
                             .show()
+                        findNavController().navigate(R.id.action_searchFragment_to_recordsFragment)
                     }
                     which == 2 -> {
                         // open the notifications VehiclesSearchFragment

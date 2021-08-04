@@ -1,6 +1,6 @@
 package com.amanuel.evscsystem.data.network
 
-import com.amanuel.evscsystem.data.models.Notification
+import com.amanuel.evscsystem.data.db.models.Notification
 import retrofit2.http.GET
 
 interface NotificationApi {

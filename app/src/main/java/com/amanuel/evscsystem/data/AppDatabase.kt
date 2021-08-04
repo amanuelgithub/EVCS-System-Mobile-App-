@@ -4,16 +4,33 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.amanuel.evscsystem.data.models.Notification
-import com.amanuel.evscsystem.data.models.NotificationDao
+import com.amanuel.evscsystem.data.db.models.Notification
+import com.amanuel.evscsystem.data.db.NotificationDao
+import com.amanuel.evscsystem.data.db.UserDao
+import com.amanuel.evscsystem.data.db.UserLoginDao
+import com.amanuel.evscsystem.data.db.models.User
+import com.amanuel.evscsystem.data.db.models.UserLogin
 import com.amanuel.evscsystem.utilities.constants.Constants
 
-@Database(entities = [Notification::class], version = 1)
+@Database(
+    entities = [
+        Notification::class,
+        User::class,
+        UserLogin::class,
+    ], version = 1
+)
 abstract class AppDatabase : RoomDatabase() {
+
     abstract fun notificationDao(): NotificationDao
 
-    companion object {
+    abstract fun userDao(): UserDao
 
+    abstract fun userLoginDao(): UserLoginDao
+
+
+
+
+    companion object {
         @Volatile
         private var instance: AppDatabase? = null
 
@@ -23,10 +40,9 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
-
         // Create and pre-populate the database
         private fun buildDatabase(context: Context): AppDatabase {
-                return Room.databaseBuilder(context, AppDatabase::class.java, Constants.DATABASE_NAME)
+            return Room.databaseBuilder(context, AppDatabase::class.java, Constants.DATABASE_NAME)
                 .build()
         }
 
