@@ -1,8 +1,6 @@
 package com.amanuel.evscsystem
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -15,7 +13,6 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.amanuel.evscsystem.databinding.ActivityMainBinding
-import com.amanuel.evscsystem.filter.FilterSortDialogFragment
 import com.amanuel.evscsystem.notification.NotificationHelper
 import dagger.hilt.android.AndroidEntryPoint
 

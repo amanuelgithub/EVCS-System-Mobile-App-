@@ -1,4 +1,4 @@
-package com.amanuel.evscsystem.data.models
+package com.amanuel.evscsystem.data.db.models
 
 import android.os.Parcelable
 import androidx.room.Entity
@@ -12,7 +12,7 @@ import java.text.DateFormat
 
 // Note: the Parcelable Interface makes it easy to send
 // the object between different fragments
-@Entity(tableName = "notifications_table")
+@Entity
 @Parcelize
 data class Notification(
     @PrimaryKey(autoGenerate = true) val id: Int,

@@ -5,25 +5,25 @@
         android:id="@+id/search_menu_option"
         android:icon="@drawable/ic_search"
         android:title="@string/search_title"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="ifRoom" />
+<!--    app:actionViewClass="androidx.appcompat.widget.SearchView"-->
 
-    <item
-        android:id="@+id/filter_menu_option"
-        android:icon="@drawable/ic_baseline_filter_list_24"
-        android:title="Filter"
-        app:showAsAction="ifRoom"/>
+<!--    <item-->
+<!--        android:id="@+id/filter_menu_option"-->
+<!--        android:icon="@drawable/ic_baseline_filter_list_24"-->
+<!--        android:title="Filter"-->
+<!--        app:showAsAction="ifRoom"/>-->
 
-    <item
-        android:id="@+id/action_sort_by_name"
-        android:title="Sort by name"
-        android:icon="@drawable/ic_baseline_sort_24"
-        app:showAsAction="never"/>
+<!--    <item-->
+<!--        android:id="@+id/action_sort_by_name"-->
+<!--        android:title="Sort by name"-->
+<!--        android:icon="@drawable/ic_baseline_sort_24"-->
+<!--        app:showAsAction="never"/>-->
 
-    <item
-        android:id="@+id/action_sort_by_date"
-        android:title="Sort by date created"
-        android:icon="@drawable/ic_baseline_sort_24"
-        app:showAsAction="never"/>
+<!--    <item-->
+<!--        android:id="@+id/action_sort_by_date"-->
+<!--        android:title="Sort by date created"-->
+<!--        android:icon="@drawable/ic_baseline_sort_24"-->
+<!--        app:showAsAction="never"/>-->
 
 </menu>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        app:key="notifications"
+        app:title="Notifications">
+
+        <SwitchPreferenceCompat
+            app:key="notifications"
+            app:title="Enable message notifications"
+            app:icon="@drawable/ic_baseline_notifications_none_24"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="user"
+        app:title="User">
+
+        <Preference
+            app:key="user_logout"
+            app:title="Logout"
+            app:icon="@drawable/ic_baseline_logout_new_24"/>
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
+        app:key="others"
+        app:title="Others">
+
+        <ListPreference
+            app:key="language"
+            app:title="Language"
+            app:useSimpleSummaryProvider="true"
+            android:defaultValue="@string/language_preference_default_value"
+            app:entries="@array/language_preference_entries"
+            app:entryValues="@array/language_preference_entry_values"
+            app:icon="@drawable/ic_baseline_language_24"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="about"
+        app:title="About">
+
+        <Preference
+            app:key="version"
+            app:title="Build Version"
+            app:summary="1.0"/>
+    </PreferenceCategory>
+
+</androidx.preference.PreferenceScreen>

@@ -7,4 +7,11 @@
         <item>Exceeded the limited passenger number</item>
         <item>Vehicle Should be Out of Service</item>
     </string-array>
+
+
+
+    <array name="initial_speed_range_slider_values">
+        <item>80.0</item>
+        <item>190.0</item>
+    </array>
 </resources>

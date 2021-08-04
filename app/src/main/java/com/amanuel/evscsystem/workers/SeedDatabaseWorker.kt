@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.amanuel.evscsystem.data.AppDatabase
-import com.amanuel.evscsystem.data.models.Notification
+import com.amanuel.evscsystem.data.db.models.Notification
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonReader

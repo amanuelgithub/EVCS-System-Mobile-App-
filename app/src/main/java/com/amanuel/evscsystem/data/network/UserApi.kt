@@ -1,19 +1,26 @@
 package com.amanuel.evscsystem.data.network
 
-import com.amanuel.evscsystem.data.responses.LoginResponse
-import okhttp3.ResponseBody
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import com.amanuel.evscsystem.data.db.models.User
+import kotlinx.coroutines.flow.Flow
+import retrofit2.http.*
 
 interface UserApi {
 
-    @GET("users")
-    suspend fun getUsers(): LoginResponse // needs modification
 
-//    @GET("users/{id}")
-//    suspend fun getUser(@Path("id") userId: Int): LoginResponse
+    // get a user by a specific id
+    @GET("users/{pk}")
+    suspend fun getUser(@Path("pk") id: Int): User
 
-    @POST("logout/")
-    suspend fun logout(): ResponseBody
+
+//    @GET("users")
+//    suspend fun getUsers(): LoginResponse // needs modification
+
+    // updates the fcm_registration token of the device
+//    @Headers("Content-Type: application/json")
+    @FormUrlEncoded
+    @PUT("devices/{id}/")
+    suspend fun updateFCMToken(
+        @Path("id") id: Int,
+        @Field("fcm_token") fcm_token: String
+    ): Any
 }

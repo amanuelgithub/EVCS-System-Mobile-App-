@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
-    tools:context=".filter.FilterSortDialogFragment">
+    tools:context=".ui.dialogs.FilterSortDialogFragment">
 
     <!-- start including my custom toolbar -->
     <include
@@ -24,8 +24,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
             android:orientation="vertical">
 
@@ -48,54 +49,69 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <com.google.android.material.chip.ChipGroup
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:singleLine="false"
-                    app:singleSelection="true">
+                    android:layout_height="match_parent">
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/notification_catg_chip"
-                        style="@style/Widget.MaterialComponents.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:layout_marginLeft="8dp"
-                        android:paddingLeft="2dp"
-                        android:paddingRight="2dp"
-                        android:text="Notifications" />
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/category_chip_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:singleLine="false"
+                        app:singleSelection="true">
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/vehicle_catg_chip"
-                        style="@style/Widget.MaterialComponents.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:paddingLeft="2dp"
-                        android:paddingRight="2dp"
-                        android:text="Vehicles" />
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/notification_catg_chip"
+                            style="@style/Widget.MaterialComponents.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:checked="true"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:text="Notifications"
+                            app:chipStrokeColor="@color/primaryColor"
+                            app:chipStrokeWidth="1sp" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/records_catg_chip"
-                        style="@style/Widget.MaterialComponents.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:paddingLeft="2dp"
-                        android:paddingRight="2dp"
-                        android:text="Record" />
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/vehicle_catg_chip"
+                            style="@style/Widget.MaterialComponents.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:text="Vehicles"
+                            app:chipStrokeColor="@color/primaryColor"
+                            app:chipStrokeWidth="1sp" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/accident_catg_chip"
-                        style="@style/Widget.MaterialComponents.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:paddingLeft="2dp"
-                        android:paddingRight="2dp"
-                        android:text="Accident" />
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/records_catg_chip"
+                            style="@style/Widget.MaterialComponents.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:text="Record"
+                            app:chipStrokeColor="@color/primaryColor"
+                            app:chipStrokeWidth="1sp" />
 
-                </com.google.android.material.chip.ChipGroup>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/accident_catg_chip"
+                            style="@style/Widget.MaterialComponents.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:paddingLeft="2dp"
+                            android:paddingRight="2dp"
+                            android:text="Accident"
+                            app:chipStrokeColor="@color/primaryColor"
+                            app:chipStrokeWidth="1sp" />
+
+                    </com.google.android.material.chip.ChipGroup>
+
+                </com.google.android.material.card.MaterialCardView>
 
             </HorizontalScrollView>
 
@@ -107,7 +123,7 @@
                 android:layout_marginBottom="8dp"
                 android:background="?android:attr/listDivider" />
 
-            <!-- Sort by options -->
+            <!-- Filter by options -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -123,51 +139,225 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <!-- start the filters section (Note: all them are hidden) -->
-                    <com.google.android.material.checkbox.MaterialCheckBox
-                        android:visibility="gone"
-                        android:id="@+id/filter_checkBox1"
+
+                    <!-- card view for checkbox 1 -->
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:checked="true"
-                        android:text="CheckBox" />
+                        app:cardBackgroundColor="@android:color/white"
+                        app:cardCornerRadius="0dp"
+                        app:cardElevation="0.7dp"
+                        app:cardMaxElevation="1dp">
 
-                    <com.google.android.material.checkbox.MaterialCheckBox
-                        android:visibility="gone"
-                        android:id="@+id/filter_checkBox2"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.checkbox.MaterialCheckBox
+                                android:id="@+id/filter_checkBox1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:checked="true"
+                                android:text="CheckBox"
+                                android:visibility="visible" />
+
+                            <View
+                                android:id="@+id/divider9"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_weight="1"
+                                android:background="?android:attr/listDivider" />
+
+                            <!-- show the different options based on the value of the checked value-->
+
+                            <!-- if created_at is checked show the day selection option -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <!-- option to show the day selector -->
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/date_picker_text_view"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="50dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginEnd="5dp"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                                    android:text="Select Date : 10/34/2021"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold"
+                                    android:visibility="gone" />
+
+                                <!-- option to show the input text for the vehcile id -->
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/vehicle_plate_no_input_layout_1"
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:visibility="gone">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/vehicle_plate_no_edit_text_1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:hint="Enter the Plate Number to Search" />
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- card view for checkbox 2 -->
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="CheckBox" />
+                        app:cardBackgroundColor="@android:color/white"
+                        app:cardCornerRadius="0dp"
+                        app:cardElevation="0.7dp"
+                        app:cardMaxElevation="1dp">
 
-                    <com.google.android.material.checkbox.MaterialCheckBox
-                        android:visibility="gone"
-                        android:id="@+id/filter_checkBox3"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.checkbox.MaterialCheckBox
+                                android:id="@+id/filter_checkBox2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="CheckBox"
+                                android:visibility="gone" />
+
+                            <View
+                                android:id="@+id/divider10"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_weight="1"
+                                android:background="?android:attr/listDivider" />
+
+                            <!-- option to show the input text for the vehcile id -->
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/vehicle_plate_no_input_layout"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:visibility="gone">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/vehicle_plate_no_edit_text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="Enter the Plate Number to Search" />
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- card view for checkbox 3 -->
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="CheckBox" />
+                        app:cardBackgroundColor="@android:color/white"
+                        app:cardCornerRadius="0dp"
+                        app:cardElevation="0.7dp"
+                        app:cardMaxElevation="1dp">
 
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.checkbox.MaterialCheckBox
+                                android:id="@+id/filter_checkBox3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="CheckBox"
+                                android:visibility="gone" />
+
+                            <View
+                                android:id="@+id/divider11"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_weight="1"
+                                android:background="?android:attr/listDivider" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <!-- speed range selector -->
+                                <!-- Discrete slider -->
+                                <com.google.android.material.slider.RangeSlider
+                                    android:id="@+id/speed_range_slider"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:stepSize="10.0"
+                                    android:valueFrom="0.0"
+                                    android:valueTo="300.0"
+                                    android:visibility="gone"
+                                    app:values="@array/initial_speed_range_slider_values" />
+                                <!-- status selector -->
+                                <RadioGroup
+                                    android:id="@+id/status_radio_group"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:visibility="gone">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <com.google.android.material.radiobutton.MaterialRadioButton
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_alignParentStart="true"
+                                            android:text="Active" />
+
+                                        <com.google.android.material.radiobutton.MaterialRadioButton
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_alignParentEnd="true"
+                                            android:text="InActive" />
+                                    </RelativeLayout>
+                                </RadioGroup>
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                    <!-- start This checkboxes are not in use -->
                     <com.google.android.material.checkbox.MaterialCheckBox
-                        android:visibility="gone"
                         android:id="@+id/filter_checkBox4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="CheckBox" />
+                        android:text="CheckBox"
+                        android:visibility="gone" />
+
 
                     <com.google.android.material.checkbox.MaterialCheckBox
-                        android:visibility="gone"
                         android:id="@+id/filter_checkBox5"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="CheckBox" />
-                    <!-- start the filters section (Note: all them are hidden) -->
+                        android:text="CheckBox"
+                        android:visibility="gone" />
+                    <!-- end This checkboxes are not in use -->
                 </LinearLayout>
-
-
 
 
                 <!-- sort by for notification

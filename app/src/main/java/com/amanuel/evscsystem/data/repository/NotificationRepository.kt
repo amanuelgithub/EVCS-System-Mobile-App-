@@ -2,6 +2,7 @@ package com.amanuel.evscsystem.data.repository
 
 import androidx.room.withTransaction
 import com.amanuel.evscsystem.data.AppDatabase
+import com.amanuel.evscsystem.data.db.models.Notification
 import com.amanuel.evscsystem.data.network.NotificationApi
 import com.amanuel.evscsystem.utilities.networkBoundResource
 import kotlinx.coroutines.delay
@@ -14,7 +15,7 @@ class NotificationRepository @Inject constructor(
 
     private val notificationDao = appDatabase.notificationDao()
 
-    fun getNotifications() = networkBoundResource(
+    fun getNotifications() = networkBoundResource<List<Notification>, List<Notification>>(
         query = {
             notificationDao.getNotifications()
         },

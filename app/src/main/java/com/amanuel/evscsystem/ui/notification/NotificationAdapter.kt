@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.amanuel.evscsystem.data.models.Notification
+import com.amanuel.evscsystem.data.db.models.Notification
 import com.amanuel.evscsystem.databinding.ItemNotificationBinding
 
 class NotificationAdapter(

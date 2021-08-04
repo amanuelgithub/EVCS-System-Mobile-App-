@@ -1,5 +1,10 @@
-package com.amanuel.evscsystem.data.models
+package com.amanuel.evscsystem.data.db.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+
+@Entity(primaryKeys = ["pk"])
 data class User(
     val pk: Int,
     val username: String,
