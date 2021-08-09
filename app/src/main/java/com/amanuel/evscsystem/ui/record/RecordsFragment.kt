@@ -3,26 +3,53 @@ package com.amanuel.evscsystem.ui.record
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.amanuel.evscsystem.R
+import com.amanuel.evscsystem.data.network.Resource
 import com.amanuel.evscsystem.databinding.FragmentRecordsBinding
 import com.amanuel.evscsystem.ui.dialogs.FilterSortDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RecordsFragment : Fragment(R.layout.fragment_records) {
+
+    private val viewModel: RecordsViewModel by viewModels()
+
+    private lateinit var binding: FragmentRecordsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val binding = FragmentRecordsBinding.inflate(layoutInflater, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        return binding.root
+        binding = FragmentRecordsBinding.bind(view)
+
+        val recordsAdapter = RecordsAdapter()
+        binding.apply {
+            recyclerviewRecords.apply {
+                adapter = recordsAdapter
+                layoutManager = LinearLayoutManager(requireContext())
+                setHasFixedSize(true)
+            }
+        }
+
+        viewModel.records.observe(viewLifecycleOwner) { resource ->
+            recordsAdapter.submitList(resource.data)
+
+            binding.apply {
+                progressBarRecords.isVisible = resource is Resource.Loading && resource.data.isNullOrEmpty()
+                errorTextViewRecords.isVisible = resource is Resource.Failure && resource.data.isNullOrEmpty()
+                errorTextViewRecords.text = resource.error?.localizedMessage
+            }
+
+        }
+
     }
 
 

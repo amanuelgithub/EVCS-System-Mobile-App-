@@ -1,5 +1,6 @@
 package com.amanuel.evscsystem.ui.home
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -13,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.amanuel.evscsystem.R
 import com.amanuel.evscsystem.data.SessionManager
+import com.amanuel.evscsystem.data.SessionManager.Companion.USER_TOKEN
 import com.amanuel.evscsystem.databinding.FragmentHomeBinding
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
@@ -21,7 +23,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(R.layout.fragment_home) {
+class HomeFragment : Fragment(R.layout.fragment_home),
+    SharedPreferences.OnSharedPreferenceChangeListener {
 
     @Inject
     lateinit var sessionManager: SessionManager
@@ -114,6 +117,30 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     companion object {
         private const val TAG = "HomeFragment"
+    }
+
+    // Note: for now i don't know how i will relate it to the SessionsManager class
+    // but the values that can be accessed here are those that are saved from the
+    // defaultSharedPreferenceObject and not from the custom SharedPreference i created in the SessionsManager
+    // class.
+    // So, when the value of authToken is changes(meaning it is saved) update it in the server.
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        when (key) {
+            USER_TOKEN -> {
+                val userId = sessionManager.fetchUserId()
+                if (userId != 0){
+                    onUpdateFCMTokenInServer(userId)
+                }
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
     }
 
 }
