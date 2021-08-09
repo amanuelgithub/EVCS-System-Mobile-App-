@@ -145,6 +145,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         viewModel.loginResponse.observe(viewLifecycleOwner) { resource ->
             //            Snackbar.make(requireView(), "Login response", Snackbar.LENGTH_LONG).show()
             binding.progressbar.visible(resource is Resource.Loading)
+
             when (resource) {
                 is Resource.Success -> {
                     viewLifecycleOwner.lifecycleScope.launch {
@@ -177,14 +178,19 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             }
         }
 
+//        // handles what things to do when clicking the login button
+//        binding.buttonLogin.setOnClickListener {
+//            if (Connectivity.isConnectedOrConnecting(requireContext())) {
+//                login()
+//            } else {
+////                view.showWarningSnackBar("Check Your Internet Connection.")
+//                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+//            }
+//        }
+
         // handles what things to do when clicking the login button
         binding.buttonLogin.setOnClickListener {
-            if (Connectivity.isConnectedOrConnecting(requireContext())) {
-                login()
-            } else {
-//                view.showWarningSnackBar("Check Your Internet Connection.")
-                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-            }
+             findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
         }
 
     }

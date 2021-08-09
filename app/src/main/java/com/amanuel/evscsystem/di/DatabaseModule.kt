@@ -3,6 +3,7 @@ package com.amanuel.evscsystem.di
 import android.content.Context
 import com.amanuel.evscsystem.data.AppDatabase
 import com.amanuel.evscsystem.data.db.NotificationDao
+import com.amanuel.evscsystem.data.db.RecordDao
 import com.amanuel.evscsystem.data.db.UserDao
 import com.amanuel.evscsystem.data.db.UserLoginDao
 import dagger.Module
@@ -30,6 +31,11 @@ class DatabaseModule {
     @Provides
     fun provideUserLogin(appDatabase: AppDatabase): UserLoginDao {
         return appDatabase.userLoginDao()
+    }
+
+    @Provides
+    fun provideRecordDao(appDatabase: AppDatabase): RecordDao {
+        return appDatabase.recordDao()
     }
 
     @Provides

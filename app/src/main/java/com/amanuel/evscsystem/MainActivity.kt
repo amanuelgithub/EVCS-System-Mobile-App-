@@ -75,8 +75,12 @@ class MainActivity : AppCompatActivity() {
             when (navDestination.id) {
                 navController.graph.startDestination,
                 R.id.emailVerifyFragment,
-                R.id.forgetPasswordFragment -> {
+                R.id.forgetPasswordFragment,
+                -> {
                     hideBottomNav()
+                    hideAppBarLayout()
+                }
+                R.id.userProfileFragment->{ // hide the appbar along with the toolbar in the userProfileFragment
                     hideAppBarLayout()
                 }
                 else -> {

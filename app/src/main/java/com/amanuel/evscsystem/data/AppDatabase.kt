@@ -6,8 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.amanuel.evscsystem.data.db.models.Notification
 import com.amanuel.evscsystem.data.db.NotificationDao
+import com.amanuel.evscsystem.data.db.RecordDao
 import com.amanuel.evscsystem.data.db.UserDao
 import com.amanuel.evscsystem.data.db.UserLoginDao
+import com.amanuel.evscsystem.data.db.models.Record
 import com.amanuel.evscsystem.data.db.models.User
 import com.amanuel.evscsystem.data.db.models.UserLogin
 import com.amanuel.evscsystem.utilities.constants.Constants
@@ -15,13 +17,16 @@ import com.amanuel.evscsystem.utilities.constants.Constants
 @Database(
     entities = [
         Notification::class,
+        Record::class,
         User::class,
         UserLogin::class,
-    ], version = 1
+    ], version = 2
 )
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun notificationDao(): NotificationDao
+
+    abstract fun recordDao(): RecordDao
 
     abstract fun userDao(): UserDao
 
