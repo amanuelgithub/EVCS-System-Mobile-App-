@@ -16,9 +16,9 @@ class SettingsViewModel @Inject constructor(
     private val userPreferences: UserPreferences
 ) : ViewModel(){
 
-
     fun logout() = viewModelScope.launch {
         authRepository.logout()
         userPreferences.clear()
+        // todo: create a way to go back to the login page of the application
     }
 }

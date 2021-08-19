@@ -30,7 +30,7 @@
             app:icon="@drawable/ic_baseline_logout_new_24"
             app:key="user_logout"
             app:selectable="true"
-            app:title="Logout" />
+            app:title="@string/logout" />
     </PreferenceCategory>
 
 
@@ -44,7 +44,7 @@
             app:entryValues="@array/language_preference_entry_values"
             app:icon="@drawable/ic_baseline_language_24"
             app:key="language"
-            app:title="Language"
+            app:title="@string/language"
             app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
 

@@ -21,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
  * Contact Email : amanuelgirma070@gmail.com
  */
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
