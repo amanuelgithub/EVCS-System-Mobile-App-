@@ -1,4 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">EVSC System</string>
+    <string name="app_name">" የኢቪኤስሲ ስርዓት"</string>
+    <string name="title_home">ቤት</string>
+    <string name="title_dashboard">ዳሽቦርድ</string>
+    <string name="title_notifications">ማሳወቂያዎች</string>
+    <string name="title_activity_bottom_nav">ዋና እንቅስቃሴ</string>
+    <string name="menu__home">ቤት</string>
+    <string name="menu__user_information">የተጠቃሚ መረጃ</string>
+    <string name="menu__settings">ቅንብሮች</string>
+    <string name="menu__user_profile">" የተጠቃሚ መገለጫ"</string>
+    <string name="menu__location_settings">" የሥራ ቦታ"</string>
+    <string name="menu__terms_conditions">" አተገባበሩና ​​መመሪያው"</string>
+    <string name="menu__notifications">ማሳወቂያዎች</string>
+    <string name="menu__reports">" ሪፖርቶች"</string>
+    <string name="menu__language">" ቋንቋ"</string>
+    <string name="hello_blank_fragment">" ሰላም ባዶ ቁርጥራጭ"</string>
+    <string name="defaultChannel">" ነባሪ ሰርጥ"</string>
+    <string name="notificationDescription">" ይህ ለ FCM ማሳወቂያ መልዕክቶች ሰርጥ ነው"</string>
+    <string name="search_title">" ይፈልጉ"</string>
+    <string name="vehicle_image_tooltip">" የተሽከርካሪ ምስል"</string>
+    <string name="ok_label">" እሺ"</string>
+    <string name="cancel">" ሰርዝ"</string>
+    <string name="dismiss_label">" አሰናብት"</string>
+    <string name="clear_all_label">" አጽዳ"</string>
+    <string name="language_preference_default_value">" እንግሊዝኛ"</string>
+    <string name="prompt_email">" ኢሜል"</string>
+    <string name="prompt_password">" የይለፍ ቃል"</string>
+    <string name="action_sign_in">" ይግቡ ወይም ይመዝገቡ"</string>
+    <string name="action_sign_in_short">"ይግቡ"</string>
+    <string name="welcome">" እንኳን ደህና መጣህ"</string>
+    <string name="invalid_username">" የሚሰራ የተጠቃሚ ስም አይደለም"</string>
+    <string name="invalid_password">" የይለፍ ቃል> 5 ቁምፊዎች መሆን አለበት"</string>
+    <string name="login_failed">መግባት አልተሳካም</string>
+    <string name="language">ቋንቋ</string>
 </resources>

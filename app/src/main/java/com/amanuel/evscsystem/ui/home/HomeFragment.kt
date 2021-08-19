@@ -45,6 +45,24 @@ class HomeFragment : Fragment(R.layout.fragment_home),
         binding = FragmentHomeBinding.bind(view)
 
         sessionManager = SessionManager(requireContext())
+
+
+        // This is to test and log the fcm token when the application is installed
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+            // Get new FCM registration token
+            val fcm_token = task.result
+
+            // Log and toast
+            val msg = getString(R.string.msg_token_fmt, fcm_token)
+            Log.d(TAG, msg)
+            Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+        })
+
+
         // from the preferences find 1. userId 2. authToken
         // check to see whether they are null or not
 //        val userId = sessionManager.fetchUserId()

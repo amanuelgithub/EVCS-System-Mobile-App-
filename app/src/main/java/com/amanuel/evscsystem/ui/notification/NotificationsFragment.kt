@@ -16,6 +16,7 @@ import com.amanuel.evscsystem.data.db.models.Notification
 import com.amanuel.evscsystem.data.network.Resource
 import com.amanuel.evscsystem.databinding.FragmentNotificationsBinding
 import com.amanuel.evscsystem.ui.dialogs.FilterSortDialogFragment
+import com.amanuel.evscsystem.utilities.onQueryTextChanged
 import dagger.hilt.android.AndroidEntryPoint
 
 //class NotificationsFragment : Fragment(R.layout.fragment_notifications) {
@@ -86,7 +87,9 @@ class NotificationsFragment : Fragment(R.layout.fragment_notifications),
 //        searchView?.isSubmitButtonEnabled = true
         searchView?.queryHint = "Search Notifications..."
 
-//        searchView.setOnQueryTextListener(this)
+        searchView?.onQueryTextChanged {
+            viewModel.searchQuery.value = it
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -94,6 +97,14 @@ class NotificationsFragment : Fragment(R.layout.fragment_notifications),
             R.id.filter_menu_option -> {
                 // show filter sort fragment
                 FilterSortDialogFragment().show(childFragmentManager, FilterSortDialogFragment.TAG)
+            }
+            R.id.action_sort_by_name -> {
+                viewModel.sortOrder.value = SortOrder.BY_NAME
+                return true
+            }
+            R.id.action_sort_by_date -> {
+                viewModel.sortOrder.value = SortOrder.BY_DATE
+                return true
             }
             else-> {
                 return super.onOptionsItemSelected(item)

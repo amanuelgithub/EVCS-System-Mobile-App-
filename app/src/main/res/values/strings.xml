@@ -1,19 +1,19 @@
 <resources>
     <string name="app_name">EVSC System</string>
     <!-- Strings related to login -->
-    <string name="prompt_email" translatable="false">Email</string>
-    <string name="prompt_password" translatable="false">Password</string>
-    <string name="action_sign_in" translatable="false">Sign in or register</string>
-    <string name="action_sign_in_short" translatable="false">Sign in</string>
-    <string name="welcome" translatable="false">"Welcome !"</string>
-    <string name="invalid_username" translatable="false">Not a valid username</string>
-    <string name="invalid_password" translatable="false">Password must be >5 characters</string>
-    <string name="login_failed" translatable="false">"Login failed"</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
     <string name="title_activity_login" translatable="false">LoginActivity</string>
 
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_header_title" translatable="false">Android Studio</string>
+    <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
 
 
     <string name="quickstart_message" translatable="false">Click the SUBSCRIBE TO WEATHER button below to subscribe to the
@@ -37,8 +37,8 @@
     <string name="fcm_message" translatable="false">FCM Message</string>
     <string name="FCM_TOKEN" translatable="false">fcm_token</string>
     <string name="FCM_PREF" translatable="false">fcm_pref</string>
-    <string name="forget_password" translatable="false">forget password?</string>
-    <string name="title_activity_bottom_navigation">MainActivity</string>
+    <string name="forget_password" translatable="false">Do you forget your password?</string>
+    <string name="title_activity_bottom_navigation" translatable="false">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -57,7 +57,7 @@
     <string name="menu__language">Language</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="defaultChannel">DefaultChannel</string>
+    <string name="defaultChannel">Default Channel</string>
     <string name="notificationDescription">This is a channel for FCM notification messages</string>
     <string name="search_title">Search</string>
     <string name="vehicle_image_tooltip">Vehicle Image</string>
@@ -73,6 +73,8 @@
 <!--    Default Values  -->
     <!-- Language Preference Default Value-->
     <string name="language_preference_default_value">English</string>
+    <string name="language">Language</string>
+    <string name="logout">Logout</string>
 
 
 </resources>

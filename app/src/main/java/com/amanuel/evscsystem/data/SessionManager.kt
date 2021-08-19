@@ -6,6 +6,7 @@ import android.text.Editable
 import androidx.preference.PreferenceManager
 import com.amanuel.evscsystem.R
 import dagger.hilt.android.qualifiers.ApplicationContext
+import java.util.*
 import javax.inject.Inject
 
 
@@ -24,6 +25,8 @@ class SessionManager @Inject constructor(
         context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE)
 
     companion object {
+        const val LANGUAGE = "en"
+
         const val USER_TOKEN = "user_token"
         const val USER_ID = "user_id"
     }
@@ -73,6 +76,17 @@ class SessionManager @Inject constructor(
 
     //////
 
+    fun updateLanguage(language: String){
+        val editor = customPrefs.edit()
+        editor.putString(LANGUAGE, language)
+        editor.apply()
+    }
+
+    fun getAppLanguage(): Locale {
+        val lang = customPrefs.getString(LANGUAGE, "en")
+        return Locale.forLanguageTag(lang!!)
+    }
+
     // Function to save auth token
     fun saveAuthToken(token: String) {
         val editor = customPrefs.edit()
@@ -94,4 +108,6 @@ class SessionManager @Inject constructor(
     fun fetchUserId(): Int {
         return customPrefs.getInt(USER_ID, 0)
     }
+
+
 }

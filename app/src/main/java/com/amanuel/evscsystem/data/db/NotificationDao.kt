@@ -5,13 +5,27 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.amanuel.evscsystem.data.db.models.Notification
+import com.amanuel.evscsystem.ui.notification.SortOrder
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NotificationDao {
 
-    @Query("SELECT * FROM Notification")
-    fun getNotifications(): Flow<List<Notification>>
+
+    fun getNotifications(searchQuery: String = "", sortOrder: SortOrder): Flow<List<Notification>> =
+        when(sortOrder){
+            SortOrder.BY_DATE -> getNotificationsSortedByDateCreated(searchQuery)
+            SortOrder.BY_NAME -> getNotificationsSortedByName(searchQuery)
+        }
+
+    @Query("SELECT * FROM Notification WHERE plateNumber LIKE '%' || :searchQuery || '%' ORDER BY createdAt")
+    fun getNotificationsSortedByDateCreated(searchQuery: String = ""): Flow<List<Notification>>
+
+    @Query("SELECT * FROM Notification WHERE plateNumber LIKE '%' || :searchQuery || '%' ORDER BY plateNumber")
+    fun getNotificationsSortedByName(searchQuery: String = ""): Flow<List<Notification>> // name here is similar to plateNumber
+
+//    @Query("SELECT * FROM Notification")
+//    fun getNotifications(): Flow<List<Notification>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(notification: Notification)

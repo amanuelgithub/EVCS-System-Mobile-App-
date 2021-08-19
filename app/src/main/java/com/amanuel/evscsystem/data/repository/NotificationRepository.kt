@@ -4,6 +4,7 @@ import androidx.room.withTransaction
 import com.amanuel.evscsystem.data.AppDatabase
 import com.amanuel.evscsystem.data.db.models.Notification
 import com.amanuel.evscsystem.data.network.NotificationApi
+import com.amanuel.evscsystem.ui.notification.SortOrder
 import com.amanuel.evscsystem.utilities.networkBoundResource
 import kotlinx.coroutines.delay
 import javax.inject.Inject
@@ -13,11 +14,11 @@ class NotificationRepository @Inject constructor(
     private val appDatabase: AppDatabase
 ) {
 
-    private val notificationDao = appDatabase.notificationDao()
+    val notificationDao = appDatabase.notificationDao()
 
-    fun getNotifications() = networkBoundResource<List<Notification>, List<Notification>>(
+    fun getNotifications(searchQuery: String, sortOrder: SortOrder) = networkBoundResource<List<Notification>, List<Notification>>(
         query = {
-            notificationDao.getNotifications()
+            notificationDao.getNotifications(searchQuery, sortOrder)
         },
         fetch = {
             delay(2000)
