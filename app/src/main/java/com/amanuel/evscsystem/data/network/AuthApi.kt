@@ -6,6 +6,7 @@ import retrofit2.http.*
 
 interface AuthApi {
 
+//    @Headers("Content-Type: application/json")
     @FormUrlEncoded
     @POST("login/")
     suspend fun login(

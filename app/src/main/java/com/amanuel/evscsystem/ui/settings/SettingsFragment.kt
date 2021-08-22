@@ -10,12 +10,14 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceFragmentCompat
 import com.amanuel.evscsystem.R
+import com.amanuel.evscsystem.data.SessionManager
 import com.amanuel.evscsystem.data.UserPreferences
 import com.amanuel.evscsystem.data.network.Resource
 import com.amanuel.evscsystem.databinding.FragmentSettingsBinding
 //import com.amanuel.evscsystem.databinding.FragmentSettingsBinding
 import com.amanuel.evscsystem.utilities.ViewUtils.Companion.showSuccessSnackBar
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment(R.layout.fragment_settings) {

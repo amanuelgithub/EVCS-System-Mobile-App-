@@ -34,15 +34,12 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideAuthLogoutService(
-        remoteServiceBuilderHelper: RemoteServiceBuilderHelper,
-//        userPreferences: UserPreferences?
-        sessionManager: SessionManager
+        remoteServiceBuilderHelper: RemoteServiceBuilderHelper
     ): AuthLogoutApi {
 //        var token: String? = runBlocking { userPreferences?.authToken?.first() }
 
-        return remoteServiceBuilderHelper.buildAuthLogoutApi(
-            AuthLogoutApi::class.java,
-            sessionManager.fetchAuthToken()
+        return remoteServiceBuilderHelper.buildAuthApi(
+            AuthLogoutApi::class.java
         )
     }
 

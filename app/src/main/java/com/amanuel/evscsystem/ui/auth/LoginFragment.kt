@@ -1,7 +1,11 @@
 package com.amanuel.evscsystem.ui.auth
 
+import android.R.attr.password
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
+import android.util.Patterns
 import android.view.View
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
@@ -11,19 +15,19 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.amanuel.evscsystem.R
-import com.amanuel.evscsystem.connectivity.Connectivity
 import com.amanuel.evscsystem.data.SessionManager
-import com.amanuel.evscsystem.data.db.models.User
 import com.amanuel.evscsystem.data.network.Resource
 import com.amanuel.evscsystem.databinding.FragmentLoginBinding
 import com.amanuel.evscsystem.ui.enable
 import com.amanuel.evscsystem.ui.handleApiError
 import com.amanuel.evscsystem.ui.visible
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.messaging.FirebaseMessaging
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class LoginFragment : Fragment(R.layout.fragment_login) {
@@ -53,93 +57,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
 
         binding.progressbar.visible(false)
-        binding.buttonLogin.enable(false)
-
-
-        // change the state of the login button based on the presence of texts
-        binding.editTextTextPassword.addTextChangedListener {
-            val email = binding.editTextTextEmailAddress.text.toString().trim()
-            binding.buttonLogin.enable(email.isNotEmpty() && it.toString().isNotEmpty())
-        }
-
-        /**
-        viewModel.loginResponse.observe(viewLifecycleOwner) { resource ->
-        //            Snackbar.make(requireView(), "Login response", Snackbar.LENGTH_LONG).show()
-        //            binding.progressbar.visible(resource is Resource.Loading)
-        when {
-        resource is Resource.Success && (resource.data != null) -> {
-        Log.d(TAG, "onViewCreated: ${resource.error.toString()}")
-        lifecycleScope.launch {
-        viewModel.saveAuthToken(resource.data?.key!!)
-
-        val tokenEmpty = sessionManager.fetchAuthToken()?.isNotEmpty() ?: true
-        val tokenNull = sessionManager.fetchAuthToken() == null
-
-        if (!tokenEmpty && !tokenNull) {
-        resource.data?.let { updateFCMToken(it.user) }
-        }
-        }
-
-        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-        }
-        resource is (Resource.Failure) && (resource.data == null) -> {
-        Log.d(TAG, "onViewCreated: ${resource.error.toString()}")
-        when (resource.error) {
-        is HttpException -> when {
-        resource.error.code() == 400 -> {
-        Toast.makeText(
-        requireContext(),
-        "Bad Request",
-        Toast.LENGTH_SHORT
-        ).show()
-        }
-        resource.error.code() == 401 -> {
-        Toast.makeText(
-        requireContext(),
-        "You are not authorized",
-        Toast.LENGTH_SHORT
-        ).show()
-        }
-        else -> {
-        Toast.makeText(
-        requireContext(),
-        "Unknown Http Error Occurred",
-        Toast.LENGTH_SHORT
-        ).show()
-        }
-
-        }
-        is SocketException -> {
-        Toast.makeText(requireContext(), "SocketException", Toast.LENGTH_SHORT)
-        .show()
-        }
-        else -> {
-        Toast.makeText(
-        requireContext(),
-        "Unknown Error Occurred",
-        Toast.LENGTH_SHORT
-        ).show()
-        }
-
-        }
-        Log.d("Failure", "Resource Failure")
-        //                    handleApiError(resource) { login() }
-        }
-        resource is (Resource.Loading) && (resource.data == null) -> {
-        binding.progressbar.visible(true)
-        }
-        else -> {
-        // do something here
-        Toast.makeText(
-        requireContext(),
-        "Resource Data: ${resource.data} and Error: ${resource.error}",
-        Toast.LENGTH_SHORT
-        ).show()
-        }
-        }
-        }
-         */
-
 
         // controls any kind of live update made in the case of logging in
         viewModel.loginResponse.observe(viewLifecycleOwner) { resource ->
@@ -150,15 +67,11 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 is Resource.Success -> {
                     viewLifecycleOwner.lifecycleScope.launch {
                         // save both the authToken and the LoggedIn userId
-                        viewModel.saveAuthToken(resource.data?.key!!)
-                        viewModel.saveUserId(resource.data.user.pk)
-//
-//                        val tokenEmpty = sessionManager.fetchAuthToken()?.isNotEmpty() ?: true
-//                        val tokenNull = sessionManager.fetchAuthToken() == null
-//
-//                        if (!tokenEmpty && !tokenNull) {
-//                            resource.data?.let { updateFCMToken(it.user) }
-//                        }
+                        runBlocking {
+                            viewModel.saveAuthToken(resource.data?.key!!)
+                            viewModel.saveUserId(resource.data.user.pk)
+                        }
+
                     }
 
                     findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
@@ -188,12 +101,23 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 //            }
 //        }
 
+        binding.editTextTextPassword.addTextChangedListener(ValidationTextWatcher(binding.editTextTextPassword));
+        binding.editTextTextEmailAddress.addTextChangedListener(ValidationTextWatcher(binding.editTextTextEmailAddress));
+
         // handles what things to do when clicking the login button
-        binding.buttonLogin.setOnClickListener {
-             findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+        binding.loginButton.setOnClickListener {
+            if (!validatePassword()) {
+                return@setOnClickListener;
+            }
+            if (!validateEmail()) {
+                return@setOnClickListener;
+            }
+
+            login()
         }
 
     }
+
 
     private fun navToForgetPasswordFragment(view: View) {
         view.findNavController().navigate(R.id.action_loginFragment_to_forgetPasswordFragment)
@@ -204,6 +128,52 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         val password = binding.editTextTextPassword.text.toString().trim()
         // validate the form
         viewModel.login(email, password)
+    }
+
+
+    private fun validatePassword(): Boolean {
+        if (binding.editTextTextPassword.text.toString().trim().isEmpty()) {
+            binding.passwordTextInputLayout.error = "Password is required"
+//            requestFocus(password)
+            return false
+        } else if (binding.editTextTextPassword.getText().toString().length < 6) {
+            binding.passwordTextInputLayout.error = "Password can't be less than 6 digit"
+//            requestFocus(password)
+            return false
+        } else {
+            binding.passwordTextInputLayout.isErrorEnabled = false
+        }
+        return true
+    }
+
+    private fun validateEmail(): Boolean {
+        if (binding.editTextTextEmailAddress.text.toString().trim().isEmpty()) {
+//            binding.emailTextInputLayout.isErrorEnabled = false
+            binding.emailTextInputLayout.error = "Email is required"
+        } else {
+            val emailId: String = binding.editTextTextEmailAddress.text.toString()
+            val isValid = Patterns.EMAIL_ADDRESS.matcher(emailId).matches()
+            if (!isValid) {
+                binding.emailTextInputLayout.error = "Invalid Email address, ex: abc@example.com"
+//                requestFocus(editText)
+                return false
+            } else {
+                binding.emailTextInputLayout.isErrorEnabled = false
+            }
+        }
+        return true
+    }
+
+    inner class ValidationTextWatcher(private val view: View) :
+        TextWatcher {
+        override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+        override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+        override fun afterTextChanged(editable: Editable) {
+            when (view.id) {
+                binding.editTextTextPassword.id -> validatePassword()
+                binding.editTextTextEmailAddress.id -> validateEmail()
+            }
+        }
     }
 
 }

@@ -1,23 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="?attr/actionBarSize"
     tools:context=".ui.report.ReportFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <!-- horizontal divider -->
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
+
+
+        <!-- start measures taken section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                style="@style/TextAppearance.Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="DRIVER'S VIOLATIONS"
+                android:textColor="@color/secondaryDarkColor"
+                android:textAlignment="center" />
+
+            <!-- horizontal divider -->
+            <View
+                android:id="@+id/divider4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+
+        </LinearLayout>
+        <!-- end measures taken section -->
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:text="The driver was drunk?"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <CheckBox
+                android:id="@+id/checkBox2"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:text="The driver was using cell phone?"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+
+            <CheckBox
+                android:id="@+id/checkBox3"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:text="The driver had there driving licence with them"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
+
+            <CheckBox
+                android:id="@+id/checkBox4"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:text="The driver was chewing chat"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/other_violations_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/border"
+                android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                android:hint="Select Other Violations"
+                android:minLines="1"
+                android:padding="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/checkBox4" />
 
             <EditText
                 android:id="@+id/editTextTextMultiLine"
@@ -26,7 +131,7 @@
                 android:hint="Put additional things you what to add..."
                 android:textSize="14sp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="24dp"
                 android:padding="8dp"
@@ -39,60 +144,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/other_violations_text_view" />
-
-            <CheckBox
-                android:id="@+id/checkBox"
-                android:layout_width="0dp"
-                android:layout_height="25dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="208dp"
-                android:layout_marginEnd="16dp"
-                android:text="The Driver was drunk?"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <CheckBox
-                android:id="@+id/checkBox2"
-                android:layout_width="0dp"
-                android:layout_height="25dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:text="He/She was using cell phone?"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox" />
-
-            <CheckBox
-                android:id="@+id/checkBox3"
-                android:layout_width="0dp"
-                android:layout_height="25dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:text="He/She had there driving lickence with them"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/other_violations_text_view"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/border"
-                android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
-                android:hint="Select Other Violations"
-                android:minLines="1"
-                android:padding="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -117,6 +168,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:text="MEASURES TAKEN"
+                android:textColor="@color/secondaryDarkColor"
                 android:textAlignment="center" />
 
             <!-- horizontal divider -->
@@ -130,7 +182,61 @@
         </LinearLayout>
         <!-- end measures taken section -->
 
+        <!-- MEASURES TAKEN SECTION STARTS HERE -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Payment Amount. eg. 500 birr"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <EditText
+                android:id="@+id/editTextTextMultiLine2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/border"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="Write a short summary of what measures you have taken."
+                android:inputType="textMultiLine"
+                android:minLines="6"
+                android:padding="8dp"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- MEASURES TAKEN SECTION ENDS HERE -->
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="REPORT"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"/>
 
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

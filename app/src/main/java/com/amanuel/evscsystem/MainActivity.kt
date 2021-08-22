@@ -2,6 +2,7 @@ package com.amanuel.evscsystem
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -12,9 +13,11 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.amanuel.evscsystem.data.SessionManager
 import com.amanuel.evscsystem.databinding.ActivityMainBinding
 import com.amanuel.evscsystem.notification.NotificationHelper
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 /**
  * Created by Amanuel Girma.
@@ -22,6 +25,9 @@ import dagger.hilt.android.AndroidEntryPoint
  */
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
+
+    @Inject
+    lateinit var sessionManager: SessionManager
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -44,6 +50,13 @@ class MainActivity : BaseActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
         navController = navHostFragment.findNavController()
+
+        // if the user is already logged in move it to the home fragment page
+        if (!sessionManager.fetchAuthToken().isNullOrEmpty()){ // user is already logged in
+            Toast.makeText(this, "USER_TOKEN: ${SessionManager.USER_TOKEN}", Toast.LENGTH_SHORT)
+                .show()
+            navController.navigate(R.id.action_loginFragment_to_homeFragment)
+        }
 
         // initialize the notification channel
         NotificationHelper.init(this)

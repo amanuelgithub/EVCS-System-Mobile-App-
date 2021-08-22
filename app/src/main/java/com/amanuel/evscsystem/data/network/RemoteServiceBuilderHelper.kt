@@ -12,40 +12,15 @@ import javax.inject.Inject
 class RemoteServiceBuilderHelper @Inject constructor() {
 
     // api/rest-auth/login/
-    fun <Api> buildAuthApi(api: Class<Api>, authToken: String? = null): Api {
+    fun <Api> buildAuthApi(api: Class<Api>): Api {
         return Retrofit.Builder()
             .baseUrl(Constants.BASE_AUTH_LOGIN_URL)
             .client(OkHttpClient.Builder()
-                .connectTimeout(5, TimeUnit.MINUTES)
-                .connectTimeout(5, TimeUnit.MINUTES)
+//                .connectTimeout(5, TimeUnit.MINUTES)
+//                .connectTimeout(5, TimeUnit.MINUTES)
                 .addInterceptor { chain ->
                     chain.proceed(chain.request().newBuilder().also {
-                        it.addHeader("Authorization", "Bearer $authToken")
-                    }.build())
-                }.also { client ->
-                    if (BuildConfig.DEBUG) {
-                        val logging = HttpLoggingInterceptor()
-                        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
-                        client.addInterceptor(logging)
-                    }
-                }.build()
-            )
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(api)
-    }
-
-
-    // api/rest-auth/logout
-    fun <Api> buildAuthLogoutApi(api: Class<Api>, authToken: String? = null): Api {
-        return Retrofit.Builder()
-            .baseUrl(Constants.BASE_AUTH_LOGIN_URL)
-            .client(OkHttpClient.Builder()
-                .connectTimeout(5, TimeUnit.MINUTES)
-                .connectTimeout(5, TimeUnit.MINUTES)
-                .addInterceptor { chain ->
-                    chain.proceed(chain.request().newBuilder().also {
-                        it.addHeader("Authorization", "Bearer $authToken")
+//                        it.addHeader("Authorization", "token $authToken")
                     }.build())
                 }.also { client ->
                     if (BuildConfig.DEBUG) {
