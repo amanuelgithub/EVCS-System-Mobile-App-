@@ -30,6 +30,17 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         binding.cancelProfileButton.setOnClickListener {
             showMainProfileLayout()
         }
+
+
+        binding.userProfileSelectionImageView.setOnClickListener {
+            selectImageOrTakePicture()
+        }
+    }
+
+    // when the imageView is clicked allow user to select image from available
+    // pictures or prompt them to take a picture
+    private fun selectImageOrTakePicture(){
+        /** todo: allow selection of user profile image from existing pictures or take new picture using the camera */
     }
 
     private fun showMainProfileLayout() {
@@ -81,9 +92,5 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     private fun showFloatingActionButton(){
         binding.profileFloatingActionButton.visibility = View.VISIBLE
     }
-
-
-
-
 
 }

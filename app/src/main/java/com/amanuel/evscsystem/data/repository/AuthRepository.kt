@@ -16,6 +16,14 @@ class AuthRepository @Inject constructor(
         authApi.login(email, password)
     }
 
+    fun deleteAuthToken(){
+        sessionManager.deleteAuthToken()
+    }
+
+    fun deleteUserId(){
+        sessionManager.deleteUserId()
+    }
+
     suspend fun saveAuthToken(token: String) {
         sessionManager.saveAuthToken(token)
     }

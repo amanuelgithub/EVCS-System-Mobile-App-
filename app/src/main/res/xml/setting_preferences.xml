@@ -12,6 +12,11 @@
             app:key="notifications"
             app:title="Enable message notifications" />
 
+        <Preference
+            app:key="fcm_token"
+            app:selectable="true"
+            app:title="Register FCM Token" />
+
         <!-- Include a ringtone selection option for the notification sounds -->
 
     </PreferenceCategory>

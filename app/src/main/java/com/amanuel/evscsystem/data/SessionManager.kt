@@ -94,9 +94,23 @@ class SessionManager @Inject constructor(
         editor.apply()
     }
 
+    fun deleteAuthToken(){
+        val editor = customPrefs.edit()
+        editor.remove(USER_TOKEN)
+        editor.clear()
+        editor.apply()
+    }
+
     fun saveUserId(userId: Int) {
         val editor = customPrefs.edit()
         editor.putInt(USER_ID, userId)
+        editor.apply()
+    }
+
+    fun deleteUserId(){
+        val editor = customPrefs.edit()
+        editor.remove(USER_ID)
+        editor.clear()
         editor.apply()
     }
 

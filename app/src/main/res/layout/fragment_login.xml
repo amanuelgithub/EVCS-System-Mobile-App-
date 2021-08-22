@@ -74,7 +74,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/app_name_text">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/usernameTextInputLayout"
+                    android:id="@+id/emailTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -104,7 +104,7 @@
                     app:endIconMode="clear_text"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/usernameTextInputLayout">
+                    app:layout_constraintTop_toBottomOf="@+id/emailTextInputLayout">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editTextTextPassword"
@@ -117,7 +117,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button
-                android:id="@+id/buttonLogin"
+                android:id="@+id/loginButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -127,7 +127,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"/>
 
             <TextView
                 android:id="@+id/textViewTextForgetPassword"
@@ -135,10 +135,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/forget_password"
-                app:layout_constraintEnd_toEndOf="@+id/buttonLogin"
+                app:layout_constraintEnd_toEndOf="@+id/loginButton"
                 app:layout_constraintHorizontal_bias="0.492"
-                app:layout_constraintStart_toStartOf="@+id/buttonLogin"
-                app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
+                app:layout_constraintStart_toStartOf="@+id/loginButton"
+                app:layout_constraintTop_toBottomOf="@+id/loginButton" />
 
             <TextView
                 android:id="@+id/textView20"

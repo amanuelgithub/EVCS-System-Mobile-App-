@@ -6,6 +6,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
+import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
@@ -50,9 +51,10 @@ object NotificationHelper {
     ) {
         val builder = NotificationCompat.Builder(context, channelId)
         builder.setContentTitle(title).setSmallIcon(R.drawable.ic_notifications)
+        builder.color = Color.parseColor("#002171") // secondaryDarkColor
 
         val notification = builder.setContentText(body)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setPriority(NotificationCompat.PRIORITY_MAX)
             .setContentIntent(intent)
             .setAutoCancel(true)
             .build()

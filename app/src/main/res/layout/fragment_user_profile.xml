@@ -23,7 +23,7 @@
              floating action button is selected -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/editable_profile_header_layout"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorBackground"
@@ -32,7 +32,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/imageView6"
+                    android:id="@+id/user_profile_selection_image_view"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginTop="16dp"
@@ -86,7 +86,7 @@
             <!-- start header-->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/profile_header_layout"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
