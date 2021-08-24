@@ -37,7 +37,7 @@ class ReportViewModel @Inject constructor(
                     if (t is HttpException) {
                         when {
                             t.code() == 401 -> {
-                                view.showWarningSnackBar("An Authorized Access!!")
+                                view.showWarningSnackBar("Unauthorized Access!!")
                             }
                             else -> {
                                 view.showErrorSnackBar("This is an actual network failure: ${t.localizedMessage}")

@@ -46,6 +46,7 @@ class NotificationsFragment : Fragment(R.layout.fragment_notifications),
                 setHasFixedSize(true)
             }
         }
+
         viewModel.notifications.observe(viewLifecycleOwner) { resource ->
             notificationsAdapter.submitList(resource.data)
 
