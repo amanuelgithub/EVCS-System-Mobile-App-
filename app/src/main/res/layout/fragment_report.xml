@@ -56,7 +56,7 @@
             android:layout_height="wrap_content">
 
             <CheckBox
-                android:id="@+id/checkBox"
+                android:id="@+id/isDrunkCheckBox"
                 android:layout_width="0dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="16dp"
@@ -70,7 +70,7 @@
 
 
             <CheckBox
-                android:id="@+id/checkBox2"
+                android:id="@+id/isUsingCellPhoneCheckBox"
                 android:layout_width="0dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="16dp"
@@ -80,10 +80,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+                app:layout_constraintTop_toBottomOf="@+id/isDrunkCheckBox" />
 
             <CheckBox
-                android:id="@+id/checkBox3"
+                android:id="@+id/isNotHavingLicenceCheckBox"
                 android:layout_width="0dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="16dp"
@@ -93,10 +93,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
+                app:layout_constraintTop_toBottomOf="@+id/isUsingCellPhoneCheckBox" />
 
             <CheckBox
-                android:id="@+id/checkBox4"
+                android:id="@+id/isChewingChatCheckBox"
                 android:layout_width="0dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="16dp"
@@ -105,7 +105,7 @@
                 android:text="The driver was chewing chat"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
+                app:layout_constraintTop_toBottomOf="@+id/isNotHavingLicenceCheckBox" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/other_violations_text_view"
@@ -122,10 +122,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox4" />
+                app:layout_constraintTop_toBottomOf="@+id/isChewingChatCheckBox" />
 
             <EditText
-                android:id="@+id/editTextTextMultiLine"
+                android:id="@+id/descriptionEditTextTextMultiLine"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="Put additional things you what to add..."
@@ -200,6 +200,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/paymentAmountTextField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Payment Amount. eg. 500 birr"
@@ -207,7 +208,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <EditText
-                android:id="@+id/editTextTextMultiLine2"
+                android:id="@+id/shortSummaryEditTextTextMultiLine"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -231,6 +232,7 @@
         <!-- MEASURES TAKEN SECTION ENDS HERE -->
 
         <Button
+            android:id="@+id/report_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="REPORT"

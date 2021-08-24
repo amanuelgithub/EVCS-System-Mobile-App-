@@ -57,7 +57,7 @@
     <fragment
         android:id="@+id/notificationsDetailFragment"
         android:name="com.amanuel.evscsystem.ui.notification.NotificationDetailFragment"
-        android:label="Notification"
+        android:label="Notification Detail"
         tools:layout="@layout/fragment_notifications_detail">
         <argument
             android:name="notification"
@@ -127,6 +127,16 @@
         <argument
             android:name="record_id"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_reportFragment_to_notificationsFragment"
+            app:destination="@id/notificationsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <argument
+            android:name="plate_number"
+            app:argType="string" />
     </fragment>
      <fragment
         android:id="@+id/vehicleOwnerFragment"

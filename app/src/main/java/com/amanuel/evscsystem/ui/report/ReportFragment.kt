@@ -5,8 +5,13 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.amanuel.evscsystem.R
+import com.amanuel.evscsystem.data.db.models.Report
 import com.amanuel.evscsystem.databinding.FragmentReportBinding
+import com.amanuel.evscsystem.utilities.EVSCDialogMsg
+import com.amanuel.evscsystem.utilities.showErrorSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.properties.Delegates
 
@@ -15,7 +20,10 @@ class ReportFragment : Fragment(R.layout.fragment_report) {
 
     private lateinit var binding: FragmentReportBinding
 
+    private val viewModel: ReportViewModel by viewModels()
+
     private var recordId by Delegates.notNull<Int>()
+    private var plateNumber by Delegates.notNull<String>()
 
 //    private lateinit var violationItems: ArrayList<String>
 //    private var checkedItems: BooleanArray? = null
@@ -32,6 +40,7 @@ class ReportFragment : Fragment(R.layout.fragment_report) {
 
         val args = ReportFragmentArgs.fromBundle(requireArguments())
         recordId = args.recordId
+        plateNumber = args.plateNumber
 
         Toast.makeText(requireActivity(), "Record: $recordId", Toast.LENGTH_SHORT).show()
 
@@ -42,6 +51,62 @@ class ReportFragment : Fragment(R.layout.fragment_report) {
             showDialog()
         }
 
+
+        // handle the click event of the report button
+        binding.reportButton.setOnClickListener {
+            report()
+        }
+
+    }
+
+    private fun report() {
+        val isDrunk: Boolean = binding.isDrunkCheckBox.isChecked
+        val isUsingCellPhone: Boolean = binding.isUsingCellPhoneCheckBox.isChecked
+        val isNotHavingLicense: Boolean = binding.isNotHavingLicenceCheckBox.isChecked
+        val isChewingChat: Boolean = binding.isChewingChatCheckBox.isChecked
+        val otherViolations: String = binding.otherViolationsTextView.text.toString()
+        val description: String = binding.descriptionEditTextTextMultiLine.text.toString()
+
+        var paymentAmount: Double
+        if (binding.paymentAmountTextField.text.toString().isNotEmpty()) {
+            paymentAmount = binding.paymentAmountTextField.text.toString().toDouble()
+        } else {
+            paymentAmount = 0.0
+        }
+
+        val shortSummary: String = binding.shortSummaryEditTextTextMultiLine.text.toString()
+
+        val report = Report(
+            isDrunk,
+            isUsingCellPhone,
+            isNotHavingLicense,
+            isChewingChat,
+            otherViolations,
+            description,
+            paymentAmount,
+            shortSummary
+        )
+
+        view?.let {
+            viewModel.report(it, recordId, report) { report ->
+                if (report != null) {
+                    // it = newly added user parsed as response
+                    // it?.id = newly added user ID
+                    Toast.makeText(requireContext(), "reporting is success!", Toast.LENGTH_SHORT).show()
+
+                    EVSCDialogMsg.showSuccessAlert(
+                        requireContext(),
+                        "Reporting Success!!!",
+                        "You have successfully written a report for vehicle with plate number: $plateNumber"
+                    ) { dialog, which ->
+                        findNavController().navigate(R.id.action_reportFragment_to_notificationsFragment)
+                    }
+
+                } else {
+                    view?.showErrorSnackBar("Reporting Failure!!!")
+                }
+            }
+        }
     }
 
 

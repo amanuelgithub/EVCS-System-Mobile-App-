@@ -1,23 +1,12 @@
 package com.amanuel.evscsystem.ui.settings
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import androidx.preference.PreferenceFragmentCompat
-import com.amanuel.evscsystem.R
-import com.amanuel.evscsystem.data.SessionManager
-import com.amanuel.evscsystem.data.UserPreferences
-import com.amanuel.evscsystem.data.network.Resource
-import com.amanuel.evscsystem.databinding.FragmentSettingsBinding
 //import com.amanuel.evscsystem.databinding.FragmentSettingsBinding
-import com.amanuel.evscsystem.utilities.ViewUtils.Companion.showSuccessSnackBar
+import android.os.Bundle
+import android.view.View
+import androidx.fragment.app.Fragment
+import com.amanuel.evscsystem.R
+import com.amanuel.evscsystem.databinding.FragmentSettingsBinding
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment(R.layout.fragment_settings) {

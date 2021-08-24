@@ -1,9 +1,12 @@
 package com.amanuel.evscsystem.utilities
 
+import android.R
+import android.app.Activity
 import android.content.Context
+import android.content.DialogInterface
+import androidx.appcompat.app.AlertDialog
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.list.listItemsMultiChoice
-import com.amanuel.evscsystem.R
+
 
 /**
  * Created By: Amanuel Girma
@@ -29,6 +32,35 @@ class EVSCDialogMsg {
         fun otherViolationsDialog(context: Context): MaterialDialog {
             return MaterialDialog(context)
         }
+
+        fun showSuccessAlert(
+            context: Context?,
+            heading: String?, description: String?,
+            action: DialogInterface.OnClickListener?
+        ) {
+            AlertDialog.Builder(context!!).setTitle(heading)
+                .setMessage(description)
+                .setPositiveButton(R.string.ok, action)
+                .setIcon(R.drawable.ic_dialog_info).show()
+        }
     }
+
+    fun ShowSuccessAlert(
+        context: Context,
+        heading: String?, description: String?
+    ) {
+        AlertDialog.Builder(context)
+            .setTitle(heading) // w w w.ja  va  2  s . co  m
+            .setMessage(description)
+            .setPositiveButton(android.R.string.yes,
+                DialogInterface.OnClickListener { dialog, which ->
+                    if (!(context as Activity).isFinishing) context.finish()
+                }
+            )
+            .setIcon(android.R.drawable.ic_dialog_info)
+            .show()
+    }
+
+
 
 }
