@@ -8,7 +8,7 @@ data class Record(
     @PrimaryKey
     val id: Int,
     val vehicle_speed: Int,
-    val duration: String,
+    val duration: String?,
 //    val vehicleId: Int,
     val vehicle: Int,
     val address: String,

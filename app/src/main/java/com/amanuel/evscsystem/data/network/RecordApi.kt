@@ -6,7 +6,9 @@ import retrofit2.http.Headers
 
 interface RecordApi {
 
+//    @Headers("Content-Type: application/json")
     @Headers("Accept: application/json")
-    @GET("records")
+    @GET("records/?format=json")
     suspend fun getRecords(): List<Record>
+
 }

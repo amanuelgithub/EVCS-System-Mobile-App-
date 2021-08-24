@@ -16,9 +16,13 @@ import java.text.DateFormat
 @Parcelize
 data class Notification(
     @PrimaryKey(autoGenerate = true) val id: Int,
-    val plateNumber: String,
-    val speed: Int,
-    val Location: String,
+    val notification_id: Int,
+    val record_id: Int,
+    val latitude: Double,
+    val longtude: Double,
+    val plate_number: String,
+    val vehicle_speed: Int,
+    val Location: String?, // must be removed
     val createdAt: Long? = System.currentTimeMillis(),
 ) : Parcelable {
     val createFormattedDate: String

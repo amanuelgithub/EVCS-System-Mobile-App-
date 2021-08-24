@@ -92,6 +92,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_notificationsFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
     </fragment>
 
 
@@ -111,12 +114,20 @@
         android:id="@+id/mapsFragment"
         android:name="com.amanuel.evscsystem.MapsFragment"
         android:label="Location "
-        tools:layout="@layout/fragment_maps" />
+        tools:layout="@layout/fragment_maps" >
+        <argument
+            android:name="notification"
+            app:argType="com.amanuel.evscsystem.data.db.models.Notification" />
+    </fragment>
     <fragment
         android:id="@+id/reportFragment"
         android:name="com.amanuel.evscsystem.ui.report.ReportFragment"
         android:label="Report"
-        tools:layout="@layout/fragment_report" />
+        tools:layout="@layout/fragment_report" >
+        <argument
+            android:name="record_id"
+            app:argType="integer" />
+    </fragment>
      <fragment
         android:id="@+id/vehicleOwnerFragment"
         android:name="com.amanuel.evscsystem.ui.vehicle.owner.VehicleOwnerFragment"

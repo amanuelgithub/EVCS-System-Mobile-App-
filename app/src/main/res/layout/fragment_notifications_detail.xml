@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="?attr/actionBarSize"
     android:background="#F1F1F1"
     android:orientation="vertical"
     tools:context=".ui.notification.NotificationDetailFragment">
@@ -33,7 +34,7 @@
                     <ImageView
                         android:id="@+id/imageView7"
                         android:layout_width="match_parent"
-                        android:layout_height="150dp"
+                        android:layout_height="100dp"
                         android:scaleType="centerCrop"
                         android:tooltipText="@string/vehicle_image_tooltip"
                         tools:src="@tools:sample/backgrounds/scenic" />
@@ -75,6 +76,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/plateNumberTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
@@ -95,13 +97,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
-                            android:text="Speed: "
+                            android:text="Vehicle Speed: "
                             android:textAlignment="viewStart"
                             android:textColor="#424242"
                             android:textSize="16dp"
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/vehicleSpeedTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
@@ -122,13 +125,74 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
-                            android:text="Location: "
+                            android:text="Latitude: "
                             android:textAlignment="viewStart"
                             android:textColor="#424242"
                             android:textSize="16dp"
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/latitudeDetailTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="82.2929"
+                            android:textAlignment="viewStart"
+                            android:textColor="#737373"
+                            android:textSize="16dp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:text="Longitude: "
+                            android:textAlignment="viewStart"
+                            android:textColor="#424242"
+                            android:textSize="16dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/longitudeDetailTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="9.928342"
+                            android:textAlignment="viewStart"
+                            android:textColor="#737373"
+                            android:textSize="16dp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:text="Address: "
+                            android:textAlignment="viewStart"
+                            android:textColor="#424242"
+                            android:textSize="16dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/addressTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
@@ -136,6 +200,8 @@
                             android:textAlignment="viewStart"
                             android:textColor="#737373"
                             android:textSize="16dp" />
+
+
                     </LinearLayout>
 
                     <View
@@ -161,13 +227,16 @@
                             android:textColor="#737373"
                             android:textSize="14dp" />
 
+<!--                        android:textColor="#2196F3"-->
+
                         <TextView
+                            android:id="@+id/dateCreatedTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="16dp"
-                            android:text="Jul 1, 2021 GC"
                             android:textAlignment="viewStart"
-                            android:textColor="#2196F3"
+                            android:text="1/2/2021 GC"
+                            android:textColor="@color/secondaryDarkColor"
                             android:textSize="14dp"
                             android:textStyle="bold" />
 
@@ -186,7 +255,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:visibility="visible">
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -217,7 +286,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:src="@drawable/ic_baseline_location_on_24" />
+                                    android:src="@drawable/ic_baseline_location_on" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -240,7 +309,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:src="@drawable/ic_baseline_add_circle_24" />
+                                    android:src="@drawable/ic_baseline_account_circle_24" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -272,29 +341,6 @@
                                     android:layout_marginTop="4dp"
                                     android:layout_marginBottom="4dp"
                                     android:text="Vehicle Owner" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/more_on_vehicle_layout"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:orientation="vertical">
-
-                                <ImageButton
-                                    android:id="@+id/more_on_vehicle_img_btn"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:src="@drawable/ic_baseline_read_more_24" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginTop="4dp"
-                                    android:layout_marginBottom="4dp"
-                                    android:text="More" />
                             </LinearLayout>
 
                         </LinearLayout>

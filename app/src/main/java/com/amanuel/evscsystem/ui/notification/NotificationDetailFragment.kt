@@ -25,12 +25,19 @@ class NotificationDetailFragment : Fragment(R.layout.fragment_notifications_deta
 
         val args = NotificationDetailFragmentArgs.fromBundle(requireArguments())
         // notification sent form the NotificationsFragment
-
         // a url for that specific notification is required
         notification = args.notification
 
         Toast.makeText(requireActivity(), "Notification: ${notification.id}", Toast.LENGTH_SHORT)
             .show()
+
+        binding.apply {
+            plateNumberTextView.text = notification.plate_number
+            vehicleSpeedTextView.text = notification.vehicle_speed.toString()
+            latitudeDetailTextView.text = notification.latitude.toString()
+//            dateCreatedTextView.text = notification.createFormattedDate.toString()
+
+        }
 
 
         binding.apply {
@@ -59,8 +66,11 @@ class NotificationDetailFragment : Fragment(R.layout.fragment_notifications_deta
     }
 
     private fun startReportFragment() {
+        val bundle = Bundle()
+        bundle.putInt("record_id", notification.record_id)
+
         val navController = findNavController()
-        navController.navigate(R.id.action_notificationsDetailFragment_to_reportFragment)
+        navController.navigate(R.id.action_notificationsDetailFragment_to_reportFragment, bundle)
     }
 
     private fun startMapsFragment() {

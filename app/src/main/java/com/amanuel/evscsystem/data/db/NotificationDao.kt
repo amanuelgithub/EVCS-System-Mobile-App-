@@ -18,10 +18,10 @@ interface NotificationDao {
             SortOrder.BY_NAME -> getNotificationsSortedByName(searchQuery)
         }
 
-    @Query("SELECT * FROM Notification WHERE plateNumber LIKE '%' || :searchQuery || '%' ORDER BY createdAt")
+    @Query("SELECT * FROM Notification WHERE plate_number LIKE '%' || :searchQuery || '%' ORDER BY createdAt")
     fun getNotificationsSortedByDateCreated(searchQuery: String = ""): Flow<List<Notification>>
 
-    @Query("SELECT * FROM Notification WHERE plateNumber LIKE '%' || :searchQuery || '%' ORDER BY plateNumber")
+    @Query("SELECT * FROM Notification WHERE plate_number LIKE '%' || :searchQuery || '%' ORDER BY plate_number")
     fun getNotificationsSortedByName(searchQuery: String = ""): Flow<List<Notification>> // name here is similar to plateNumber
 
 //    @Query("SELECT * FROM Notification")
