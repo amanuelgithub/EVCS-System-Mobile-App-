@@ -2,6 +2,7 @@ package com.amanuel.evscsystem.data.network
 
 import com.amanuel.evscsystem.BuildConfig
 import com.amanuel.evscsystem.utilities.constants.Constants
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -9,10 +10,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
+
 class RemoteServiceBuilderHelper @Inject constructor() {
 
     // api/rest-auth/login/
     fun <Api> buildAuthApi(api: Class<Api>): Api {
+        val gson = GsonBuilder()
+            .setLenient()
+            .create()
+
         return Retrofit.Builder()
             .baseUrl(Constants.BASE_AUTH_LOGIN_URL)
             .client(OkHttpClient.Builder()
@@ -30,7 +36,7 @@ class RemoteServiceBuilderHelper @Inject constructor() {
                     }
                 }.build()
             )
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(api)
     }
@@ -38,6 +44,11 @@ class RemoteServiceBuilderHelper @Inject constructor() {
 
     // api/...
     fun <Api> buildApi(api: Class<Api>, token: String? = null): Api {
+        val gson = GsonBuilder()
+            .setLenient()
+            .create()
+
+
         return Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
             .client(OkHttpClient.Builder()
@@ -55,7 +66,7 @@ class RemoteServiceBuilderHelper @Inject constructor() {
                     }
                 }.build()
             )
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(api)
     }

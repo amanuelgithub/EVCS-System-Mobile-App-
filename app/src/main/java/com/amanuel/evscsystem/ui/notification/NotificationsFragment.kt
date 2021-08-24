@@ -67,15 +67,22 @@ class NotificationsFragment : Fragment(R.layout.fragment_notifications),
         val bundle = Bundle()
         bundle.putParcelable("notification",notification)
 
+        findNavController().navigate(R.id.action_notificationsFragment_to_mapsFragment, bundle)
+    }
+
+    override fun onNotificationCardViewClicked(notification: Notification) {
+        val bundle  = Bundle()
+        bundle.putParcelable("notification", notification)
+
         findNavController().navigate(R.id.action_notificationsFragment_to_notificationsDetailFragment, bundle)
     }
 
-    // when the more options Image is clicked show a bottom sheet
-    // to the users to prompt it to do things
-    override fun onMoreOptionClicked(position: Int) {
-        val notificationBottomSheetDialog = NotificationBottomSheetDialog()
-        notificationBottomSheetDialog.show(parentFragmentManager, "NotificationBottomSheetDialog")
-    }
+//    // when the more options Image is clicked show a bottom sheet
+//    // to the users to prompt it to do things
+//    override fun onMoreOptionClicked(position: Int) {
+//        val notificationBottomSheetDialog = NotificationBottomSheetDialog()
+//        notificationBottomSheetDialog.show(parentFragmentManager, "NotificationBottomSheetDialog")
+//    }
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

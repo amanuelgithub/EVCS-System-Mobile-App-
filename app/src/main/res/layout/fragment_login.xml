@@ -35,10 +35,9 @@
 
             <ImageView
                 android:id="@+id/imageView2"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/ic_baseline_login_24_remove"
-                android:layout_marginTop="76dp"
+                android:layout_width="190dp"
+                android:layout_height="190dp"
+                android:src="@drawable/evcs_launcher_icon_1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
@@ -50,11 +49,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="28dp"
                 android:layout_marginEnd="16dp"
                 android:gravity="center"
                 android:text="@string/app_name"
-                android:textSize="24dp"
+                android:textColor="@color/secondaryDarkColor"
+                android:textSize="32dp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +67,7 @@
                 android:layout_width="312dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="56dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -121,7 +121,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:background="@drawable/custom_button"
                 android:text="@string/action_sign_in_short"
                 android:textColor="#FFF"
                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
@@ -135,6 +134,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/forget_password"
+                android:textColor="@color/secondaryLightColor"
                 app:layout_constraintEnd_toEndOf="@+id/loginButton"
                 app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintStart_toStartOf="@+id/loginButton"
@@ -176,23 +176,23 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textView20" />
 
-            <Button
-                android:id="@+id/phoneLoginButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="92dp"
-                android:drawableStart="@drawable/ic_baseline_phone_in_talk"
-                android:text="SignIn with Phone"
-                android:textAllCaps="false"
-                android:textColor="#fff"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView20"
-                app:layout_constraintVertical_bias="1.0" />
+<!--            <Button-->
+<!--                android:id="@+id/phoneLoginButton"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:layout_marginEnd="16dp"-->
+<!--                android:layout_marginBottom="92dp"-->
+<!--                android:drawableStart="@drawable/ic_baseline_phone_in_talk"-->
+<!--                android:text="SignIn with Phone"-->
+<!--                android:textAllCaps="false"-->
+<!--                android:textColor="#fff"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintHorizontal_bias="1.0"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/textView20"-->
+<!--                app:layout_constraintVertical_bias="1.0" />-->
 
             <ProgressBar
                 android:id="@+id/progressbar"

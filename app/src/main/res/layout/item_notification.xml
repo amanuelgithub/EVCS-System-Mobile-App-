@@ -2,7 +2,6 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/notification_card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardElevation="20dp"
@@ -11,18 +10,21 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/notification_constraint_layout"
         android:padding="2dp">
 
         <TextView
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="PN= "
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Plate Number= "
+            android:textColor="@color/secondaryDarkColor"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintBaseline_toBaselineOf="@+id/location_text_view"
-            app:layout_constraintStart_toEndOf="@+id/location_text_view" />
+            app:layout_constraintStart_toEndOf="@+id/location_image_view"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/plate_no_text_view"
@@ -33,106 +35,106 @@
             app:layout_constraintBaseline_toBaselineOf="@+id/textView11"
             app:layout_constraintStart_toEndOf="@+id/textView11" />
 
-        <TextView
-            android:id="@+id/vehicle_code_text_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="2"
-            android:textSize="16sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/textView12"
-            app:layout_constraintStart_toEndOf="@+id/textView12" />
-
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="CD= "
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBaseline_toBaselineOf="@+id/textView11"
-            app:layout_constraintStart_toEndOf="@+id/plate_no_text_view" />
-
         <ImageView
             android:id="@+id/location_image_view"
-            android:layout_width="31dp"
-            android:layout_height="43dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_baseline_location_on" />
-
-        <TextView
-            android:id="@+id/location_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="52dp"
-            android:layout_marginTop="16dp"
-            android:text="Adama, Bole"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:srcCompat="@drawable/ic_baseline_location_on_24" />
 
         <ImageView
             android:id="@+id/imageView5"
-            android:layout_width="18dp"
-            android:layout_height="23dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/vehicle_speed_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toStartOf="@+id/vehicle_speed_text_view"
-            app:layout_constraintTop_toTopOf="@+id/vehicle_speed_text_view"
+            app:layout_constraintTop_toBottomOf="@+id/divider14"
             app:srcCompat="@drawable/ic_baseline_directions_car" />
 
         <TextView
             android:id="@+id/vehicle_speed_text_view"
-            android:layout_width="26dp"
-            android:layout_height="15dp"
-            android:layout_marginStart="76dp"
-            android:layout_marginTop="68dp"
-            android:text="70km"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="70km/s"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
         <ImageView
             android:id="@+id/imageView6"
-            android:layout_width="15dp"
-            android:layout_height="23dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView16"
-            app:layout_constraintEnd_toStartOf="@+id/textView16"
-            app:layout_constraintTop_toTopOf="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider14"
             app:srcCompat="@drawable/ic_baseline_timelapse" />
 
         <TextView
             android:id="@+id/textView16"
-            android:layout_width="50dp"
-            android:layout_height="17dp"
-            android:layout_marginStart="32dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="25 min ago"
-            app:layout_constraintBaseline_toBaselineOf="@+id/vehicle_speed_text_view"
-            app:layout_constraintStart_toEndOf="@+id/vehicle_speed_text_view" />
+            app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+            app:layout_constraintStart_toEndOf="@+id/imageView6"
+            app:layout_constraintTop_toTopOf="@+id/imageView6"/>
 
-        <ImageView
-            android:id="@+id/more_image_view"
-            android:layout_width="33dp"
-            android:layout_height="59dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_baseline_more_vert_24" />
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Longitude= "
+            android:textColor="@color/secondaryDarkColor"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/plate_no_text_view"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/longitudeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="49.8383"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView15"
+            app:layout_constraintStart_toEndOf="@+id/textView15" />
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Latitude= "
+            android:textColor="@color/secondaryDarkColor"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/plate_no_text_view"
+            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+        <TextView
+            android:id="@+id/latitudeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="93.28282"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView22"
+            app:layout_constraintStart_toEndOf="@+id/textView22" />
 
         <View
-            android:id="@+id/view2"
-            android:layout_width="240dp"
+            android:id="@+id/divider14"
+            android:layout_width="403dp"
             android:layout_height="1dp"
-            android:layout_marginStart="52dp"
-            android:layout_marginTop="52dp"
-            android:background="#C5C5C5"
+            android:layout_marginTop="32dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

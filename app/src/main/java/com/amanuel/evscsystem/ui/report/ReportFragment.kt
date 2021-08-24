@@ -1,18 +1,21 @@
 package com.amanuel.evscsystem.ui.report
 
-import android.content.DialogInterface
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import com.amanuel.evscsystem.R
 import com.amanuel.evscsystem.databinding.FragmentReportBinding
+import dagger.hilt.android.AndroidEntryPoint
+import kotlin.properties.Delegates
 
-
+@AndroidEntryPoint
 class ReportFragment : Fragment(R.layout.fragment_report) {
 
     private lateinit var binding: FragmentReportBinding
+
+    private var recordId by Delegates.notNull<Int>()
 
 //    private lateinit var violationItems: ArrayList<String>
 //    private var checkedItems: BooleanArray? = null
@@ -26,6 +29,11 @@ class ReportFragment : Fragment(R.layout.fragment_report) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentReportBinding.bind(view)
+
+        val args = ReportFragmentArgs.fromBundle(requireArguments())
+        recordId = args.recordId
+
+        Toast.makeText(requireActivity(), "Record: $recordId", Toast.LENGTH_SHORT).show()
 
         arrayViolations = resources.getStringArray(R.array.other_violations_array)
         arrayChecked = BooleanArray(arrayViolations.size)
