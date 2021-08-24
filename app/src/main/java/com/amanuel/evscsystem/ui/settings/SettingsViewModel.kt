@@ -1,5 +1,6 @@
 package com.amanuel.evscsystem.ui.settings
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,6 +11,7 @@ import com.amanuel.evscsystem.data.repository.AuthRepository
 import com.amanuel.evscsystem.data.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import okhttp3.ResponseBody
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,13 +27,11 @@ class SettingsViewModel @Inject constructor(
         get() = _updateFCMTokenResponse
 
 
-    fun logout() = viewModelScope.launch {
+    fun logout(view: View, onResult: (ResponseBody?) -> Unit) = viewModelScope.launch {
         authRepository.deleteAuthToken()
         authRepository.deleteUserId()
 
-        authRepository.logout()
-//        userPreferences.clear()
-        // todo: create a way to go back to the login page of the application
+        authRepository.logout(view, onResult)
     }
 
     fun deleteAuthToken(){
@@ -41,7 +41,6 @@ class SettingsViewModel @Inject constructor(
     fun deleteUserId(){
         authRepository.deleteUserId()
     }
-
 
     fun updateFCMToken(id: Int, fcmToken: String) = viewModelScope.launch {
         _updateFCMTokenResponse.value = userRepository.updateFCMToken(id, fcmToken)

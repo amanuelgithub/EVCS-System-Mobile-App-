@@ -15,8 +15,11 @@ import androidx.preference.PreferenceFragmentCompat
 import com.amanuel.evscsystem.ContextUtils
 import com.amanuel.evscsystem.LocaleHelper
 import com.amanuel.evscsystem.R
+import com.amanuel.evscsystem.connectivity.Connectivity
 import com.amanuel.evscsystem.data.SessionManager
 import com.amanuel.evscsystem.ui.home.HomeFragment
+import com.amanuel.evscsystem.utilities.showErrorSnackBar
+import com.amanuel.evscsystem.utilities.showWarningSnackBar
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
@@ -129,25 +132,24 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(),
 
         // Logout User
         if (preference?.key.equals("user_logout")) {
-            // todo: logout the user from the application
-            Toast.makeText(
-                requireContext(), "user logout preference is clicked!",
-                Toast.LENGTH_SHORT
-            ).show()
+            if (Connectivity.isConnectedOrConnecting(requireContext())) {
+                view?.let {
+                    viewModel.logout(it){responseBody ->
+                        if (responseBody != null){
+                            // remove both auth token and user id when signing out
+                            viewModel.deleteAuthToken()
+                            viewModel.deleteUserId()
 
-            // remove both auth token and user id when signing out
-            viewModel.deleteAuthToken()
-            viewModel.deleteUserId()
-            // logging the user out of the application
-            viewModel.logout()
-
-            Toast.makeText(
-                requireContext(),
-                "user token: ${sessionManager.fetchAuthToken()}} user id: ${sessionManager.fetchUserId()}",
-                Toast.LENGTH_SHORT
-            ).show()
-            // finally navigate back to LoginFragment
-            findNavController().navigate(R.id.action_settingsFragment_to_loginFragment)
+                            // finally navigate back to LoginFragment
+                            findNavController().navigate(R.id.action_settingsFragment_to_loginFragment)
+                        }else {
+                            view?.showErrorSnackBar("Something went wrong :( ")
+                        }
+                    }
+                }
+            } else {
+                view?.showWarningSnackBar("Check Your internet connection before trying to logout!!")
+            }
         }
 
         // change language
@@ -173,8 +175,7 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(),
 
             Toast.makeText(requireContext(), "Selected Language: $actualLang", Toast.LENGTH_SHORT).show()
             LocaleHelper.setLocale(requireContext(), actualLang)
-//
-//
+
 //            SessionManager(requireContext()).updateLanguage(actualLang)
         }
 

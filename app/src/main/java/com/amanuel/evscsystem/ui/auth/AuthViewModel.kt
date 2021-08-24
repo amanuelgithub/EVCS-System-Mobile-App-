@@ -1,5 +1,6 @@
 package com.amanuel.evscsystem.ui.auth
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -19,18 +20,22 @@ class AuthViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : BaseViewModel(authRepository) {
 
-    private val _loginResponse: MutableLiveData<Resource<LoginResponse>> = MutableLiveData()
-    val loginResponse: LiveData<Resource<LoginResponse>>
-        get() = _loginResponse
+//    private val _loginResponse: MutableLiveData<Resource<LoginResponse>> = MutableLiveData()
+//    val loginResponse: LiveData<Resource<LoginResponse>>
+//        get() = _loginResponse
 
     // todo: update the Any response to Actual response from the sever
     private val _updateFCMTokenResponse: MutableLiveData<Resource<Any>> = MutableLiveData()
     val updateFCMTokenResponse: LiveData<Resource<Any>>
         get() = _updateFCMTokenResponse
 
-    fun login(email: String, password: String) = viewModelScope.launch {
-        _loginResponse.value = Resource.Loading(null)
-        _loginResponse.value = authRepository.login(email, password)
+//    fun login(email: String, password: String) = viewModelScope.launch {
+//        _loginResponse.value = Resource.Loading(null)
+//        _loginResponse.value = authRepository.login(email, password)
+//    }
+
+    fun login(view: View, email: String, password: String, onResult: (LoginResponse?) -> Unit){
+        authRepository.login(view, email, password, onResult)
     }
 
     fun updateFCMToken(id: Int, fcmToken: String) = viewModelScope.launch {

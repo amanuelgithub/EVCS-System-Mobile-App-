@@ -11,8 +11,7 @@ import com.amanuel.evscsystem.databinding.ItemNotificationBinding
 
 class NotificationAdapter(
     private val notificationWidgetsClickListenerInterface: NotificationWidgetsClickListenerInterface
-) :
-    ListAdapter<Notification, NotificationAdapter.NotificationsViewHolder>(NotificationDiffCallBack()) {
+) : ListAdapter<Notification, NotificationAdapter.NotificationsViewHolder>(NotificationDiffCallBack()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationsViewHolder {

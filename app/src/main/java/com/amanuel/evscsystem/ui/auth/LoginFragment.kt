@@ -15,15 +15,19 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.amanuel.evscsystem.R
+import com.amanuel.evscsystem.connectivity.Connectivity
 import com.amanuel.evscsystem.data.SessionManager
 import com.amanuel.evscsystem.data.network.Resource
 import com.amanuel.evscsystem.databinding.FragmentLoginBinding
 import com.amanuel.evscsystem.ui.enable
 import com.amanuel.evscsystem.ui.handleApiError
 import com.amanuel.evscsystem.ui.visible
+import com.amanuel.evscsystem.utilities.showErrorSnackBar
+import com.amanuel.evscsystem.utilities.showWarningSnackBar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
@@ -58,38 +62,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         binding.progressbar.visible(false)
 
-        // controls any kind of live update made in the case of logging in
-        viewModel.loginResponse.observe(viewLifecycleOwner) { resource ->
-            //            Snackbar.make(requireView(), "Login response", Snackbar.LENGTH_LONG).show()
-            binding.progressbar.visible(resource is Resource.Loading)
-
-            when (resource) {
-                is Resource.Success -> {
-                    viewLifecycleOwner.lifecycleScope.launch {
-                        // save both the authToken and the LoggedIn userId
-                        runBlocking {
-                            viewModel.saveAuthToken(resource.data?.key!!)
-                            viewModel.saveUserId(resource.data.user.pk)
-                        }
-
-                    }
-
-                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-                }
-                is Resource.Failure -> {
-                    Log.d("Failure", "Resource Failure")
-                    handleApiError(resource) { login() }
-                }
-                else -> {
-                    // do something here
-                    Toast.makeText(
-                        requireContext(),
-                        "Resource Data: ${resource.data} and Error: ${resource.error}",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        }
 
 //        // handles what things to do when clicking the login button
 //        binding.buttonLogin.setOnClickListener {
@@ -113,7 +85,11 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 return@setOnClickListener;
             }
 
-            login()
+            if (Connectivity.isConnectedOrConnecting(requireContext())) {
+                login()
+            } else {
+                view.showWarningSnackBar("Check Your Internet Connection.")
+            }
         }
 
     }
@@ -127,7 +103,28 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         val email = binding.editTextTextEmailAddress.text.toString().trim()
         val password = binding.editTextTextPassword.text.toString().trim()
         // validate the form
-        viewModel.login(email, password)
+        binding.progressbar.visibility = View.VISIBLE
+        viewLifecycleOwner.lifecycleScope.launch {
+            delay(2000)
+        }
+        view?.let {
+            viewModel.login(it, email, password) { loginResponse ->
+                if (loginResponse != null) {
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        // save both the authToken and the LoggedIn userId
+                        runBlocking {
+                            viewModel.saveAuthToken(loginResponse.key)
+                            viewModel.saveUserId(loginResponse.user.pk)
+                        }
+                    }
+                    binding.progressbar.visibility = View.GONE
+                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                } else {
+                    binding.progressbar.visibility = View.GONE
+                    view?.showErrorSnackBar("Authentication Failure")
+                }
+            }
+        }
     }
 
 
