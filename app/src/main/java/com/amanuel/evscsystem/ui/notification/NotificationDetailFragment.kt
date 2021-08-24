@@ -68,6 +68,7 @@ class NotificationDetailFragment : Fragment(R.layout.fragment_notifications_deta
     private fun startReportFragment() {
         val bundle = Bundle()
         bundle.putInt("record_id", notification.record_id)
+        bundle.putString("plate_number", notification.plate_number)
 
         val navController = findNavController()
         navController.navigate(R.id.action_notificationsDetailFragment_to_reportFragment, bundle)

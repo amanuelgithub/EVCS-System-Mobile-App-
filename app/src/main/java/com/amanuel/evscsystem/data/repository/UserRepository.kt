@@ -3,7 +3,6 @@ package com.amanuel.evscsystem.data.repository
 import androidx.room.withTransaction
 import com.amanuel.evscsystem.data.AppDatabase
 import com.amanuel.evscsystem.data.SessionManager
-import com.amanuel.evscsystem.data.db.UserDao
 import com.amanuel.evscsystem.data.db.UserLoginDao
 import com.amanuel.evscsystem.data.db.models.User
 import com.amanuel.evscsystem.data.db.models.UserLogin

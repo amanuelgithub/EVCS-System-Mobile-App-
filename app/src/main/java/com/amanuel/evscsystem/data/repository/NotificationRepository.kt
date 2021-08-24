@@ -16,7 +16,7 @@ class NotificationRepository @Inject constructor(
 
     val notificationDao = appDatabase.notificationDao()
 
-    fun getNotifications(searchQuery: String, sortOrder: SortOrder) = networkBoundResource<List<Notification>, List<Notification>>(
+    suspend fun getNotifications(searchQuery: String, sortOrder: SortOrder) = networkBoundResource<List<Notification>, List<Notification>>(
         query = {
             notificationDao.getNotifications(searchQuery, sortOrder)
         },

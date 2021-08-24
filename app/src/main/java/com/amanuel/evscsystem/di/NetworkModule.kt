@@ -82,6 +82,18 @@ object NetworkModule {
         return remoteServiceBuilderHelper.buildApi(NotificationApi::class.java, token)
     }
 
+    @Singleton
+    @Provides
+    fun provideReportService(
+        remoteServiceBuilderHelper: RemoteServiceBuilderHelper,
+        sessionManager: SessionManager
+    ): ReportApi {
+        val token = runBlocking { sessionManager.fetchAuthToken() }
+        return remoteServiceBuilderHelper.buildApi(ReportApi::class.java, token)
+    }
+
+
+
 
 
 }

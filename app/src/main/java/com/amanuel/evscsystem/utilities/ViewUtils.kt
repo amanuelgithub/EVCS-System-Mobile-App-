@@ -21,8 +21,8 @@ inline fun SearchView.onQueryTextChanged(crossinline listener: (String) -> Unit)
     })
 }
 
-class ViewUtils{
-    companion object{
+//class ViewUtils{
+//    companion object{
 
         fun View.showErrorSnackBar(error: String){
             val snackbar = Snackbar.make(this, error, Snackbar.LENGTH_SHORT)
@@ -54,5 +54,5 @@ class ViewUtils{
             snackbar.show()
         }
 
-    }
-}
+//    }
+//}

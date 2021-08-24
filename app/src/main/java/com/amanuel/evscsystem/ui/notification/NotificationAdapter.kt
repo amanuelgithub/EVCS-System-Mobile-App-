@@ -34,8 +34,9 @@ class NotificationAdapter(
             binding.apply {
                 // @todo: bind the view with the notifications data
                 plateNoTextView.text = notification.plate_number.toString()
-                latitudeTextView.text = "${notification.latitude} \n &#176"
-                longitudeTextView.text = "${notification.longtude} \n &#176"
+                latitudeTextView.text = "${notification.latitude} \u00B0"
+//                latitudeTextView.text = "${notification.latitude} \n &#176"
+                longitudeTextView.text = "${notification.longtude} \u00B0"
                 vehicleSpeedTextView.text = "${notification.vehicle_speed} km/s"
             }
         }
