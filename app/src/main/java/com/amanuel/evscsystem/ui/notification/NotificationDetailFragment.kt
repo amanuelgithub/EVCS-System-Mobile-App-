@@ -62,7 +62,7 @@ class NotificationDetailFragment : Fragment(R.layout.fragment_notifications_deta
         }
 
         // bottom sheet
-        initBottomSheet()
+//        initBottomSheet()
     }
 
     private fun startReportFragment() {
@@ -75,8 +75,10 @@ class NotificationDetailFragment : Fragment(R.layout.fragment_notifications_deta
     }
 
     private fun startMapsFragment() {
-        val navController = findNavController()
-        navController.navigate(R.id.action_notificationsDetailFragment_to_mapsFragment)
+        val bundle = Bundle()
+        bundle.putParcelable("notification", notification)
+
+        findNavController().navigate(R.id.action_notificationsDetailFragment_to_mapsFragment, bundle)
     }
 
     private fun FragmentNotificationsDetailBinding.collapseAvailActions() {

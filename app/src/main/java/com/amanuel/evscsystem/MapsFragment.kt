@@ -10,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.amanuel.evscsystem.data.db.models.Notification
+import com.amanuel.evscsystem.ui.notification.NotificationDetailFragmentArgs
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -17,6 +19,8 @@ import com.google.android.gms.maps.model.*
 
 
 class MapsFragment : Fragment() {
+
+    private lateinit var notification: Notification
 
     private val callback = OnMapReadyCallback { googleMap ->
         /**
@@ -28,9 +32,14 @@ class MapsFragment : Fragment() {
          * install it inside the SupportMapFragment. This method will only be triggered once the
          * user has installed Google Play services and returned to the app.
          */
-        val sydney = LatLng(-34.0, 151.0)
+
+        val args = NotificationDetailFragmentArgs.fromBundle(requireArguments())
+        notification = args.notification
+
+
+        val place = LatLng(notification.latitude,notification.longtude)
         googleMap.addMarker(
-            MarkerOptions().position(sydney)
+            MarkerOptions().position(place)
                 .title("Marker in Sydney")
                 .icon(
                     BitmapFromVector(
@@ -40,11 +49,11 @@ class MapsFragment : Fragment() {
                 )
 
         )
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 14f))
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(place, 14f))
 
         googleMap.addCircle(
             CircleOptions()
-                .center(sydney)
+                .center(place)
                 .radius(500.0)
                 .strokeWidth(3f)
                 .strokeColor(Color.RED)

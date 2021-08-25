@@ -8,6 +8,6 @@ import retrofit2.http.Headers
 interface NotificationApi {
 
     @Headers("Accept: application/json")
-    @GET("notification/?format=json")
+    @GET("notifications/?format=json")
     suspend fun getNotifications(): List<Notification>
 }

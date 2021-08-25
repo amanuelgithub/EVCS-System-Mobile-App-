@@ -1,27 +1,19 @@
 package com.amanuel.evscsystem.ui.home
 
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.amanuel.evscsystem.R
 import com.amanuel.evscsystem.data.SessionManager
-import com.amanuel.evscsystem.data.SessionManager.Companion.USER_TOKEN
+import com.amanuel.evscsystem.data.network.Resource
 import com.amanuel.evscsystem.databinding.FragmentHomeBinding
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -51,9 +43,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         binding = FragmentHomeBinding.bind(view)
 
-//        var args = HomeFragmentArgs.fromBundle(requireArguments())
-//
-//        userId = args.userId
+        viewModel.notifications.observe(viewLifecycleOwner) { resource ->
+            val totalNotifications = resource.data?.size
+            if (resource is Resource.Failure && resource.data.isNullOrEmpty()) {
+                binding.allTimeNotificationsTextView.text = "0"
+            } else {
+                binding.allTimeNotificationsTextView.text = totalNotifications.toString()
+            }
+        }
 
     }
 

@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NotificationsViewModel @Inject internal constructor(
-    repository: NotificationRepository
+    private val repository: NotificationRepository
 ) : ViewModel() {
 
     val searchQuery = MutableStateFlow("")
