@@ -25,10 +25,6 @@ class ReportFragment : Fragment(R.layout.fragment_report) {
     private var recordId by Delegates.notNull<Int>()
     private var plateNumber by Delegates.notNull<String>()
 
-//    private lateinit var violationItems: ArrayList<String>
-//    private var checkedItems: BooleanArray? = null
-//    private var selectedItems = ArrayList<Int>()
-
     private lateinit var arrayViolations: Array<String>
     private lateinit var arrayChecked: BooleanArray
 
@@ -119,7 +115,7 @@ class ReportFragment : Fragment(R.layout.fragment_report) {
         val builder = AlertDialog.Builder(requireContext())
 
         // Set a title for alert dialog
-        builder.setTitle("Choose favorite colors.")
+        builder.setTitle("Choose Other Violations.")
 
         // Define multiple choice items for alert dialog
         builder.setMultiChoiceItems(arrayViolations, arrayChecked) { dialog, which, isChecked ->

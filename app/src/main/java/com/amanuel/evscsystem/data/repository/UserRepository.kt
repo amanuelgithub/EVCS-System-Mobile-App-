@@ -1,5 +1,6 @@
 package com.amanuel.evscsystem.data.repository
 
+import androidx.lifecycle.LiveData
 import androidx.room.withTransaction
 import com.amanuel.evscsystem.data.AppDatabase
 import com.amanuel.evscsystem.data.SessionManager
@@ -39,6 +40,18 @@ class UserRepository @Inject constructor(
             }
         }
     )
+
+    suspend fun insertUser(user: User) {
+        userDao.insert(user)
+    }
+
+    suspend fun deleteUser(){
+        userDao.deleteUser()
+    }
+
+    suspend fun getUserFromRoom(userId: Int): User {
+        return userDao.getUserData(userId)
+    }
 
     suspend fun updateFCMToken(id: Int, fcmToken: String) = safeApiCall {
         userApi.updateFCMToken(id, fcmToken)

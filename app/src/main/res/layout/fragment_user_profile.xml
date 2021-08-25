@@ -23,7 +23,7 @@
              floating action button is selected -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/editable_profile_header_layout"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorBackground"
@@ -86,7 +86,7 @@
             <!-- start header-->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/profile_header_layout"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -145,11 +145,11 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout2"
+                android:id="@+id/profile_first_name_textInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="48dp"
                 android:layout_marginEnd="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -165,13 +165,13 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout3"
+                android:id="@+id/profile_last_name_textInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
-                app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="@+id/profile_first_name_textInputLayout"
+                app:layout_constraintStart_toStartOf="@+id/profile_first_name_textInputLayout"
+                app:layout_constraintTop_toBottomOf="@+id/profile_first_name_textInputLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/profile_last_name_edit_text"
@@ -183,15 +183,15 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout4"
+                android:id="@+id/profile_username_textInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:startIconDrawable="@drawable/ic_baseline_account_circle_24"
                 app:endIconMode="clear_text"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="@+id/textInputLayout3"
-                app:layout_constraintStart_toStartOf="@+id/textInputLayout3"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="@+id/profile_last_name_textInputLayout"
+                app:layout_constraintStart_toStartOf="@+id/profile_last_name_textInputLayout"
+                app:layout_constraintTop_toBottomOf="@+id/profile_last_name_textInputLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/profile_username_edit_text"
@@ -203,15 +203,15 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout5"
+                android:id="@+id/profile_email_textInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:startIconDrawable="@drawable/ic_baseline_email"
                 app:endIconMode="clear_text"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="@+id/textInputLayout4"
-                app:layout_constraintStart_toStartOf="@+id/textInputLayout4"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="@+id/profile_username_textInputLayout"
+                app:layout_constraintStart_toStartOf="@+id/profile_username_textInputLayout"
+                app:layout_constraintTop_toBottomOf="@+id/profile_username_textInputLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/profile_email_edit_text"
@@ -222,47 +222,47 @@
                     android:text="amanuelgirma070@gmail.com" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout6"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:startIconDrawable="@drawable/ic_baseline_lock"
-                app:endIconMode="clear_text"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="@+id/textInputLayout5"
-                app:layout_constraintStart_toStartOf="@+id/textInputLayout5"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout5">
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:id="@+id/textInputLayout6"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:startIconDrawable="@drawable/ic_baseline_lock"-->
+<!--                app:endIconMode="clear_text"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                app:layout_constraintEnd_toEndOf="@+id/textInputLayout5"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/textInputLayout5"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/textInputLayout5">-->
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/profile_password_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:hint="password"
-                    android:inputType="textPassword"
-                    android:text="ybkxDd0O_BJe1Q9" />
-            </com.google.android.material.textfield.TextInputLayout>
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:id="@+id/profile_password_edit_text"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:enabled="false"-->
+<!--                    android:hint="password"-->
+<!--                    android:inputType="textPassword"-->
+<!--                    android:text="ybkxDd0O_BJe1Q9" />-->
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:startIconDrawable="@drawable/ic_baseline_phone_in_talk"
-                app:endIconMode="clear_text"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="32dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/textInputLayout6"
-                app:layout_constraintStart_toStartOf="@+id/textInputLayout6"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout6">
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:startIconDrawable="@drawable/ic_baseline_phone_in_talk"-->
+<!--                app:endIconMode="clear_text"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:layout_marginBottom="32dp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="@+id/textInputLayout6"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/textInputLayout6"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/textInputLayout6">-->
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/profile_phone_number_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:hint="phone number"
-                    android:text="(499) 940-1155 x9122" />
-            </com.google.android.material.textfield.TextInputLayout>
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:id="@+id/profile_phone_number_edit_text"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:enabled="false"-->
+<!--                    android:hint="phone number"-->
+<!--                    android:text="(499) 940-1155 x9122" />-->
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -275,7 +275,7 @@
                 android:id="@+id/profile_floating_action_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="48dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="16dp"
                 android:clickable="true"
@@ -285,6 +285,16 @@
                 app:layout_constraintVertical_bias="0.991"
                 app:srcCompat="@drawable/ic_baseline_edit_24" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/change_password_move_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginBottom="16dp"
+            android:text="change password"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
