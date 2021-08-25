@@ -7,18 +7,24 @@ import androidx.lifecycle.viewModelScope
 import com.amanuel.evscsystem.data.db.models.User
 import com.amanuel.evscsystem.data.db.models.UserLogin
 import com.amanuel.evscsystem.data.network.Resource
+import com.amanuel.evscsystem.data.repository.NotificationRepository
 import com.amanuel.evscsystem.data.repository.UserRepository
 import com.amanuel.evscsystem.data.responses.LoginResponse
 import com.amanuel.evscsystem.ui.base.BaseViewModel
+import com.amanuel.evscsystem.ui.notification.SortOrder
 import com.google.gson.reflect.TypeToken
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val notificationRepository: NotificationRepository
 ) : BaseViewModel(userRepository) {
 
 
@@ -33,4 +39,19 @@ class HomeViewModel @Inject constructor(
         _updateFCMTokenResponse.value = userRepository.updateFCMToken(id, fcmToken)
     }
 
+    val searchQuery = MutableStateFlow("")
+
+    val sortOrder = MutableStateFlow(SortOrder.BY_DATE)
+
+    private val notificationsFlow = combine(
+        searchQuery,
+        sortOrder,
+    ) { query, sortOrder ->
+        Pair(query, sortOrder)
+    }.flatMapLatest { (query, sortOrder) ->
+        notificationRepository.getNotifications(query, sortOrder)
+    }
+
+    // Note: this .asLiveData() does multiple things including launching a coroutine.
+    val notifications = notificationsFlow.asLiveData()
 }

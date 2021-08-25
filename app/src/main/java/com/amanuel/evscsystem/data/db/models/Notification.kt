@@ -6,10 +6,6 @@ import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 import java.text.DateFormat
 
-/**
- * Created By: Amanuel Girma
- */
-
 // Note: the Parcelable Interface makes it easy to send
 // the object between different fragments
 @Entity

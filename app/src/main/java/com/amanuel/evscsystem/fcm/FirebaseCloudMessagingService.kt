@@ -5,14 +5,9 @@ import androidx.navigation.NavDeepLinkBuilder
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import com.amanuel.evscsystem.R
-import com.amanuel.evscsystem.data.UserPreferences
-import com.amanuel.evscsystem.fcm.djangopushnotification.FCMUtil
 import com.amanuel.evscsystem.notification.NotificationHelper
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
 class FirebaseCloudMessagingService : FirebaseMessagingService() {
 

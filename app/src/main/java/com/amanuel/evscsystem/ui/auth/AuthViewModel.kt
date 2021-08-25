@@ -4,6 +4,7 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.amanuel.evscsystem.data.db.models.User
 import com.amanuel.evscsystem.data.network.Resource
 import com.amanuel.evscsystem.data.repository.AuthRepository
 import com.amanuel.evscsystem.data.repository.UserRepository
@@ -29,6 +30,10 @@ class AuthViewModel @Inject constructor(
     val updateFCMTokenResponse: LiveData<Resource<Any>>
         get() = _updateFCMTokenResponse
 
+    private val _user: MutableLiveData<User> = MutableLiveData()
+    val user: LiveData<User>
+        get() = _user
+
 //    fun login(email: String, password: String) = viewModelScope.launch {
 //        _loginResponse.value = Resource.Loading(null)
 //        _loginResponse.value = authRepository.login(email, password)
@@ -40,6 +45,14 @@ class AuthViewModel @Inject constructor(
 
     fun updateFCMToken(id: Int, fcmToken: String) = viewModelScope.launch {
         _updateFCMTokenResponse.value = userRepository.updateFCMToken(id, fcmToken)
+    }
+
+    suspend fun insertUser(user: User) = viewModelScope.launch {
+        userRepository.insertUser(user)
+    }
+
+    suspend fun getUserFromRoom(userId: Int) = viewModelScope.launch {
+        _user.value = userRepository.getUserFromRoom(userId)
     }
 
     suspend fun saveAuthToken(token: String) {

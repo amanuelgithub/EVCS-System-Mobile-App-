@@ -157,7 +157,11 @@
         android:id="@+id/userProfileFragment"
         android:name="com.amanuel.evscsystem.ui.profile.UserProfileFragment"
         android:label="User Profile"
-        tools:layout="@layout/fragment_user_profile" />
+        tools:layout="@layout/fragment_user_profile" >
+        <action
+            android:id="@+id/action_userProfileFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+    </fragment>
     <fragment
         android:id="@+id/filterSortFragment"
         android:name="com.amanuel.evscsystem.ui.dialogs.FilterSortDialogFragment"
@@ -184,6 +188,15 @@
         android:name="com.amanuel.evscsystem.ui.record.RecordsFragment"
         android:label="Records"
         tools:layout="@layout/fragment_records" />
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.amanuel.evscsystem.ui.change_password.ChangePasswordFragment"
+        android:label="Change Password"
+        tools:layout="@layout/fragment_change_password" >
+        <action
+            android:id="@+id/action_changePasswordFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
+    </fragment>
 
 
 </navigation>

@@ -14,10 +14,10 @@ interface UserDao {
     suspend fun update(user: User)
 
     @Query("SELECT * FROM User WHERE pk = :userId")
-    fun getUserData(userId: Int): LiveData<User>
+    suspend fun getUserData(userId: Int): User
 
     //    @Delete
     @Query("DELETE FROM User")
-    fun deleteUser()
+    suspend fun deleteUser()
 
 }

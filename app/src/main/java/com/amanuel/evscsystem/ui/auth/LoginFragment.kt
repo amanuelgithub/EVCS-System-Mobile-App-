@@ -63,16 +63,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         binding.progressbar.visible(false)
 
 
-//        // handles what things to do when clicking the login button
-//        binding.buttonLogin.setOnClickListener {
-//            if (Connectivity.isConnectedOrConnecting(requireContext())) {
-//                login()
-//            } else {
-////                view.showWarningSnackBar("Check Your Internet Connection.")
-//                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-//            }
-//        }
-
         binding.editTextTextPassword.addTextChangedListener(ValidationTextWatcher(binding.editTextTextPassword));
         binding.editTextTextEmailAddress.addTextChangedListener(ValidationTextWatcher(binding.editTextTextEmailAddress));
 
@@ -115,9 +105,17 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                         runBlocking {
                             viewModel.saveAuthToken(loginResponse.key)
                             viewModel.saveUserId(loginResponse.user.pk)
+
+                            // save the user in the database
+                            viewModel.insertUser(loginResponse.user)
+                            Toast.makeText(requireContext(), "User inserted ${loginResponse.user}", Toast.LENGTH_SHORT).show()
                         }
                     }
                     binding.progressbar.visibility = View.GONE
+
+//                    val bundle = Bundle()
+//                    bundle.putInt("userId", loginResponse.user.pk)
+
                     findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                 } else {
                     binding.progressbar.visibility = View.GONE
