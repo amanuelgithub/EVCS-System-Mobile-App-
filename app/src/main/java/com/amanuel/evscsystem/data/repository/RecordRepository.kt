@@ -3,7 +3,9 @@ package com.amanuel.evscsystem.data.repository
 import androidx.room.withTransaction
 import com.amanuel.evscsystem.data.AppDatabase
 import com.amanuel.evscsystem.data.network.RecordApi
+import com.amanuel.evscsystem.ui.record.SortOrder
 import com.amanuel.evscsystem.utilities.networkBoundResource
+import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 class RecordRepository @Inject constructor(
@@ -13,11 +15,12 @@ class RecordRepository @Inject constructor(
 
     private val recordDao = appDatabase.recordDao()
 
-    fun getRecords() = networkBoundResource(
+    fun getRecords(searchQuery: String, sortOrder: SortOrder) = networkBoundResource(
         query = {
-            recordDao.getRecords()
+            recordDao.getRecords(searchQuery, sortOrder)
         },
         fetch = {
+            delay(2000)
             recordApi.getRecords()
         },
         saveFetchResult = { records ->

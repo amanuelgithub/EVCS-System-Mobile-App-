@@ -15,7 +15,7 @@ interface NotificationDao {
     fun getNotifications(searchQuery: String = "", sortOrder: SortOrder): Flow<List<Notification>> =
         when(sortOrder){
             SortOrder.BY_DATE -> getNotificationsSortedByDateCreated(searchQuery)
-            SortOrder.BY_NAME -> getNotificationsSortedByName(searchQuery)
+            SortOrder.BY_PLATE_NUMBER -> getNotificationsSortedByName(searchQuery)
         }
 
     @Query("SELECT * FROM Notification WHERE plate_number LIKE '%' || :searchQuery || '%' ORDER BY createdAt")

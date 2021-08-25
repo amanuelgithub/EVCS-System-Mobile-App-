@@ -28,9 +28,9 @@ class RecordsAdapter : ListAdapter<Record, RecordsAdapter.RecordsViewHolder>(Rec
             binding.apply {
                 latitudeRecordTextView.text = record.latitude.toString()
                 longitudeRecordTextView.text = record.longitude.toString()
-                vehicleSpeedRecordTextView.text = record.vehicle_speed.toString()
+                vehicleSpeedRecordTextView.text = record.vehicleSpeed.toString()
                 addressRecordTextView.text = record.address
-                createdAtRecordTextView.text = record.created_at
+                createdAtRecordTextView.text = record.createdAt
             }
         }
     }
