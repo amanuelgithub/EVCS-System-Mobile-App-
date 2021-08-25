@@ -30,4 +30,4 @@ class NotificationsViewModel @Inject internal constructor(
     val notifications = notificationsFlow.asLiveData()
 }
 
-enum class SortOrder { BY_NAME, BY_DATE }
+enum class SortOrder { BY_PLATE_NUMBER, BY_DATE }

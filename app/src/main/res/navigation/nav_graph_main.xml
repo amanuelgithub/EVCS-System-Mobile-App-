@@ -108,7 +108,17 @@
             app:destination="@id/notificationsFragment" />
         <action
             android:id="@+id/action_searchFragment_to_recordsFragment"
-            app:destination="@id/recordsFragment" />
+            app:destination="@id/recordsFragment" >
+            <argument
+                android:name="vehicle_plate_nubmer"
+                android:defaultValue='""' />
+            <argument
+                android:name="selection_date"
+                android:defaultValue='""' />
+            <argument
+                android:name="status"
+                android:defaultValue="false" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/mapsFragment"
@@ -152,7 +162,11 @@
         android:id="@+id/filterSortFragment"
         android:name="com.amanuel.evscsystem.ui.dialogs.FilterSortDialogFragment"
         android:label="Filter and Sort"
-        tools:layout="@layout/fragment_dialog_filter_sort" /><action android:id="@+id/action_global_userProfileFragment" app:destination="@id/userProfileFragment"/>
+        tools:layout="@layout/fragment_dialog_filter_sort" >
+        <action
+            android:id="@+id/action_filterSortFragment_to_recordsFragment"
+            app:destination="@id/recordsFragment" />
+    </fragment><action android:id="@+id/action_global_userProfileFragment" app:destination="@id/userProfileFragment"/>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.amanuel.evscsystem.ui.settings.SettingsFragment"

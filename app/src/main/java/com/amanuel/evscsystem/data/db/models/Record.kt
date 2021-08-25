@@ -10,7 +10,7 @@ data class Record(
     val id: Int,
 
     @SerializedName("pk") val pk: Int,
-    @SerializedName("vehicle") val vehiclePlateNumber: Int,
+    @SerializedName("vehicle") val vehiclePlateNumber: String,
     @SerializedName("latitude") val latitude: Double,
     @SerializedName("longitude") val longitude: Double,
     @SerializedName("vehicle_speed") val vehicleSpeed: Int,

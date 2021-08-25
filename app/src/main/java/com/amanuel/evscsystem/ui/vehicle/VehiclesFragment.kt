@@ -28,7 +28,7 @@ class VehiclesFragment : Fragment(R.layout.fragment_vehicles) {
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_all_search_fragment, menu)
+        inflater.inflate(R.menu.menu_all_search_records_fragment, menu)
 
         // convert the search menu item to a search view
         val search = menu?.findItem(R.id.search_data_menu_option)
@@ -43,7 +43,7 @@ class VehiclesFragment : Fragment(R.layout.fragment_vehicles) {
         when (item.itemId) {
             R.id.filter_menu_option -> {
                 // show filter sort fragment
-                FilterSortDialogFragment().show(childFragmentManager, FilterSortDialogFragment.TAG)
+//                FilterSortDialogFragment().show(childFragmentManager, FilterSortDialogFragment.TAG)
             }
             else -> {
                 return super.onOptionsItemSelected(item)

@@ -66,7 +66,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
-                            android:checked="true"
                             android:paddingLeft="2dp"
                             android:paddingRight="2dp"
                             android:text="Notifications"
@@ -93,6 +92,7 @@
                             android:layout_marginLeft="8dp"
                             android:paddingLeft="2dp"
                             android:paddingRight="2dp"
+                            android:checked="true"
                             android:text="Record"
                             app:chipStrokeColor="@color/primaryColor"
                             app:chipStrokeWidth="1sp" />
@@ -209,7 +209,7 @@
                                         android:id="@+id/vehicle_plate_no_edit_text_1"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:hint="Enter the Plate Number to Search" />
+                                        android:hint="Enter the Plate Number to Search 1" />
                                 </com.google.android.material.textfield.TextInputLayout>
                             </LinearLayout>
 
@@ -313,25 +313,28 @@
                                     android:id="@+id/status_radio_group"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:visibility="gone">
+                                    android:checkedButton="@id/radioButtonActive"
+                                    android:visibility="visible">
 
-                                    <RelativeLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="horizontal">
+<!--                                    <RelativeLayout-->
+<!--                                        android:layout_width="match_parent"-->
+<!--                                        android:layout_height="wrap_content"-->
+<!--                                        android:orientation="horizontal">-->
 
                                         <com.google.android.material.radiobutton.MaterialRadioButton
+                                            android:id="@+id/radioButtonActive"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentStart="true"
                                             android:text="Active" />
 
                                         <com.google.android.material.radiobutton.MaterialRadioButton
+                                            android:id="@+id/radioButtonInactive"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentEnd="true"
                                             android:text="InActive" />
-                                    </RelativeLayout>
+<!--                                    </RelativeLayout>-->
                                 </RadioGroup>
                             </LinearLayout>
 

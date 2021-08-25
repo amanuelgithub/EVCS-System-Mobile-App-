@@ -7,19 +7,34 @@ import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.navigation.fragment.findNavController
 import com.amanuel.evscsystem.R
 import com.amanuel.evscsystem.databinding.FragmentDialogFilterSortBinding
+import com.amanuel.evscsystem.utilities.showWarningSnackBar
 import com.google.android.material.checkbox.MaterialCheckBox
 import com.google.android.material.chip.Chip
 import com.google.android.material.datepicker.MaterialDatePicker
+import java.text.DateFormatSymbols
+import java.util.*
+import kotlin.collections.ArrayList
+
 
 /**
  * Created By: Amanuel Girma
  * Date:
  */
 
-class FilterSortDialogFragment : DialogFragment(R.layout.fragment_dialog_filter_sort),
+class FilterSortDialogFragment(
+    private val receiveFilteringOptionsData: ReceiveFilteringOptionsData
+) : DialogFragment(R.layout.fragment_dialog_filter_sort),
     CompoundButton.OnCheckedChangeListener {
+
+
+    var dateSelected = ""
+    var vehiclePlateNumber = ""
+    var recordStatus = false
+
+    private lateinit var calendar: Calendar
 
     private lateinit var binding: FragmentDialogFilterSortBinding
 
@@ -48,9 +63,11 @@ class FilterSortDialogFragment : DialogFragment(R.layout.fragment_dialog_filter_
 
 
     // initial category and filter
-    private var category = Category.NOTIFICATION
-    private var filters: MutableList<String> =
-        mutableListOf(notificationFilters[1]) // init filter option is 'created_at'
+    private var category = Category.RECORD
+//    private var filters: MutableList<String> =
+//        mutableListOf(recordFilters[1]) // init filter option is 'created_at'
+
+    private var filters: MutableList<String> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -156,9 +173,33 @@ class FilterSortDialogFragment : DialogFragment(R.layout.fragment_dialog_filter_
             // Builds and shows the material date picker
             val materialDatePickerBuilder = MaterialDatePicker.Builder.datePicker()
             materialDatePickerBuilder.setTitleText("Select Date")
+            materialDatePickerBuilder.setSelection(MaterialDatePicker.todayInUtcMilliseconds())
 
             val materialDatePicker = materialDatePickerBuilder.build()
             materialDatePicker.show(childFragmentManager, "DatePicker")
+
+            materialDatePicker.addOnPositiveButtonClickListener { selection ->
+                val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+                calendar.timeInMillis = selection;
+
+                this.calendar = calendar
+
+                var monthName = ""
+                val day = calendar.get(Calendar.DAY_OF_MONTH)
+                val month = calendar.get(Calendar.MONTH)
+                val year = calendar.get(Calendar.YEAR)
+
+                val months: Array<String> = DateFormatSymbols().getMonths()
+                for (monthIndex in months.indices) {
+                    if (month == monthIndex) {
+                        monthName = months[monthIndex]
+                    }
+                }
+                // setting the selected date for records
+                dateSelected = "$monthName $day $year"
+
+                binding.datePickerTextView.text = "Date: $day/$monthName/$year "
+            }
         }
         // end date picker option
 
@@ -191,10 +232,6 @@ class FilterSortDialogFragment : DialogFragment(R.layout.fragment_dialog_filter_
             filterCheckBox5.setOnCheckedChangeListener(this@FilterSortDialogFragment)
         }
     }
-
-
-
-
 
 
     // Checkboxes
@@ -324,8 +361,11 @@ class FilterSortDialogFragment : DialogFragment(R.layout.fragment_dialog_filter_
     // The default category is Notification and the default filter for it is created_at(or date)
     private fun setupDefaultCategoryAndFilters() {
         uncheckAllCheckedBox()
-        setCategoryToNotification()
-        setupNotificationFilters()
+//        setCategoryToNotification()
+//        setupNotificationFilters()
+
+        setCategoryToRecord()
+        setupRecordFilters()
     }
 
     private fun setupRecordFilters() {
@@ -501,7 +541,7 @@ class FilterSortDialogFragment : DialogFragment(R.layout.fragment_dialog_filter_
     }
 
 
-    private fun hideAllMoreFilterViews(){
+    private fun hideAllMoreFilterViews() {
         binding.apply {
             speedRangeSlider.visibility = View.GONE
             vehiclePlateNoInputLayout1.visibility = View.GONE
@@ -555,47 +595,67 @@ class FilterSortDialogFragment : DialogFragment(R.layout.fragment_dialog_filter_
 //        TODO("Not yet implemented")
         when (category) {
             Category.NOTIFICATION -> {
-                for (index in notificationFilters.indices) {
-                    if (filterCheckBoxes[index].isChecked) {
-                        filters.clear()
-                        filters.add(index, notificationFilters[index])
-                    }
-                }
+                Toast.makeText(requireContext(), "Not Included notif !!!", Toast.LENGTH_SHORT)
+                    .show()
+//                for (index in notificationFilters.indices) {
+//                    if (filterCheckBoxes[index].isChecked) {
+//                        filters.clear()
+//                        filters.add(index, notificationFilters[index])
+//                    }
+//                }
             }
             Category.VEHICLE -> {
-                for (index in vehiclesFilters.indices) {
-                    if (filterCheckBoxes[index].isChecked) {
-                        filters.clear()
-                        filters.add(index, vehiclesFilters[index])
-                    }
-                }
+                Toast.makeText(requireContext(), "Not Included vehicle !!!", Toast.LENGTH_SHORT)
+                    .show()
+//                for (index in vehiclesFilters.indices) {
+//                    if (filterCheckBoxes[index].isChecked) {
+//                        filters.clear()
+//                        filters.add(index, vehiclesFilters[index])
+//                    }
+//                }
             }
             Category.RECORD -> {
+                filters.clear()
                 for (index in recordFilters.indices) {
                     if (filterCheckBoxes[index].isChecked) {
-                        filters.clear()
                         filters.add(index, recordFilters[index])
                     }
                 }
+
+
+//                    private var recordFilters = mutableListOf("created_at", "vehicle_id", "status")
+                for (index in filters.indices) {
+                    if (filters[index] == "created_at") {
+                        if (dateSelected.isEmpty()) {
+                            view?.showWarningSnackBar("Selected A Date")
+                        }
+                    }
+                    if (filters[index] == "vehicle_id") {
+                        vehiclePlateNumber = binding.vehiclePlateNoEditText.text.toString()
+
+                    }
+                    if (filters[index] == "status") {
+                        val selectedOption: Int = binding.statusRadioGroup.checkedRadioButtonId
+                        recordStatus = selectedOption != binding.radioButtonActive.id
+                    }
+
+                }
+
+                // setting the data
+                receiveFilteringOptionsData.setFilterOptionValues(vehiclePlateNumber, dateSelected, recordStatus)
+
+                dismiss()
+
             }
             Category.ACCIDENT -> {
-                return
-                // todo: not yet implemented
+                Toast.makeText(requireContext(), "Not Included accident !!!", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
+    }
 
-
-        Toast.makeText(
-            requireActivity(),
-            "category: $category and filters: $filters",
-            Toast.LENGTH_SHORT
-        ).show()
-
-        // now we have both category and filters
-        // todo: send them back
-
-        dismiss()
-
+    interface ReceiveFilteringOptionsData {
+        fun setFilterOptionValues(plateNumber: String, selectedDate: String, status: Boolean)
     }
 
     /**

@@ -19,9 +19,9 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/action_sort_by_name"
+        android:id="@+id/action_sort_by_plate_number"
         android:icon="@drawable/ic_baseline_sort_24"
-        android:title="Sort by name"
+        android:title="Sort by Plate Number"
         app:showAsAction="never" />
 
     <item

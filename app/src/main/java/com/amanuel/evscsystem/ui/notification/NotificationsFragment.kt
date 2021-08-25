@@ -87,7 +87,7 @@ class NotificationsFragment : Fragment(R.layout.fragment_notifications),
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_all_search_fragment, menu)
+        inflater.inflate(R.menu.menu_all_search_notification_fragment, menu)
 
         // converting the menu search item to a search view
         val search = menu?.findItem(R.id.search_data_menu_option)
@@ -102,12 +102,12 @@ class NotificationsFragment : Fragment(R.layout.fragment_notifications),
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.filter_menu_option -> {
-                // show filter sort fragment
-                FilterSortDialogFragment().show(childFragmentManager, FilterSortDialogFragment.TAG)
-            }
-            R.id.action_sort_by_name -> {
-                viewModel.sortOrder.value = SortOrder.BY_NAME
+//            R.id.filter_menu_option -> {
+//                // show filter sort fragment
+//                FilterSortDialogFragment().show(childFragmentManager, FilterSortDialogFragment.TAG)
+//            }
+            R.id.action_sort_by_plate_number -> {
+                viewModel.sortOrder.value = SortOrder.BY_PLATE_NUMBER
                 return true
             }
             R.id.action_sort_by_date -> {
