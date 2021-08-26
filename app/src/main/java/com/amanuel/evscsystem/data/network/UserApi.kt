@@ -13,6 +13,9 @@ interface UserApi {
     @GET("users/{pk}")
     suspend fun getUser(@Path("pk") id: Int): User
 
+    @GET("users/{pk}")
+    suspend fun getUserData(@Path("pk") id: Int): Call<User>
+
     // updates the fcm_registration token of the device
 //    @Headers("Content-Type: application/json")
     @FormUrlEncoded

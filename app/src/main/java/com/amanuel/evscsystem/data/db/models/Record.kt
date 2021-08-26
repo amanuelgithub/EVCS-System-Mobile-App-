@@ -15,6 +15,6 @@ data class Record(
     @SerializedName("longitude") val longitude: Double,
     @SerializedName("vehicle_speed") val vehicleSpeed: Int,
     @SerializedName("status") val status: Boolean,
-    @SerializedName("address") val address: String,
+    @SerializedName("address") val address: String?,
     @SerializedName("created_at") val createdAt: String
 )

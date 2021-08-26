@@ -83,4 +83,39 @@ class UserProfileViewModel @Inject constructor(
         )
     }
 
+    suspend fun getUserData(
+        view: View,
+        userId: Int,
+        onResult: (User?) -> Unit
+    ) {
+        userApi.getUserData(userId).enqueue(
+            object : Callback<User> {
+                override fun onFailure(call: Call<User>, t: Throwable) {
+
+                    if (t is IOException) {
+                        view.showErrorSnackBar("This is an actual network failure: ${t.localizedMessage}")
+                    }
+                    if (t is HttpException) {
+                        when {
+                            t.code() == 401 -> {
+                                view.showWarningSnackBar("Unauthorized Access!!")
+                            }
+                            else -> {
+                                view.showErrorSnackBar("This is an actual network failure: ${t.localizedMessage}")
+                            }
+                        }
+                    } else {
+                        view.showErrorSnackBar("conversion issue! big problems :( ${t.localizedMessage}")
+                    }
+                    onResult(null)
+                }
+
+                override fun onResponse(call: Call<User>, response: Response<User>) {
+                    val reportedReport = response.body()
+                    onResult(reportedReport)
+                }
+            }
+        )
+    }
+
 }

@@ -47,9 +47,38 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
             viewModel.getUserFromRoom(userId)
         }
 
-        viewModel.user.observe(viewLifecycleOwner) { user ->
-            if (user != null){
-                Toast.makeText(requireContext(), "User Data: ${user.email}", Toast.LENGTH_SHORT).show()
+
+
+//        view?.let {
+//
+//            viewLifecycleOwner.lifecycleScope.launch {
+//                viewModel.getUserData(it, userId) { user ->
+//                    if (user != null) {
+//                        binding.apply {
+//                            profileFirstNameEditText.setText(user.first_name)
+//                            profileLastNameEditText.setText(user.last_name)
+//                            profileUsernameEditText.setText(user.username)
+//                            profileEmailEditText.setText(user.email)
+//
+//                            fullNameTextView.text =
+//                                "${profileFirstNameEditText.text.toString()} ${profileLastNameEditText.text.toString()}"
+////                    profilePasswordEditText.setText(user.password)
+////                    profilePhoneNumberEditText.setText(user.phone)
+//                        }
+//                    }
+//                }
+//            }
+//        }
+
+
+
+
+
+        viewModel.user.observe(viewLifecycleOwner)
+        { user ->
+            if (user != null) {
+                Toast.makeText(requireContext(), "User Data: ${user.email}", Toast.LENGTH_SHORT)
+                    .show()
 
                 binding.apply {
                     profileFirstNameEditText.setText(user.first_name)
@@ -57,9 +86,8 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
                     profileUsernameEditText.setText(user.username)
                     profileEmailEditText.setText(user.email)
 
-                    fullNameTextView.text = "${profileFirstNameEditText.text.toString()} ${profileLastNameEditText.text.toString()}"
-//                    profilePasswordEditText.setText(user.password)
-//                    profilePhoneNumberEditText.setText(user.phone)
+                    fullNameTextView.text =
+                        "${profileFirstNameEditText.text.toString()} ${profileLastNameEditText.text.toString()}"
                 }
             }
         }
@@ -72,7 +100,6 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
             showEditableProfileLayout()
             binding.changePasswordMoveBtn.visibility = View.GONE
         }
-
 
         binding.profileUsernameEditText.addTextChangedListener(ValidationTextWatcher(binding.profileUsernameEditText));
         binding.profileEmailEditText.addTextChangedListener(ValidationTextWatcher(binding.profileEmailEditText));
@@ -102,7 +129,15 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 //            Toast.makeText(requireContext(), "$firstName $lastName $username $email", Toast.LENGTH_SHORT).show()
 
             view?.let {
-                viewModel.updateUserProfile(it, userId, userId, username, email, firstName, lastName) { user ->
+                viewModel.updateUserProfile(
+                    it,
+                    userId,
+                    userId,
+                    username,
+                    email,
+                    firstName,
+                    lastName
+                ) { user ->
                     if (user != null) {
 
                         viewLifecycleOwner.lifecycleScope.launch {
@@ -113,7 +148,11 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
                         }
 
 
-                        Toast.makeText(requireContext(), "User updated successfully!!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "User updated successfully!!",
+                            Toast.LENGTH_SHORT
+                        ).show()
 
                         EVSCDialogMsg.showSuccessAlert(
                             requireContext(),
@@ -133,24 +172,29 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 
         }
 
+
         binding.cancelProfileButton.setOnClickListener {
             showMainProfileLayout()
             binding.changePasswordMoveBtn.visibility = View.VISIBLE
         }
 
 
+
         binding.userProfileSelectionImageView.setOnClickListener {
             selectImageOrTakePicture()
         }
+
 
         binding.changePasswordMoveBtn.setOnClickListener {
             // navigate to change password page
             findNavController().navigate(R.id.action_userProfileFragment_to_changePasswordFragment)
         }
+
     }
 
+
     // when the imageView is clicked allow user to select image from available
-    // pictures or prompt them to take a picture
+// pictures or prompt them to take a picture
     private fun selectImageOrTakePicture() {
         /** todo: allow selection of user profile image from existing pictures or take new picture using the camera */
     }
@@ -278,5 +322,6 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
             }
         }
     }
-
 }
+
+
